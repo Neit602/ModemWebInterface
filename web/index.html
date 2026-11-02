@@ -290,8 +290,31 @@ body.stale .sgrid { opacity: .55; }
   background: var(--surface); color: var(--ink); min-width: 0; width: 100%;
 }
 .inspector input[type="color"] { padding: 2px; height: 34px; }
-.inspector .add { display: flex; gap: 8px; }
+.palette { list-style: none; margin: 8px 0 0; padding: 0 4px 0 0; display: grid; gap: 10px; max-height: 520px; overflow: auto; overscroll-behavior: contain; }
+@media (max-width: 979px) { .palette { max-height: 380px; } }
+.pcard { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.pcard:hover, .pcard:focus-within { border-color: var(--accent); }
+.pc-main {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; width: 100%; padding: 10px 10px 8px;
+  border: 0; background: none; text-align: left; cursor: grab; border-radius: 10px 10px 0 0; touch-action: pan-y;
+}
+.pc-main:active { cursor: grabbing; }
+.pc-thumb { grid-column: 1 / -1; display: flex; align-items: center; min-height: 34px; overflow: hidden; }
+.pc-thumb img { display: block; image-rendering: pixelated; outline: 1px solid var(--line); background: #fff; max-width: 100%; }
+.pc-thumb .none { font-size: 12px; color: var(--muted); }
+.pc-name { font-weight: 600; font-size: 14px; }
+.pc-desc { grid-column: 1; font-size: 13px; color: var(--ink-2); line-height: 1.35; }
+.pc-size { grid-column: 1; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pc-size svg { flex: none; }
+.pc-add { grid-column: 2; grid-row: 2 / span 3; align-self: center; font-size: 13px; font-weight: 600; color: var(--accent-ink);
+  background: var(--accent); border-radius: 7px; padding: 4px 10px; }
+.pc-sizes { margin: 0 10px 10px; }
+.pc-sizes button { font-size: 12px; padding: 3px 10px; }
+.pcard.dragging { opacity: .6; }
+.ghost { position: absolute; outline: 2px dashed var(--accent); background: rgb(30 85 179 / .12); pointer-events: none; z-index: 3; }
+.ghost span { position: absolute; left: 0; bottom: 100%; font-size: 11px; line-height: 1; padding: 2px 4px; background: var(--accent); color: var(--accent-ink); border-radius: 4px 4px 0 0; white-space: nowrap; }
 .inspector hr { border: 0; border-top: 1px solid var(--line); margin: 14px 0; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .check { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--ink-2); }
 
 dialog.confirm {
@@ -490,16 +513,16 @@ dialog.aim::backdrop { background: var(--page); }
           <div class="stage grid-on" id="stage" tabindex="0" aria-label="Screen layout. Select a widget, then use the arrow keys to move it; hold Shift to move by 8 pixels.">
             <img id="preview" alt="Preview of this page as the router will draw it" width="320" height="240">
             <div id="boxes"></div>
+            <div class="ghost" id="ghost" hidden><span></span></div>
           </div>
           <p class="sub" id="preview-msg" style="margin-top:6px"></p>
         </div>
         <aside class="inspector" aria-labelledby="h-insp">
-          <h3 id="h-insp">Add a widget</h3>
-          <div class="add">
-            <select id="w-type" aria-label="Widget type"></select>
-            <button type="button" class="btn" id="w-add">Add</button>
-          </div>
+          <h3 id="h-pal">Widgets</h3>
+          <p class="sub">Press a widget to add it where the dashed frame shows, or drag it onto the screen.</p>
+          <ul class="palette" id="palette" aria-labelledby="h-pal"></ul>
           <hr>
+          <h3 id="h-insp" class="visually-hidden">Selected widget</h3>
           <div id="w-form"><p class="sub">Select a widget on the screen to change it.</p></div>
         </aside>
       </div>
@@ -1142,8 +1165,6 @@ function renderEvents(list) {
 const WNAMES = { metric: "Big signal value", band: "Band and cell", bars: "Signal bars", speed: "Download / upload speed",
   traffic: "Traffic total", battery: "Battery", clock: "Clock", operator: "Operator", devices: "Connected devices",
   chart: "Signal chart", aim: "Antenna aiming", data: "Data session and IP", text: "Free text" };
-const WSIZE = { metric: [304, 96], band: [304, 36], bars: [32, 20], speed: [200, 64], traffic: [240, 20], battery: [96, 20],
-  clock: [96, 32], operator: [200, 24], devices: [160, 20], chart: [304, 72], aim: [320, 240], data: [304, 20], text: [160, 20] };
 const OPTS = {
   metric: ["Metric", [["auto", "Main for the network (RSRP or RSCP)"], ["rsrp", "RSRP"], ["sinr", "SINR"], ["rsrq", "RSRQ"], ["rscp", "RSCP (3G)"], ["ecio", "Ec/Io (3G)"]]],
   size: ["Text size", [["s", "Small, 12 px"], ["m", "Medium, 16 px"], ["mb", "Medium bold, 16 px"], ["l", "Large, 24 px"], ["xl", "Extra large, 32 px"], ["xxl", "Huge, 48 px"], ["huge", "Giant, 64 px"]]],
@@ -1151,7 +1172,8 @@ const OPTS = {
   label: ["Label", [["on", "Show name and quality"], ["off", "Hide"]]],
   color: ["Colour"], text: ["Text"], offset: ["Time zone"],
 };
-const SC = { layout: null, page: 0, sel: -1, widgets: {}, persistent: false, dirty: false, loaded: false, previewT: 0, lastPreview: 0, lastMirror: 0 };
+const SC = { layout: null, page: 0, sel: -1, widgets: {}, metas: [], meta: {}, pick: {}, persistent: false, dirty: false, loaded: false, previewT: 0, lastPreview: 0, lastMirror: 0 };
+const wname = (t) => (SC.meta[t] && SC.meta[t].name) || WNAMES[t] || t;
 const snapOn = () => $("#snap").checked;
 const curPage = () => SC.layout.pages[SC.page];
 
@@ -1164,8 +1186,12 @@ async function openScreen() {
       $("#lay-note").textContent = "The screen designer needs the panel itself: open it from the router or run mifi-panel -demo.";
       return;
     }
-    const sel = $("#w-type"); sel.replaceChildren();
-    for (const k of Object.keys(WNAMES)) if (SC.widgets[k]) sel.append(new Option(WNAMES[k], k));
+    try {
+      const r = await api.widgets();
+      SC.metas = r.widgets || [];
+      for (const m of SC.metas) { SC.meta[m.type] = m; SC.pick[m.type] = m.default; }
+    } catch (e) { SC.metas = []; }
+    buildPalette();
     noteSaved();
   }
   drawDesigner(); refreshPreview(); refreshMirror();
@@ -1257,7 +1283,7 @@ function drawBoxes() {
     const b = document.createElement("div");
     b.className = "wbox" + (i === SC.sel ? " sel" : "");
     Object.assign(b.style, { left: w.x * k + "px", top: w.y * k + "px", width: w.w * k + "px", height: w.h * k + "px" });
-    b.innerHTML = `<span>${esc(WNAMES[w.type] || w.type)}</span><i aria-hidden="true"></i>`;
+    b.innerHTML = `<span>${esc(wname(w.type))}</span><i aria-hidden="true"></i>`;
     b.addEventListener("pointerdown", (e) => startDrag(e, i, e.target.tagName === "I"));
     host.append(b);
   });
@@ -1273,8 +1299,9 @@ function startDrag(e, i, resize) {
   const move = (ev) => {
     const dx = (ev.clientX - sx) / k, dy = (ev.clientY - sy) / k;
     if (resize) {
-      w.w = Math.max(8, Math.min(320 - w.x, Math.round((o.w + dx) / g) * g));
-      w.h = Math.max(8, Math.min(240 - w.y, Math.round((o.h + dy) / g) * g));
+      const mn = (SC.meta[w.type] && SC.meta[w.type].min) || [8, 8];
+      w.w = Math.max(mn[0], Math.min(320 - w.x, Math.round((o.w + dx) / g) * g));
+      w.h = Math.max(mn[1], Math.min(240 - w.y, Math.round((o.h + dy) / g) * g));
     } else {
       w.x = Math.max(0, Math.min(320 - w.w, Math.round((o.x + dx) / g) * g));
       w.y = Math.max(0, Math.min(240 - w.h, Math.round((o.y + dy) / g) * g));
@@ -1292,7 +1319,7 @@ function drawForm() {
   const f = $("#w-form"); f.replaceChildren();
   const w = curPage().widgets[SC.sel];
   if (!w) { f.innerHTML = '<p class="sub">Select a widget on the screen to change it.</p>'; return; }
-  const h = document.createElement("h3"); h.textContent = WNAMES[w.type] || w.type; f.append(h);
+  const h = document.createElement("h3"); h.textContent = wname(w.type); f.append(h);
   const xywh = document.createElement("div"); xywh.className = "xywh";
   for (const [k, lab, max] of [["x", "X", 319], ["y", "Y", 239], ["w", "Width", 320], ["h", "Height", 240]]) {
     const l = document.createElement("label"); l.textContent = lab;
@@ -1331,17 +1358,135 @@ function drawForm() {
   f.append(del);
 }
 
-$("#w-add").addEventListener("click", () => {
-  const type = $("#w-type").value, [w, h] = WSIZE[type] || [120, 24];
-  const opts = {};
-  if (type === "clock") { // the router keeps UTC: start with this computer's time zone
-    const m = -new Date().getTimezoneOffset();
-    opts.offset = (m >= 0 ? "+" : "-") + Math.floor(Math.abs(m) / 60) + (Math.abs(m) % 60 ? ":" + String(Math.abs(m) % 60).padStart(2, "0") : "");
+/* ---------- Widget palette ---------- */
+const preset = (m, key) => m.sizes.find((p) => p.key === key) || m.sizes.find((p) => p.key === m.default) || m.sizes[0];
+const thumbURL = (type, key) => `api/screen/widget-preview?type=${encodeURIComponent(type)}&size=${key}&v=${encodeURIComponent(info.version || "")}`;
+
+// A tiny 320x240 outline with the widget's area filled, at 1/10 scale.
+function miniOutline(w, h) {
+  return `<svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><rect x="1" y="1" width="32" height="24" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>` +
+    `<rect x="1" y="1" width="${Math.max(1, w / 10)}" height="${Math.max(1, h / 10)}" fill="var(--accent)"/></svg>`;
+}
+
+function buildPalette() {
+  const ul = $("#palette"); ul.replaceChildren();
+  if (!SC.metas.length) {
+    const li = document.createElement("li"); li.className = "empty";
+    li.textContent = "The widget list comes from the panel: open it from the router or run mifi-panel -demo."; ul.append(li); return;
   }
-  if (type === "text") opts.text = "Text";
-  curPage().widgets.push({ type, x: Math.max(0, Math.floor((320 - w) / 16) * 8), y: Math.max(0, Math.floor((240 - h) / 16) * 8), w, h, opts });
-  SC.sel = curPage().widgets.length - 1; drawForm(); changed();
-});
+  for (const m of SC.metas) {
+    const li = document.createElement("li"); li.className = "pcard"; li.dataset.type = m.type;
+    const main = document.createElement("button"); main.type = "button"; main.className = "pc-main";
+    main.innerHTML = `<span class="pc-thumb"></span><span class="pc-name"></span><span class="pc-desc"></span><span class="pc-size"></span><span class="pc-add" aria-hidden="true">Add</span>`;
+    main.querySelector(".pc-name").textContent = m.name;
+    main.querySelector(".pc-desc").textContent = m.desc;
+    li.append(main);
+    if (m.sizes.length > 1) {
+      const seg = document.createElement("div"); seg.className = "seg pc-sizes"; seg.setAttribute("role", "radiogroup");
+      seg.setAttribute("aria-label", `Size of ${m.name}`);
+      for (const p of m.sizes) {
+        const b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "radio"); b.dataset.key = p.key;
+        b.textContent = p.key; b.title = `${p.w}×${p.h} px`;
+        b.addEventListener("click", () => { SC.pick[m.type] = p.key; paintCard(li, m); showGhost(m); });
+        seg.append(b);
+      }
+      li.append(seg);
+    }
+    li.addEventListener("pointerenter", () => showGhost(m));
+    li.addEventListener("pointerleave", () => { if (!PD.drag) hideGhost(); });
+    li.addEventListener("focusin", () => showGhost(m));
+    li.addEventListener("focusout", (e) => { if (!li.contains(e.relatedTarget)) hideGhost(); });
+    main.addEventListener("pointerdown", (e) => paletteDown(e, li, m));
+    main.addEventListener("click", () => {
+      if (PD.suppressClick) { PD.suppressClick = false; return; }
+      const p = preset(m, SC.pick[m.type]), at = freeSpot(p.w, p.h);
+      addWidget(m, p, at.x, at.y);
+    });
+    paintCard(li, m);
+    ul.append(li);
+  }
+}
+
+// paintCard shows the chosen size: thumbnail, pixel size, outline, accessible name and S/M/L state.
+function paintCard(li, m) {
+  const p = preset(m, SC.pick[m.type]);
+  const main = li.querySelector(".pc-main"), th = main.querySelector(".pc-thumb");
+  const avail = Math.max(120, $("#palette").clientWidth - 30);
+  const k = p.w * 2 <= avail ? 2 : 1; // integer scales only, so the thumbnail stays pixel-exact
+  th.replaceChildren();
+  const img = new Image(p.w * k, p.h * k);
+  img.alt = ""; img.decoding = "async"; img.loading = "lazy"; img.src = thumbURL(m.type, p.key);
+  img.addEventListener("error", () => { th.innerHTML = '<span class="none">No preview from a file: run mifi-panel -demo</span>'; });
+  th.append(img);
+  main.querySelector(".pc-size").innerHTML = miniOutline(p.w, p.h) + `<span>${p.w}×${p.h} px</span>`;
+  main.setAttribute("aria-label", `Add ${m.name}, ${p.w} by ${p.h} pixels`);
+  main.setAttribute("aria-description", m.desc);
+  li.querySelectorAll(".pc-sizes button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.key === p.key)));
+}
+
+// freeSpot finds the first place on the current page, row by row on the 8 px grid, where a w x h widget
+// does not overlap another one. With no room left it falls back to the top-left corner.
+function freeSpot(w, h) {
+  const ws = curPage().widgets;
+  const hit = (x, y) => ws.some((o) => x < o.x + o.w && x + w > o.x && y < o.y + o.h && y + h > o.y);
+  for (let y = 0; y + h <= 240; y += 8) for (let x = 0; x + w <= 320; x += 8) if (!hit(x, y)) return { x, y, free: true };
+  return { x: 0, y: 0, free: false };
+}
+
+function placeGhost(m, p, x, y, note) {
+  const g = $("#ghost"), k = scale();
+  Object.assign(g.style, { left: x * k + "px", top: y * k + "px", width: p.w * k + "px", height: p.h * k + "px" });
+  g.querySelector("span").textContent = `${m.name}, ${p.w}×${p.h}${note ? " · " + note : ""}`;
+  g.hidden = false;
+}
+function showGhost(m) {
+  if (!SC.loaded || PD.drag) return;
+  const p = preset(m, SC.pick[m.type]), at = freeSpot(p.w, p.h);
+  placeGhost(m, p, at.x, at.y, at.free ? "" : "no free space, it will overlap");
+}
+function hideGhost() { $("#ghost").hidden = true; }
+
+function addWidget(m, p, x, y) {
+  const opts = { ...(p.opts || {}) };
+  if (m.type === "clock") { // the router keeps UTC: start with this computer's time zone
+    const z = -new Date().getTimezoneOffset();
+    opts.offset = (z >= 0 ? "+" : "-") + Math.floor(Math.abs(z) / 60) + (Math.abs(z) % 60 ? ":" + String(Math.abs(z) % 60).padStart(2, "0") : "");
+  }
+  if (m.type === "text") opts.text = "Text";
+  curPage().widgets.push({ type: m.type, x, y, w: p.w, h: p.h, opts });
+  SC.sel = curPage().widgets.length - 1; hideGhost(); drawForm(); changed();
+}
+
+// Dragging from the palette: past a few pixels the press becomes a drag, the ghost follows the pointer
+// over the screen (snapped to the grid) and dropping there adds the widget.
+const PD = { drag: false, suppressClick: false };
+function paletteDown(e, li, m) {
+  if (e.button !== 0) return;
+  const main = e.currentTarget, sx = e.clientX, sy = e.clientY;
+  let at = null;
+  const move = (ev) => {
+    if (!PD.drag) {
+      if (Math.hypot(ev.clientX - sx, ev.clientY - sy) < 6) return;
+      PD.drag = true; li.classList.add("dragging");
+      try { main.setPointerCapture(ev.pointerId); } catch (err) {}
+    }
+    const p = preset(m, SC.pick[m.type]), r = $("#stage").getBoundingClientRect(), k = scale(), g = snapOn() ? 8 : 1;
+    const inside = ev.clientX >= r.left && ev.clientX <= r.right && ev.clientY >= r.top && ev.clientY <= r.bottom;
+    if (!inside) { at = null; hideGhost(); return; }
+    const x = Math.max(0, Math.min(320 - p.w, Math.round(((ev.clientX - r.left) / k - p.w / 2) / g) * g));
+    const y = Math.max(0, Math.min(240 - p.h, Math.round(((ev.clientY - r.top) / k - p.h / 2) / g) * g));
+    at = { x, y }; placeGhost(m, p, x, y, "drop here");
+  };
+  const up = () => {
+    main.removeEventListener("pointermove", move); main.removeEventListener("pointerup", up); main.removeEventListener("pointercancel", cancel);
+    if (PD.drag) {
+      PD.drag = false; PD.suppressClick = true; li.classList.remove("dragging");
+      if (at) addWidget(m, preset(m, SC.pick[m.type]), at.x, at.y); else hideGhost();
+    }
+  };
+  const cancel = () => { PD.drag = false; li.classList.remove("dragging"); hideGhost(); up(); };
+  main.addEventListener("pointermove", move); main.addEventListener("pointerup", up); main.addEventListener("pointercancel", cancel);
+}
 $("#stage").addEventListener("pointerdown", () => { if (SC.sel >= 0) { SC.sel = -1; drawBoxes(); drawForm(); } });
 $("#stage").addEventListener("keydown", (e) => {
   const w = SC.loaded && curPage().widgets[SC.sel]; if (!w) return;
@@ -1456,6 +1601,7 @@ function realApi() {
     layoutGet: () => fetch("api/screen/layout", { cache: "no-store" }).then(j),
     layoutPut: (l) => fetch("api/screen/layout", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(l) }).then(j),
     layoutDefault: () => fetch("api/screen/default", { cache: "no-store" }).then(j),
+    widgets: () => fetch("api/screen/widgets").then(j),
     preview: (l, page) => fetch(`api/screen/preview?page=${page}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(l) }).then(img),
     mirror: () => fetch("api/screen/mirror.png", { cache: "no-store" }).then(img),
     session: () => fetch("api/screen/session", { cache: "no-store" }).then(j),
@@ -1583,6 +1729,13 @@ function mockApi() {
   const noPicture = async () => { throw new Error("the picture is drawn by the panel itself; run mifi-panel -demo to see it"); };
   return {
     layoutGet: async () => ({ layout: defLayout(), from: "default", persistent: false, widgets: wopts }),
+    // From a file there are no thumbnails (the panel draws them); one size per widget is enough here.
+    widgets: async () => {
+      const box = { metric: [200, 80], aim: [320, 240], chart: [240, 72], bars: [40, 28], band: [240, 36], operator: [200, 28], speed: [200, 64],
+        traffic: [200, 20], data: [304, 24], devices: [96, 16], battery: [64, 16], clock: [80, 28], text: [160, 28] };
+      return { widgets: Object.keys(box).map((t) => ({ type: t, name: WNAMES[t], desc: "", opts: wopts[t], min: [8, 8], default: "M",
+        sizes: [{ key: "M", w: box[t][0], h: box[t][1] }] })) };
+    },
     layoutPut: async () => ({ saved: false }),
     layoutDefault: async () => defLayout(),
     preview: noPicture,

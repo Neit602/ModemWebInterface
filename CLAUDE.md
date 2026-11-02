@@ -64,6 +64,8 @@ Keep docs/history.md up to date: when something important is learned or decided,
   One command at a time behind a mutex; pollers use TryLock.
 - `cells.go`: EARFCN -> band/MHz table, $QCRSRP?/$QCRSRQ? parsing (3G format fix-up), cell tracker
   (60 s memory), serving cell details (eNB/sector, RNC/CID), connection event log; `/api/cells`, `/api/events`.
+- `widgets.go`: the widget list with metadata (palette, S/M/L presets, minimum sizes enforced by Validate)
+  and cached thumbnails on fixed sample data.
 - `render.go` + `screen.go`: 320x240 renderer (Terminus bitmap fonts in fonts/, OFL), layouts and widgets,
   screen mirror (read-only /dev/fb0) and preview API; one renderer for both the PNG preview and RGB666 frames.
 - `showscreen.go` + `testframe.go`: drawing on the LCD = mmap /dev/fb0 + ioctl(0x9999, {0,0,320,240}) (nvtl_lcd,
@@ -81,8 +83,10 @@ Keep docs/history.md up to date: when something important is learned or decided,
 - `probe.sh`: general read-only device survey. `probe-modem.sh`: focused survey of modem plumbing,
   vendor CLIs (help output), leases, IPv6. `README.md`: install steps.
 - Default `-listen lan`: 127.0.0.1 and the br0 address only (waits for br0 to get an address).
-- Status (0.4.0): reads real data on the device (checked live, read-only). Reconnect and Find all
+- Status (0.6.0): reads real data on the device (checked live, read-only); Cells page, screen mirror,
+  screen designer with widget palette, Show on router (two live trials with me). Reconnect and Find all
   networks were run once with me; Restart data session has never run on the device (first test only with me).
+  Where we stopped and how to resume: the "Resume here" section at the end of docs/history.md.
 
 ## Safety rules
 

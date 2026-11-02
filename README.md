@@ -3,7 +3,7 @@
 A custom web UI for the Inseego MiFi 8800L that replaces the stock one. It is a single file with no
 dependencies that runs on the router itself and opens from any phone or laptop on its Wi-Fi.
 
-What it does (version 0.5):
+What it does (version 0.6):
 
 - live signal with a quality rating and a 15-minute chart: RSRP, SINR and RSRQ on LTE,
   RSCP and Ec/Io on 3G (the panel switches by itself), plus RSSI;
@@ -19,7 +19,9 @@ What it does (version 0.5):
   cell, registration, data session, IP address);
 - a **Screen** page: a live mirror of the router's own 2.4" screen, and a designer for your own screens
   (pages of widgets: big signal value, band and cell, signal bars, speed, traffic, battery, clock, operator,
-  devices, signal chart, antenna aiming, data session, free text) with a pixel-exact preview drawn by the router,
+  devices, signal chart, antenna aiming, data session, free text) with a pixel-exact preview drawn by the router.
+  Widgets are picked from a palette: each card shows a pixel-exact thumbnail, a short description and its size
+  in S/M/L presets; a dashed frame on the screen shows where it will land; press it or drag it onto the screen,
   and **Show on router**: the router's screen shows your pages for a set time (tap for the next page, hold or
   press the power button to go back), after which the stock screen returns by itself. A failsafe process keeps
   the router's watchdog satisfied and brings the stock screen back even if the panel stops;
@@ -133,6 +135,8 @@ How it is put together:
   `/api/action`, `/api/at`);
 - `render.go`: draws 320x240 frames (bitmap fonts, lines, text) and encodes them as PNG or as the
   framebuffer's RGB666; decodes the framebuffer for the mirror;
+- `widgets.go`: widget metadata (name, description, minimum size, S/M/L presets), cached palette thumbnails
+  drawn on fixed sample data (`/api/screen/widgets`, `/api/screen/widget-preview`);
 - `screen.go`: screen layouts, widgets, the default layout and the `/api/screen/...` endpoints;
 - `fonts/`: Terminus bitmap fonts (SIL OFL 1.1, see `fonts/Terminus-OFL.txt`) with Latin and Cyrillic,
   made by `go run ./tools/fontgen <out.bin> <font.bdf>` from the Terminus 4.49.1 BDF files;

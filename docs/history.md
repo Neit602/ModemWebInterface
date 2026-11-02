@@ -61,7 +61,7 @@ It complements CLAUDE.md (device facts, rules) and README.md (install steps).
 - Default listening on loopback and br0 only: the stock firewall has no INPUT rules.
 - Read-only probing first, every persistent change only with my OK.
 
-## Right now
+## Right now (as of v0.2, kept for history; the current state is in "Resume here" at the end)
 
 - The SIM in the router is the one that gets only 3G at home (my main operator). So expect:
   AT+COPS? reports access technology 2 (UTRAN), +CESQ gives RSCP and Ec/No while RSRP/RSRQ are 255
@@ -506,11 +506,68 @@ Screen: option A (mirror), then D (own screen on demand), built towards a widget
   keep-alives, LCD state handling. Not yet tried live: exit by the power button, exit at time-up, the
   failsafe taking over after a panel crash.
 
-## Next steps
+## Version 0.6.0: widget palette (2026-11-02)
 
-1. Done: probe-modem.sh and the AT port check (probe-at.txt is from the fixed 0.3.0 probe).
-2. Done in 0.3.0 (see below). Wire the panel to the free AT port or to vendor CLI tools; add the 3G metrics view.
-3. Band, EARFCN and SINR from Qualcomm/Inseego-specific sources.
-4. Autostart plan (persistent location, init script in /etc/rc3.d, full uninstall), only with my OK.
+- widgets.go: one list of widget metadata (type, name, one-line description, options, minimum size, default
+  size, S/M/L presets with the text size that suits each; devices has S/M, aiming S/L). Validate now grows
+  widgets to their minimum size. GET /api/screen/widgets serves the list.
+- Thumbnails: GET /api/screen/widget-preview?type=&size=&v=<version> renders the widget alone with the
+  same renderer, cropped to its box, at 1x, on fixed sample data (LTE B3, RSRP -82, a fixed history curve,
+  12:34), so they never change. Cached in memory after the first render and in the browser for a day
+  (the version in the URL refreshes them on upgrade). On the router: first render 22-39 ms, cached ~4 ms.
+- Palette: the dropdown is gone. Each card is a real button ("Add <name>, <w> by <h> pixels") with the
+  thumbnail (shown at 2x when it fits the column, else 1x: integer scales only, pixelated), name, description,
+  "W×H px", a tiny 320x240 outline with the area filled, and S/M/L switches that update the thumbnail.
+  Hover or keyboard focus shows a dashed ghost on the canvas at the next free spot (first non-overlapping
+  place on the 8 px grid, row by row; "no free space, it will overlap" when there is none). Press = add at
+  the ghost; drag the card onto the screen = add where dropped (snapped). On phones the palette is a
+  scrollable list (cards use touch-action: pan-y, so there pressing is the way to add). Resizing on the
+  canvas respects the minimum size.
+- Aiming widget: the "below the best" line shrinks its font to fit narrow boxes.
+- Live check on the router (read-only apart from the preview): 13 widget types; CPU busy 3.5% with the panel
+  idle, 7.0% with the Screen page open (most of it is the mirror every 2 s and the live preview every 3 s; the
+  palette only costs its first thumbnails). Panel RSS 9.6 MB.
+- My layout with signal bars was saved from the phone: /data/mifi-panel/screen-layout.json now exists on flash.
+- adb lost the router twice after USB re-enumerations without a reboot; `adb kill-server` fixes it.
+
+## Resume here (state on 2026-11-02, end of the v0.6.0 session)
+
+### Where things are
+
+- Code: v0.6.0, committed to git; remote origin = git@github.com:Neit602/ModemWebInterface.git.
+  Push only when I ask. Never commit probe*.txt or dist/ (router serial, MACs, client names; in .gitignore).
+- Router: Vodafone UA SIM on LTE B3 (B3 enabled in the band preference, persistent; stays enabled).
+  AT+CEREG=2 is sent by the panel at startup. Nothing is installed persistently except
+  /data/mifi-panel/screen-layout.json (my saved screen layout; /data/mifi-panel/ is approved for layouts).
+- The panel runs only from /tmp (RAM): after a reboot or power loss it is gone and has to be started again.
+  No autostart yet.
+- This computer gets its internet over another Wi-Fi (OLAX), not through the MiFi.
+
+### How to run the panel on the router (the way it was done in this session)
+
+```
+sh build.sh                                   # vet + tests, builds dist/mifi-panel (ARMv7) and dist/mifi-panel-local
+adb shell "pkill -x mifi-panel"               # stop an old copy if it runs
+adb push dist/mifi-panel /tmp/
+adb shell "chmod +x /tmp/mifi-panel; (setsid /tmp/mifi-panel -password <PW> -layout-dir /data/mifi-panel </dev/null >/tmp/panel.log 2>&1 &)"
+adb forward tcp:8080 tcp:8080                 # then http://localhost:8080, or http://192.168.1.1:8080 over the MiFi Wi-Fi
+```
+
+- Login: user admin, password = the -password value. Generate at least 12 characters and check its length
+  before telling me (once a filter left only 3 characters and I could not log in). Never write it into the repo.
+- adb lessons: start background processes with `(setsid cmd </dev/null >log 2>&1 &)`, not `cmd &`;
+  stop with `pkill -x` (pkill -f matches its own shell); after a USB re-enumeration run `adb kill-server`;
+  adb forward can disappear, so re-add it rather than trusting it.
+- Local demo: `dist/mifi-panel-local -demo`, or open web/index.html with `?demo=1` / `?demo=3g`.
+
+### Open items, in order
+
+1. Not tried live yet, only together with me: Restart data session; Show on router exits by the power button
+   and at time-up; the failsafe taking over after the panel is killed mid-show.
+2. Autostart plan (persistent location such as /data/mifi-panel or /opt, init script in /etc/rc3.d, password
+   handling, full uninstall), proposed first and installed only with my OK (rule 2).
+3. Possible CPU saving: the mirror on the Screen page reads /dev/fb0 every 2 s (7.0% router CPU with the page
+   open vs 3.5% idle); it could refresh only when the picture changes.
+4. IPA offload undercount check (speed test while comparing rmnet_data0, wlan0/1 and /sys/kernel/debug/ipa).
 5. Roadmap in CLAUDE.md: Telegram bot with power-outage alerts and SMS forwarding, GPS signal logger,
-   VPN, DNS ad blocking, custom info on the device screen.
+   VPN, DNS ad blocking.

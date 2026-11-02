@@ -43,23 +43,6 @@ const (
 	maxWidgets = 40
 )
 
-// widgetTypes lists every widget with the options the designer offers for it.
-var widgetTypes = map[string][]string{
-	"metric":   {"metric", "size", "align", "color", "label"},
-	"band":     {"size", "align", "color"},
-	"bars":     {"metric", "color"},
-	"speed":    {"size", "align", "color"},
-	"traffic":  {"size", "align", "color"},
-	"battery":  {"size", "align", "color"},
-	"clock":    {"size", "align", "color", "offset"},
-	"operator": {"size", "align", "color"},
-	"devices":  {"size", "align", "color"},
-	"chart":    {"metric", "color"},
-	"aim":      {"metric", "color"},
-	"data":     {"size", "align", "color"},
-	"text":     {"text", "size", "align", "color"},
-}
-
 // Validate clamps a layout to the screen and rejects what the renderer cannot draw.
 func (l *Layout) Validate() error {
 	if len(l.Pages) == 0 {
@@ -79,11 +62,12 @@ func (l *Layout) Validate() error {
 		}
 		for wi := range p.Widgets {
 			w := &p.Widgets[wi]
-			if _, ok := widgetTypes[w.Type]; !ok {
+			meta, ok := widgetMeta(w.Type)
+			if !ok {
 				return fmt.Errorf("page %d: unknown widget %q", pi+1, w.Type)
 			}
-			w.W = clamp(w.W, 8, screenW)
-			w.H = clamp(w.H, 8, screenH)
+			w.W = clamp(w.W, meta.Min[0], screenW)
+			w.H = clamp(w.H, meta.Min[1], screenH)
 			w.X = clamp(w.X, 0, screenW-w.W)
 			w.Y = clamp(w.Y, 0, screenH-w.H)
 			for k, v := range w.Opts {
@@ -534,7 +518,13 @@ func drawAim(c *Canvas, w Widget, r image.Rectangle, d ScreenData, fg color.RGBA
 			delta = bd.format(fp(best-*v)) + " " + def.unit + " below the best"
 		}
 	}
-	c.TextIn(image.Rect(in.Min.X, deltaTop, in.Max.X, deltaTop+l.height()), delta, l, "center", fg)
+	dt := l // a smaller font when the line does not fit the width
+	for _, cand := range []string{"l", "mb", "m", "s"} {
+		if dt = textSizes[cand]; dt.width(delta) <= in.Dx() {
+			break
+		}
+	}
+	c.TextIn(image.Rect(in.Min.X, deltaTop, in.Max.X, deltaTop+l.height()), delta, dt, "center", fg)
 
 	bar := image.Rect(in.Min.X, barTop, in.Max.X, in.Max.Y)
 	c.Fill(bar, colGrid)

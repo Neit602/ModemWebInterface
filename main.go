@@ -18,7 +18,7 @@ import (
 	"time"
 )
 
-const version = "0.5.0"
+const version = "0.6.0"
 
 //go:embed web
 var webFS embed.FS
@@ -133,6 +133,7 @@ func main() {
 	})
 	layouts := NewLayoutStore(cfg.LayoutDir)
 	registerScreenAPI(mux, cfg, col, layouts, NewShower(cfg, col))
+	registerWidgetAPI(mux)
 	mux.HandleFunc("GET /api/info", func(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusOK, map[string]any{
 			"version":    version,
