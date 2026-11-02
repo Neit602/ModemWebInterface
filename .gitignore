@@ -1,0 +1,5 @@
+# Build output
+dist/
+
+# Device survey dumps: they contain the router's serial number, MAC addresses and Wi-Fi client names
+probe*.txt

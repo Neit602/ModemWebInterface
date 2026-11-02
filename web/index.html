@@ -1,0 +1,1732 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>MiFi Panel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%2318221d'/%3E%3Cpath d='M3 12h2V9H3zm4 0h2V6H7zm4 0h2V3h-2z' fill='%23f3f5f0'/%3E%3C/svg%3E">
+<style>
+@font-face {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(fonts/geologica-cyrillic.woff2) format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "Geologica";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(fonts/geologica-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light;
+  --page: #e2e7df;
+  --surface: #f3f5f0;
+  --ink: #18221d;
+  --ink-2: #47544d;
+  --muted: #66736c;
+  --line: #d2d9cf;
+  --grid: #dde3da;
+  --accent: #1e55b3;
+  --accent-ink: #ffffff;
+  --s-down: #2a78d6;
+  --s-up: #eb6834;
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --notice: #f6eccb;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #121915;
+    --surface: #1b2420;
+    --ink: #e4eae3;
+    --ink-2: #b5c0b8;
+    --muted: #8b968f;
+    --line: #2c3832;
+    --grid: #26312b;
+    --accent: #79a3ec;
+    --accent-ink: #0f1a2e;
+    --s-down: #3987e5;
+    --s-up: #d95926;
+    --notice: #2e2a17;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 400 15px/1.5 "Geologica", system-ui, sans-serif;
+}
+h2 { font-size: 17px; font-weight: 600; line-height: 1.3; margin: 0; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 12px 16px 40px; }
+
+/* Status bar */
+.bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px;
+  padding: 6px 2px 14px;
+}
+.bar .op { font-weight: 600; font-size: 17px; }
+.chip {
+  display: inline-block; padding: 2px 9px; border-radius: 999px;
+  border: 1px solid var(--line); font-size: 13px; color: var(--ink-2); white-space: nowrap;
+}
+.chip.demo { border-color: var(--warning); color: var(--ink); }
+.state { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); }
+.bar .push { margin-left: auto; }
+
+.notice {
+  background: var(--notice); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px;
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.notice ul { margin: 0; padding-left: 18px; }
+
+.icon { width: 16px; height: 16px; flex: none; vertical-align: -3px; }
+.st-good { color: var(--good); }
+.st-warning { color: var(--warning); }
+.st-serious { color: var(--serious); }
+.st-critical { color: var(--critical); }
+.st-neutral { color: var(--muted); }
+
+/* Layout grid */
+.grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) {
+  .grid { grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr); align-items: start; }
+  .signal { grid-column: 1; grid-row: 1; }
+  .side { grid-column: 2; grid-row: 1 / span 2; }
+  .details { grid-column: 1; grid-row: 2; }
+}
+body.stale .grid { opacity: .55; }
+
+/* Signal */
+.signal { background: var(--surface); border-radius: 16px; padding: 18px 18px 14px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.sec-head h2 { margin-right: auto; }
+
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; padding: 2px; }
+.seg button {
+  border: 0; background: none; padding: 4px 11px; border-radius: 7px; cursor: pointer;
+  font-size: 13px; font-weight: 500; color: var(--ink-2);
+}
+.seg button[aria-checked="true"] { background: var(--ink); color: var(--surface); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 38px; padding: 7px 14px; border-radius: 9px; cursor: pointer;
+  font-weight: 500; font-size: 14px; border: 1px solid var(--line); background: var(--surface);
+}
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn:disabled { opacity: .5; cursor: default; filter: none; }
+
+.hero { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 18px; margin-top: 14px; }
+.hero-val { font-size: 76px; font-weight: 500; line-height: 1; letter-spacing: -0.025em; }
+.hero-val .unit { font-size: 22px; font-weight: 400; color: var(--muted); letter-spacing: 0; margin-left: 8px; }
+.q { display: inline-flex; align-items: center; gap: 7px; font-size: 17px; font-weight: 500; }
+.q .icon { width: 18px; height: 18px; }
+.hero-note { color: var(--ink-2); margin-top: 6px; max-width: 60ch; }
+
+.chart { position: relative; margin-top: 14px; }
+.chart svg { display: block; width: 100%; overflow: visible; touch-action: pan-y; }
+.chart:focus-visible { outline-offset: 4px; }
+.chart .gl { stroke: var(--grid); stroke-width: 1; }
+.chart .base { stroke: var(--line); stroke-width: 1; }
+.chart .ylab, .chart .xlab { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.chart .ln { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart .xh-line { stroke: var(--muted); stroke-width: 1; }
+.chart .dot { stroke: var(--surface); stroke-width: 2; }
+.tip {
+  position: absolute; top: 0; pointer-events: none; z-index: 2;
+  background: var(--ink); color: var(--surface); border-radius: 8px; padding: 7px 10px;
+  font-size: 12px; line-height: 1.45; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.tip .t { opacity: .7; }
+.tip .row { display: flex; align-items: center; gap: 7px; }
+.tip .row b { font-weight: 600; }
+.tip .k { display: inline-block; width: 12px; height: 2px; border-radius: 1px; }
+
+.readouts {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px; margin: 12px 0 0; padding-top: 12px; border-top: 1px solid var(--line);
+}
+.readouts div { margin: 0; }
+.readouts dt { color: var(--ink-2); font-size: 13px; }
+.readouts dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 7px; font-size: 19px; font-weight: 500; }
+.readouts dd small { font-size: 13px; color: var(--muted); font-weight: 400; white-space: nowrap; }
+.peak { color: var(--ink-2); font-size: 13px; margin-top: 10px; }
+
+/* Side column */
+.side { background: var(--surface); border-radius: 12px; padding: 4px 16px; }
+.side > section { padding: 14px 0; }
+.side > section + section { border-top: 1px solid var(--line); }
+.rates { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 10px; }
+.rate { display: flex; align-items: baseline; gap: 8px; }
+.rate .k { display: inline-block; width: 14px; height: 2px; border-radius: 1px; align-self: center; }
+.rate b { font-size: 22px; font-weight: 500; }
+.rate span { color: var(--ink-2); font-size: 13px; }
+.sub { color: var(--ink-2); font-size: 13px; }
+#net-sub { margin-top: 8px; }
+.action-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.action-msg { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; font-size: 14px; }
+.action-msg[hidden] { display: none; }
+.spin { width: 16px; height: 16px; flex: none; margin-top: 2px; border-radius: 50%; border: 2px solid var(--line); border-top-color: var(--accent); animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; border-top-color: var(--line); border-color: var(--accent); } }
+
+.clients { list-style: none; margin: 8px 0 0; padding: 0; }
+.clients li { display: grid; grid-template-columns: 1fr auto; gap: 0 10px; padding: 7px 0; }
+.clients li + li { border-top: 1px solid var(--line); }
+.clients .nm { font-weight: 500; overflow-wrap: anywhere; }
+.clients .ad { grid-column: 1; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.clients .on { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: 13px; color: var(--ink-2); display: inline-flex; gap: 5px; align-items: center; }
+.empty { color: var(--ink-2); margin-top: 8px; font-size: 14px; }
+
+/* Details */
+.details { padding: 4px 4px 0; }
+.details h2 { margin-bottom: 8px; }
+.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4px 28px; margin: 0; }
+.kv div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.kv dt { color: var(--ink-2); }
+.kv dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
+
+.console { margin-top: 16px; }
+.console summary { cursor: pointer; font-weight: 600; }
+.console form { display: flex; gap: 8px; margin-top: 10px; }
+.console input {
+  flex: 1; min-width: 0; font: inherit; padding: 7px 10px; border-radius: 9px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
+.console pre {
+  background: var(--surface); border-radius: 10px; padding: 10px 12px; margin: 10px 0 0;
+  max-height: 260px; overflow: auto; font: 13px/1.5 ui-monospace, Menlo, Consolas, monospace; white-space: pre-wrap;
+}
+
+footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
+
+/* Pages */
+.tabs { margin: -4px 0 14px; }
+.seg a {
+  display: inline-block; padding: 5px 14px; border-radius: 7px; text-decoration: none;
+  font-size: 14px; font-weight: 500; color: var(--ink-2);
+}
+.seg a[aria-selected="true"] { background: var(--ink); color: var(--surface); }
+
+/* Cells page */
+.cgrid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) {
+  .cgrid { grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr); align-items: start; }
+  .cgrid > .ev-card { grid-column: 2; grid-row: 1 / span 3; }
+}
+body.stale .cgrid { opacity: .55; }
+.card { background: var(--surface); border-radius: 12px; padding: 16px; }
+.card > .sub { margin-top: 4px; max-width: 70ch; }
+.card .kv { margin-top: 10px; }
+.chip.serving { border-color: var(--accent); color: var(--accent); }
+
+.cells { list-style: none; margin: 8px 0 0; padding: 0; }
+.cells li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 12px; padding: 10px 0; }
+.cells li + li { border-top: 1px solid var(--line); }
+.cells .nm { font-weight: 500; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.cells .val { grid-column: 2; grid-row: 1; display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cells .val small { color: var(--muted); font-weight: 400; font-size: 13px; }
+.cells .meta { grid-column: 1 / -1; color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.cells .meter { grid-column: 1 / -1; height: 6px; }
+.cells li.old { opacity: .6; }
+
+.tbl { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+.tbl th { text-align: left; font-weight: 500; font-size: 13px; color: var(--ink-2); padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); }
+.tbl td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; font-variant-numeric: tabular-nums; }
+.tbl td .icon { margin-right: 5px; }
+
+.events { list-style: none; margin: 8px 0 0; padding: 0; max-height: 720px; overflow: auto; }
+.events li { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 0 8px; align-items: baseline; padding: 6px 0; font-size: 14px; }
+.events li + li { border-top: 1px solid var(--line); }
+.events time { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Screen page */
+.sgrid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+body.stale .sgrid { opacity: .55; }
+.lcd { margin-top: 10px; width: min(100%, 640px); aspect-ratio: 4 / 3; background: #000; border-radius: 10px; padding: 8px; box-sizing: content-box; max-width: calc(100% - 16px); }
+.lcd img, .stage img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.dz { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); margin-top: 12px; }
+@media (min-width: 980px) { .dz { grid-template-columns: minmax(0, 640px) minmax(260px, 1fr); align-items: start; } }
+.stage { position: relative; width: 100%; max-width: 640px; aspect-ratio: 4 / 3; background: #fff; outline: 1px solid var(--line); touch-action: none; user-select: none; }
+.stage.grid-on { background-image: linear-gradient(to right, rgb(0 0 0 / .06) 1px, transparent 1px), linear-gradient(to bottom, rgb(0 0 0 / .06) 1px, transparent 1px); background-size: var(--g) var(--g); }
+.stage.grid-on img { opacity: .92; }
+.wbox { position: absolute; outline: 1px dashed rgb(30 85 179 / .55); cursor: move; }
+.wbox span { position: absolute; left: 0; bottom: 100%; font-size: 11px; line-height: 1; padding: 2px 4px; background: var(--accent); color: var(--accent-ink); border-radius: 4px 4px 0 0; pointer-events: none; white-space: nowrap; opacity: 0; }
+.wbox.sel span, .wbox:hover span { opacity: 1; }
+.wbox.sel { outline: 2px solid var(--accent); z-index: 2; }
+.wbox i { position: absolute; right: -6px; bottom: -6px; width: 12px; height: 12px; background: var(--accent); border: 2px solid #fff; border-radius: 3px; cursor: nwse-resize; }
+.wbox:not(.sel) i { display: none; }
+.showbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-top: 10px; }
+.showbar .action-msg { margin-top: 0; }
+.showbar select { font: inherit; font-size: 14px; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.pagebar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+.pagebar .seg button { font-size: 13px; }
+.inspector h3 { font-size: 15px; font-weight: 600; margin: 0 0 8px; }
+.inspector .row { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 8px; align-items: center; margin-top: 8px; font-size: 14px; }
+.inspector .xywh { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+.inspector .xywh label { font-size: 12px; color: var(--ink-2); display: grid; gap: 2px; }
+.inspector input, .inspector select {
+  font: inherit; font-size: 14px; padding: 5px 8px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); min-width: 0; width: 100%;
+}
+.inspector input[type="color"] { padding: 2px; height: 34px; }
+.inspector .add { display: flex; gap: 8px; }
+.inspector hr { border: 0; border-top: 1px solid var(--line); margin: 14px 0; }
+.check { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--ink-2); }
+
+dialog.confirm {
+  border: 0; border-radius: 14px; padding: 20px; width: min(440px, calc(100vw - 32px));
+  background: var(--surface); color: var(--ink);
+}
+dialog.confirm::backdrop { background: rgb(0 0 0 / .4); }
+dialog.confirm p { margin-top: 8px; color: var(--ink-2); }
+dialog.confirm .action-btns { justify-content: flex-end; margin-top: 18px; }
+
+/* Antenna aiming */
+dialog.aim {
+  width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; border: 0; padding: 0;
+  background: var(--page); color: var(--ink);
+}
+dialog.aim::backdrop { background: var(--page); }
+.aim-in {
+  height: 100%; display: flex; flex-direction: column; padding: 16px; gap: 10px;
+  max-width: 760px; margin: 0 auto;
+}
+.aim-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.aim-top h2 { margin-right: auto; }
+.aim-main { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.aim-val { font-size: clamp(96px, 30vw, 200px); font-weight: 500; line-height: .95; letter-spacing: -0.035em; }
+.aim-val .unit { font-size: 28px; font-weight: 400; color: var(--muted); letter-spacing: 0; margin-left: 10px; }
+.aim-delta { font-size: 22px; font-weight: 500; }
+.aim-sub { color: var(--ink-2); font-size: 17px; }
+.meter { height: 10px; border-radius: 999px; background: var(--grid); position: relative; overflow: hidden; }
+.meter i { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: var(--ink); }
+.meter b { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--accent); }
+.btn[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+
+@media (max-width: 520px) {
+  .hero-val { font-size: 60px; }
+  .signal { padding: 14px 14px 12px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="bar">
+    <span class="op" id="op">—</span>
+    <span class="chip" id="tech" hidden></span>
+    <span class="state" id="reg"></span>
+    <span class="state" id="conn"></span>
+    <span class="state push" id="batt"></span>
+    <span class="chip demo" id="demo" hidden>Demo data</span>
+  </header>
+
+  <nav class="tabs" aria-label="Pages">
+    <div class="seg" role="tablist">
+      <a href="#" role="tab" data-view="overview" aria-selected="true">Overview</a>
+      <a href="#cells" role="tab" data-view="cells" aria-selected="false">Cells</a>
+      <a href="#screen" role="tab" data-view="screen" aria-selected="false">Screen</a>
+    </div>
+  </nav>
+
+  <div class="notice" id="notice" role="status" hidden></div>
+
+  <main class="grid" id="view-overview">
+    <section class="signal" aria-labelledby="h-signal">
+      <div class="sec-head">
+        <h2 id="h-signal">Signal</h2>
+        <div class="seg" id="metric-seg" role="radiogroup" aria-label="Metric to show"></div>
+        <button type="button" class="btn" id="aim-open">Antenna aiming</button>
+      </div>
+      <div class="hero" aria-live="off">
+        <div class="hero-val"><span id="hv">—</span><span class="unit" id="hu">dBm</span></div>
+        <div class="q" id="hq"></div>
+      </div>
+      <p class="hero-note" id="hnote"></p>
+      <div class="chart" id="sig-chart" tabindex="0" aria-label="Signal chart. Use the left and right arrow keys to inspect values.">
+        <svg aria-hidden="true"></svg>
+        <div class="tip" hidden></div>
+      </div>
+      <p class="peak" id="peak"></p>
+      <dl class="readouts" id="readouts"></dl>
+    </section>
+
+    <div class="side">
+      <section aria-labelledby="h-net">
+        <h2 id="h-net">Internet</h2>
+        <div class="rates">
+          <div class="rate"><i class="k" style="background:var(--s-down)"></i><b id="rx">—</b><span>download</span></div>
+          <div class="rate"><i class="k" style="background:var(--s-up)"></i><b id="tx">—</b><span>upload</span></div>
+        </div>
+        <div class="chart" id="net-chart" tabindex="0" aria-label="Speed chart. Use the left and right arrow keys to inspect values.">
+          <svg aria-hidden="true"></svg>
+          <div class="tip" hidden></div>
+        </div>
+        <p class="sub" id="net-sub"></p>
+      </section>
+
+      <section aria-labelledby="h-act">
+        <h2 id="h-act">Network connection</h2>
+        <p class="sub" style="margin-top:4px">If the internet drops or gets very slow, try reconnecting first.
+          If the network is there but pages do not load, restart the data session: the router gets a new IP address.</p>
+        <div class="action-btns">
+          <button type="button" class="btn primary" data-action="reregister">Reconnect</button>
+          <button type="button" class="btn" data-action="restart_data">Restart data session</button>
+          <button type="button" class="btn" data-scan>Find all networks</button>
+        </div>
+        <div class="action-msg" id="action-msg" role="status" hidden></div>
+      </section>
+
+      <section aria-labelledby="h-cl">
+        <h2 id="h-cl">Devices</h2>
+        <p class="sub" id="cl-sub"></p>
+        <ul class="clients" id="clients"></ul>
+      </section>
+    </div>
+
+    <section class="details" aria-labelledby="h-det">
+      <h2 id="h-det">Details</h2>
+      <dl class="kv" id="kv"></dl>
+      <details class="console" id="console" hidden>
+        <summary>Modem console</summary>
+        <form id="at-form">
+          <input id="at-in" autocomplete="off" spellcheck="false" placeholder="AT+CSQ" aria-label="AT command">
+          <button class="btn" type="submit">Send</button>
+        </form>
+        <pre id="at-out" aria-live="polite"></pre>
+      </details>
+    </section>
+  </main>
+
+  <main class="cgrid" id="view-cells" hidden>
+    <section class="card" aria-labelledby="h-srv">
+      <div class="sec-head"><h2 id="h-srv">Serving cell</h2><span class="chip" id="srv-chip" hidden></span></div>
+      <dl class="kv" id="srv-kv"></dl>
+      <p class="sub" id="srv-note" style="margin-top:10px"></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-nb">
+      <h2 id="h-nb">Cells nearby</h2>
+      <p class="sub" id="nb-sub"></p>
+      <ul class="cells" id="nb-list"></ul>
+    </section>
+
+    <section class="card" aria-labelledby="h-scan">
+      <div class="sec-head">
+        <h2 id="h-scan">All networks</h2>
+        <button type="button" class="btn" data-scan>Find all networks</button>
+      </div>
+      <p class="sub">Which operators the modem can see here. Searching takes the router off the network, so the internet drops for 1–3 minutes.</p>
+      <div class="action-msg" id="scan-msg" role="status" hidden></div>
+      <div id="scan-out"></div>
+    </section>
+
+    <section class="card ev-card" aria-labelledby="h-ev">
+      <h2 id="h-ev">Connection events</h2>
+      <p class="sub">What changed since the panel started: network type, band, cell, registration, data session and IP address. The last 300 are kept.</p>
+      <ol class="events" id="ev-list"></ol>
+    </section>
+  </main>
+
+  <main class="sgrid" id="view-screen" hidden>
+    <section class="card" aria-labelledby="h-mirror">
+      <h2 id="h-mirror">Router screen</h2>
+      <p class="sub">What the router's own screen shows right now. It refreshes every 2 seconds while this page is open; the panel only reads the screen.</p>
+      <div class="lcd"><img id="mirror" alt="The current picture on the router's screen" width="320" height="240"></div>
+      <p class="sub" id="mirror-msg" style="margin-top:8px"></p>
+    </section>
+
+    <section class="card" aria-labelledby="h-design">
+      <div class="sec-head">
+        <h2 id="h-design">Screen designer</h2>
+        <div class="action-btns" style="margin:0">
+          <button type="button" class="btn primary" id="lay-save">Save</button>
+          <button type="button" class="btn" id="lay-download">Download JSON</button>
+          <label class="btn" tabindex="0">Load JSON<input type="file" id="lay-file" accept="application/json,.json" hidden></label>
+          <button type="button" class="btn" id="lay-reset">Default layout</button>
+        </div>
+      </div>
+      <div class="showbar">
+        <label class="check">Show for
+          <select id="show-for" aria-label="How long to show it">
+            <option value="30">30 seconds</option><option value="60">1 minute</option><option value="120" selected>2 minutes</option>
+            <option value="300">5 minutes</option><option value="600">10 minutes</option>
+          </select>
+        </label>
+        <button type="button" class="btn primary" id="show-start">Show on router</button>
+        <button type="button" class="btn" id="show-stop" hidden>Stop</button>
+        <span class="action-msg" id="show-msg" role="status" hidden></span>
+      </div>
+      <p class="sub" id="lay-note">Design pages for the router's 320 × 240 screen. The picture under the frames is drawn by the router exactly as the screen will show it, with live data.</p>
+      <div class="pagebar">
+        <div class="seg" id="page-seg" role="tablist" aria-label="Pages"></div>
+        <button type="button" class="btn" id="page-add">Add page</button>
+        <button type="button" class="btn" id="page-rename">Rename</button>
+        <button type="button" class="btn" id="page-del">Delete page</button>
+        <label class="check"><input type="checkbox" id="snap" checked> Snap to 8 px grid</label>
+      </div>
+      <div class="dz">
+        <div>
+          <div class="stage grid-on" id="stage" tabindex="0" aria-label="Screen layout. Select a widget, then use the arrow keys to move it; hold Shift to move by 8 pixels.">
+            <img id="preview" alt="Preview of this page as the router will draw it" width="320" height="240">
+            <div id="boxes"></div>
+          </div>
+          <p class="sub" id="preview-msg" style="margin-top:6px"></p>
+        </div>
+        <aside class="inspector" aria-labelledby="h-insp">
+          <h3 id="h-insp">Add a widget</h3>
+          <div class="add">
+            <select id="w-type" aria-label="Widget type"></select>
+            <button type="button" class="btn" id="w-add">Add</button>
+          </div>
+          <hr>
+          <div id="w-form"><p class="sub">Select a widget on the screen to change it.</p></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer id="foot"></footer>
+</div>
+
+<dialog class="aim" id="aim" aria-labelledby="aim-h">
+  <div class="aim-in">
+    <div class="aim-top">
+      <h2 id="aim-h">Antenna aiming</h2>
+      <button type="button" class="btn" id="aim-sound" aria-pressed="false">Sound</button>
+      <button type="button" class="btn" id="aim-reset">Reset best</button>
+      <button type="button" class="btn" id="aim-close">Close</button>
+    </div>
+    <div class="aim-main">
+      <div class="q" id="aim-q"></div>
+      <div class="aim-val"><span id="aim-v">—</span><span class="unit" id="aim-u"></span></div>
+      <div class="meter" aria-hidden="true"><i id="aim-bar"></i><b id="aim-peak-mark"></b></div>
+      <p class="aim-delta" id="aim-delta" aria-live="polite"></p>
+      <p class="aim-sub" id="aim-sub"></p>
+    </div>
+    <p class="sub">Turn the antenna slowly and wait a few seconds after each move. The tone gets higher as the signal improves.</p>
+  </div>
+</dialog>
+
+<dialog class="confirm" id="scan-dlg" aria-labelledby="scan-dlg-h">
+  <form method="dialog">
+    <h2 id="scan-dlg-h">Search for all networks?</h2>
+    <p>The modem has to leave the network to search. The internet on this router drops for 1–3 minutes, then the modem reconnects by itself.</p>
+    <div class="action-btns">
+      <button type="submit" class="btn" value="cancel">Cancel</button>
+      <button type="submit" class="btn primary" value="ok">Start the search</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog class="confirm" id="show-dlg" aria-labelledby="show-dlg-h">
+  <form method="dialog">
+    <h2 id="show-dlg-h">Show this on the router's screen?</h2>
+    <p>The router's own screen app is paused while the panel draws this layout, starting with the page that is open now.
+      On the router: tap the screen for the next page; hold it, or press the power button, to go back.
+      The stock screen returns by itself when the time is up, even if the panel stops working.</p>
+    <div class="action-btns">
+      <button type="submit" class="btn" value="cancel">Cancel</button>
+      <button type="submit" class="btn primary" value="ok">Show it</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+"use strict";
+const $ = (s) => document.querySelector(s);
+
+/* ---------- Formatting ---------- */
+const NF0 = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 });
+const NF1 = new Intl.NumberFormat("en-GB", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const NF2 = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 2 });
+const MHZ = (v) => new Intl.NumberFormat("en-GB", { minimumFractionDigits: 1, maximumFractionDigits: 1, useGrouping: false }).format(v) + " MHz";
+const fixMinus = (s) => s.replace(/[-−]/g, "−");
+function num(v, d = 0) {
+  if (v == null || !isFinite(v)) return "—";
+  return fixMinus((d ? NF1 : NF0).format(v));
+}
+function rate(bps) { // bytes per second -> text in bits
+  if (bps == null || !isFinite(bps)) return "—";
+  const b = bps * 8;
+  if (b >= 1e6) return NF1.format(b / 1e6) + " Mbps";
+  if (b >= 1e3) return NF0.format(b / 1e3) + " kbps";
+  return NF0.format(b) + " bps";
+}
+function bytes(n) {
+  if (n == null || !isFinite(n)) return "—";
+  if (n >= 1e9) return NF1.format(n / 1e9) + " GB";
+  if (n >= 1e6) return NF0.format(n / 1e6) + " MB";
+  return NF0.format(n / 1e3) + " KB";
+}
+function duration(s) {
+  if (!s) return "—";
+  if (s < 60) return "under a minute";
+  const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
+  if (d) return `${d} d ${h} h`;
+  if (h) return `${h} h ${m} min`;
+  return `${m} min`;
+}
+// The router clock starts at 1970 until the network sets it, so times are shown on this device's clock.
+let skew = 0;
+const clock = (t) => new Date(t + skew).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+
+/* ---------- Metrics and quality ---------- */
+const METRICS = {
+  rsrp: { name: "RSRP", unit: "dBm", min: -125, max: -65, d: 0, steps: [-80, -90, -100, -110],
+          note: "Signal strength from the tower. Closer to zero is better." },
+  sinr: { name: "SINR", unit: "dB", min: -5, max: 30, d: 1, steps: [20, 13, 0],
+          note: "How clean the signal is from interference. Higher means faster internet." },
+  rsrq: { name: "RSRQ", unit: "dB", min: -20, max: -3, d: 1, steps: [-10, -13, -16, -19],
+          note: "Signal quality including how busy the tower is. Closer to zero is better." },
+  rscp: { name: "RSCP", unit: "dBm", min: -120, max: -50, d: 0, steps: [-85, -95, -105],
+          note: "3G signal strength from the tower. Closer to zero is better." },
+  ecio: { name: "Ec/Io", unit: "dB", min: -24, max: 0, d: 0, steps: [-6, -10, -14],
+          note: "How clean the 3G signal is from interference and other towers. Closer to zero is better." },
+};
+// Which metrics the modem reports depends on the network type: LTE and 3G measure different things.
+const SETS = { LTE: ["rsrp", "sinr", "rsrq"], "3G": ["rscp", "ecio"] };
+const setFor = (st) => (st && st.network.tech === "3G" ? "3G" : "LTE");
+const LEVELS = [
+  { t: "Excellent", st: "good" }, { t: "Good", st: "good" }, { t: "Fair", st: "warning" },
+  { t: "Poor", st: "serious" }, { t: "Very poor", st: "critical" },
+];
+function quality(m, v) {
+  if (v == null) return null;
+  const s = METRICS[m].steps;
+  let i = s.findIndex((x) => v >= x);
+  if (i < 0) i = s.length;
+  return LEVELS[Math.min(i, LEVELS.length - 1)];
+}
+
+const ICONS = {
+  good: '<circle cx="8" cy="8" r="7" fill="currentColor"/><path d="M4.6 8.2l2.2 2.2 4.6-4.7" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+  warning: '<path d="M8 1.2l7.2 13.3H.8z" fill="currentColor"/><path d="M8 6v4" stroke="#1a1a1a" stroke-width="1.7" stroke-linecap="round"/><circle cx="8" cy="12.3" r="1" fill="#1a1a1a"/>',
+  serious: '<path d="M8 .8l7.2 7.2L8 15.2.8 8z" fill="currentColor"/><path d="M8 4.8v4" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><circle cx="8" cy="11.2" r="1" fill="#fff"/>',
+  critical: '<path d="M5 .8h6L15.2 5v6L11 15.2H5L.8 11V5z" fill="currentColor"/><path d="M5.6 5.6l4.8 4.8M10.4 5.6l-4.8 4.8" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
+  neutral: '<circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="2"/>',
+  bolt: '<path d="M9.2 1L3.5 9h4l-1 6L12.5 7h-4z" fill="currentColor"/>',
+};
+function icon(name, st = name) {
+  return `<svg class="icon st-${st}" viewBox="0 0 16 16" aria-hidden="true">${ICONS[name]}</svg>`;
+}
+function setQ(el, q) {
+  if (!q) { el.innerHTML = icon("neutral") + "<span>No data</span>"; return; }
+  el.innerHTML = icon(q.st) + `<span>${q.t}</span>`;
+}
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+/* ---------- Charts ---------- */
+function setupChart(el) {
+  const svg = el.querySelector("svg"), tip = el.querySelector(".tip");
+  el._idx = null;
+  const show = (i) => { el._idx = i; paintHover(el); };
+  svg.addEventListener("pointermove", (e) => {
+    const g = el._geo; if (!g) return;
+    const r = svg.getBoundingClientRect();
+    el._px = (e.clientX - r.left) * (g.W / r.width);
+    show(nearest(g.t, g.xinv(el._px)));
+  });
+  svg.addEventListener("pointerleave", () => { el._px = null; show(null); });
+  el.addEventListener("keydown", (e) => {
+    const g = el._geo; if (!g || !g.t.length) return;
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    const i = el._idx == null ? g.t.length - 1 : el._idx + (e.key === "ArrowLeft" ? -1 : 1);
+    el._px = null; show(Math.max(0, Math.min(g.t.length - 1, i)));
+  });
+  el.addEventListener("blur", () => show(null));
+  new ResizeObserver(() => el._redraw && el._redraw()).observe(el);
+  el._tip = tip;
+}
+function nearest(arr, v) {
+  let lo = 0, hi = arr.length - 1;
+  if (hi < 0) return null;
+  while (hi - lo > 1) { const m = (lo + hi) >> 1; if (arr[m] < v) lo = m; else hi = m; }
+  return Math.abs(arr[lo] - v) <= Math.abs(arr[hi] - v) ? lo : hi;
+}
+function since(ms) {
+  const s = Math.round(ms / 1000);
+  if (s < 60) return `${s} s ago`;
+  return `${Math.round(s / 60)} min ago`;
+}
+
+function drawChart(el, o) {
+  const svg = el.querySelector("svg");
+  const W = Math.max(260, Math.round(el.clientWidth)), H = o.height;
+  const pad = { l: 38, r: 8, t: 8, b: 20 };
+  const t = o.t, n = t.length;
+  const t0 = n ? t[0] : 0, t1 = n ? t[n - 1] : 1, span = Math.max(1, t1 - t0);
+  const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b;
+  const x = (v) => pad.l + (v - t0) / span * iw;
+  const xinv = (px) => t0 + (px - pad.l) / iw * span;
+  const y = (v) => pad.t + (1 - (Math.min(o.max, Math.max(o.min, v)) - o.min) / (o.max - o.min)) * ih;
+
+  let s = "";
+  for (const g of o.grid) {
+    const yy = y(g.v).toFixed(1);
+    s += `<line class="${g.base ? "base" : "gl"}" x1="${pad.l}" x2="${W - pad.r}" y1="${yy}" y2="${yy}"/>`;
+    s += `<text class="ylab" x="${pad.l - 6}" y="${(+yy + 4).toFixed(1)}" text-anchor="end">${esc(g.label)}</text>`;
+  }
+  for (const se of o.series) {
+    let d = "", area = "", seg = [];
+    const flush = () => {
+      if (seg.length && se.area) {
+        area += `M${seg[0][0]},${y(o.min).toFixed(1)}` + seg.map((p) => `L${p[0]},${p[1]}`).join("") + `L${seg[seg.length - 1][0]},${y(o.min).toFixed(1)}Z`;
+      }
+      seg = [];
+    };
+    for (let i = 0; i < n; i++) {
+      const v = se.values[i];
+      if (v == null) { flush(); continue; }
+      const p = [x(t[i]).toFixed(1), y(v).toFixed(1)];
+      d += (seg.length ? "L" : "M") + p[0] + "," + p[1];
+      seg.push(p);
+    }
+    flush();
+    if (area) s += `<path d="${area}" fill="${se.color}" fill-opacity=".1"/>`;
+    if (d) s += `<path class="ln" d="${d}" stroke="${se.color}"/>`;
+  }
+  for (const se of o.series) {
+    const i = n - 1;
+    if (i >= 0 && se.values[i] != null) {
+      s += `<circle class="dot" cx="${x(t[i]).toFixed(1)}" cy="${y(se.values[i]).toFixed(1)}" r="4.5" fill="${se.endColor || se.color}"/>`;
+    }
+  }
+  if (n > 1) {
+    s += `<text class="xlab" x="${pad.l}" y="${H - 4}">${esc(since(t1 - t0))}</text>`;
+    s += `<text class="xlab" x="${W - pad.r}" y="${H - 4}" text-anchor="end">now</text>`;
+  }
+  s += `<g class="xh" visibility="hidden"><line class="xh-line" y1="${pad.t}" y2="${H - pad.b}"/>` +
+       o.series.map((se) => `<circle class="dot" r="4.5" fill="${se.color}"/>`).join("") + "</g>";
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.setAttribute("height", H);
+  svg.innerHTML = s;
+  el._geo = { W, H, t, x, xinv, y, o, pad };
+  if (el._px != null && n) el._idx = nearest(t, xinv(el._px));
+  else if (el._idx != null && el._idx >= n) el._idx = null;
+  paintHover(el);
+}
+
+function paintHover(el) {
+  const g = el._geo, tip = el._tip;
+  if (!g) return;
+  const grp = el.querySelector(".xh");
+  const i = el._idx;
+  if (i == null || !g.t.length) { grp.setAttribute("visibility", "hidden"); tip.hidden = true; return; }
+  const px = g.x(g.t[i]);
+  grp.setAttribute("visibility", "visible");
+  const line = grp.querySelector("line");
+  line.setAttribute("x1", px); line.setAttribute("x2", px);
+  const dots = grp.querySelectorAll("circle");
+  tip.replaceChildren();
+  const tt = document.createElement("div"); tt.className = "t"; tt.textContent = clock(g.t[i]); tip.append(tt);
+  g.o.series.forEach((se, k) => {
+    const v = se.values[i];
+    dots[k].setAttribute("cx", px);
+    dots[k].setAttribute("cy", v == null ? -99 : g.y(v));
+    const row = document.createElement("div"); row.className = "row";
+    const key = document.createElement("i"); key.className = "k";
+    key.style.background = se.color === "var(--ink)" ? "var(--surface)" : se.color;
+    const b = document.createElement("b"); b.textContent = se.fmt(v);
+    const lab = document.createElement("span"); lab.textContent = se.name;
+    row.append(key, b, lab); tip.append(row);
+  });
+  tip.hidden = false;
+  const r = el.getBoundingClientRect(), scale = r.width / g.W, tw = tip.offsetWidth;
+  let left = px * scale + 12;
+  if (left + tw > r.width) left = px * scale - tw - 12;
+  tip.style.left = Math.max(0, left) + "px";
+}
+
+/* ---------- Data ---------- */
+const H = { t: [], rsrp: [], rsrq: [], sinr: [], rscp: [], ecio: [], rx: [], tx: [] };
+const HCAP = 450;
+function pushHist(st) {
+  const n = H.t.length, step = info.interval || 2000;
+  if (n) {
+    const gap = st.ts - H.t[n - 1];
+    if (gap === 0) return;
+    if (gap < 0 || (gap > 60000 && gap > 30 * step)) { // router clock jumped: keep the chart continuous
+      const shift = st.ts - step - H.t[n - 1];
+      H.t = H.t.map((x) => x + shift);
+    }
+  }
+  H.t.push(st.ts); H.rsrp.push(st.signal.rsrp); H.rsrq.push(st.signal.rsrq); H.sinr.push(st.signal.sinr);
+  H.rscp.push(st.signal.rscp); H.ecio.push(st.signal.ecio);
+  H.rx.push(st.wan.rx_rate); H.tx.push(st.wan.tx_rate);
+  if (H.t.length > HCAP) for (const k in H) H[k].splice(0, H.t.length - HCAP);
+}
+function loadHist(h) {
+  for (const k in H) H[k] = (h[k] || []).slice(-HCAP);
+}
+
+let metric = "rsrp", mset = "LTE", last = null, info = { interval: 2000 };
+
+function buildSeg() {
+  const seg = $("#metric-seg");
+  seg.replaceChildren();
+  for (const k of SETS[mset]) {
+    const b = document.createElement("button");
+    b.type = "button"; b.dataset.m = k; b.textContent = METRICS[k].name;
+    b.setAttribute("role", "radio"); b.setAttribute("aria-checked", String(k === metric));
+    b.addEventListener("click", () => selectMetric(k));
+    seg.append(b);
+  }
+}
+function selectMetric(k) {
+  metric = k;
+  document.querySelectorAll("#metric-seg button").forEach((x) => x.setAttribute("aria-checked", String(x.dataset.m === k)));
+  aim.peak = null;
+  renderSignal();
+  if (last) aimUpdate(last);
+}
+
+function render(st) {
+  last = st;
+  const n = st.network, s = st.signal, w = st.wan, b = st.battery;
+  if (setFor(st) !== mset) { // the modem moved between LTE and 3G
+    mset = setFor(st); metric = SETS[mset][0]; aim.peak = null; buildSeg();
+  }
+
+  $("#demo").hidden = st.mode !== "demo";
+  $("#op").textContent = n.operator || (n.reg === "unknown" || !n.reg ? "Unknown operator" : "No network");
+  const tech = [n.tech, n.tech_name !== n.tech && n.tech_name, n.band].filter(Boolean).join(" · ");
+  $("#tech").hidden = !tech; $("#tech").textContent = tech;
+
+  const REG = { roaming: ["Roaming", "warning"], searching: ["Searching for network", "warning"],
+                denied: ["Registration denied", "critical"], none: ["Not registered", "critical"] };
+  const rg = REG[n.reg];
+  $("#reg").innerHTML = rg ? icon(rg[1]) + `<span>${rg[0]}</span>` : "";
+
+  const online = w.up && w.ip;
+  $("#conn").innerHTML = online ? icon("good") + "<span>Online</span>"
+    : w.state === "connecting" ? icon("warning") + "<span>Connecting…</span>"
+    : icon("critical") + "<span>No internet</span>";
+
+  if (b.present && b.percent != null) {
+    const ch = b.status === "charging" || b.ext_power;
+    const lowSt = b.percent <= 15 ? "critical" : b.percent <= 30 ? "warning" : null;
+    $("#batt").innerHTML = (ch ? icon("bolt", "neutral") : lowSt ? icon(lowSt) : "") +
+      `<span>Battery ${b.percent}%${ch ? ", charging" : ""}</span>`;
+  } else $("#batt").textContent = "";
+
+  // warnings
+  const warns = st.warnings || [];
+  const nt = $("#notice");
+  nt.hidden = !warns.length;
+  if (warns.length) {
+    nt.replaceChildren();
+    nt.insertAdjacentHTML("afterbegin", icon("warning"));
+    if (warns.length === 1) {
+      const p = document.createElement("p"); p.textContent = warns[0]; nt.append(p);
+    } else {
+      const ul = document.createElement("ul");
+      for (const m of warns) { const li = document.createElement("li"); li.textContent = m; ul.append(li); }
+      nt.append(ul);
+    }
+  }
+
+  renderSignal();
+
+  $("#rx").textContent = rate(w.rx_rate);
+  $("#tx").textContent = rate(w.tx_rate);
+  $("#net-sub").textContent = online
+    ? `IP address ${w.ip}.${w.session_s ? ` Connected for ${duration(w.session_s)}.` : ""} Since the connection came up: ${bytes(w.rx_bytes)} received, ${bytes(w.tx_bytes)} sent.`
+    : "The modem has no internet connection right now.";
+  drawNet();
+
+  renderAction(st.action);
+  renderClients(st.clients || []);
+  renderDetails(st);
+  aimUpdate(st);
+}
+
+function renderSignal() {
+  if (!last) return;
+  const m = METRICS[metric], v = last.signal[metric];
+  $("#hv").textContent = num(v, m.d);
+  $("#hu").textContent = m.unit;
+  $("#hv").parentElement.hidden = v == null;
+  setQ($("#hq"), quality(metric, v));
+  $("#hnote").textContent = m.note + (mset === "3G" ? " The modem is on 3G now, so the LTE values (RSRP, SINR) do not apply." : "");
+
+  const vals = H[metric].filter((x) => x != null);
+  $("#peak").textContent = vals.length
+    ? `Best in the last ${since(H.t[H.t.length - 1] - H.t[0]).replace(" ago", "")}: ${num(Math.max(...vals), m.d)} ${m.unit}, worst: ${num(Math.min(...vals), m.d)} ${m.unit}.`
+    : "";
+
+  const grid = m.steps.map((x, i) => ({ v: x, label: num(x) }));
+  const q = quality(metric, v);
+  const el = $("#sig-chart");
+  el._redraw = () => drawChart(el, {
+    height: 200, t: H.t, min: m.min, max: m.max, grid,
+    series: [{ name: m.name, values: H[metric], color: "var(--ink)",
+               endColor: q ? `var(--${q.st})` : "var(--ink)", fmt: (x) => `${num(x, m.d)} ${m.unit}` }],
+  });
+  el._redraw();
+
+  const rows = [];
+  for (const k of SETS[mset]) {
+    if (k === metric) continue;
+    const mm = METRICS[k], vv = last.signal[k], qq = quality(k, vv);
+    rows.push(`<div><dt>${mm.name}</dt><dd>${qq ? icon(qq.st) : icon("neutral")}<span>${num(vv, mm.d)}</span><small>${mm.unit}${qq ? ", " + qq.t.toLowerCase() : ""}</small></dd></div>`);
+  }
+  const s = last.signal;
+  if (s.rssi != null) rows.push(`<div><dt>RSSI</dt><dd><span>${num(s.rssi)}</span><small>dBm</small></dd></div>`);
+  $("#readouts").innerHTML = rows.join("");
+}
+
+function drawNet() {
+  const el = $("#net-chart");
+  const toM = (a) => a.map((v) => (v == null ? null : v * 8 / 1e6));
+  const rx = toM(H.rx), tx = toM(H.tx);
+  const peak = Math.max(0.5, ...rx.filter((v) => v != null), ...tx.filter((v) => v != null));
+  const steps = [0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500];
+  const top = steps.find((s) => s >= peak) || Math.ceil(peak / 100) * 100;
+  const fmtM = (v) => (v == null ? "—" : NF1.format(v) + " Mbps");
+  el._redraw = () => drawChart(el, {
+    height: 120, t: H.t, min: 0, max: top,
+    grid: [{ v: 0, label: "0", base: true }, { v: top / 2, label: NF2.format(top / 2) }, { v: top, label: NF2.format(top) }],
+    series: [
+      { name: "download", values: rx, color: "var(--s-down)", area: true, fmt: fmtM },
+      { name: "upload", values: tx, color: "var(--s-up)", fmt: fmtM },
+    ],
+  });
+  el._redraw();
+}
+
+function renderAction(a) {
+  const box = $("#action-msg");
+  const running = a && a.state === "running";
+  document.querySelectorAll("[data-action], [data-scan]").forEach((b) => (b.disabled = running));
+  renderScanMsg(a);
+  if (!a || (a.state !== "running" && Date.now() - a.finished > 120000)) { box.hidden = true; return; }
+  box.hidden = false;
+  box.replaceChildren();
+  if (running) {
+    const sp = document.createElement("span"); sp.className = "spin"; box.append(sp);
+  } else {
+    box.insertAdjacentHTML("afterbegin", icon(a.state === "done" ? "good" : "critical"));
+  }
+  const tx = document.createElement("span");
+  tx.textContent = a.state === "error" ? `Failed: ${a.message}` : a.message;
+  box.append(tx);
+}
+
+function renderClients(list) {
+  const on = list.filter((c) => c.online).length;
+  $("#cl-sub").textContent = list.length ? `${on} online now, ${list.length} total` : "";
+  const ul = $("#clients");
+  ul.replaceChildren();
+  if (!list.length) {
+    const li = document.createElement("li"); li.className = "empty"; li.style.display = "block";
+    li.textContent = "Nobody has connected to this router's Wi-Fi yet.";
+    ul.append(li); return;
+  }
+  for (const c of list) {
+    const li = document.createElement("li");
+    const nm = document.createElement("span"); nm.className = "nm"; nm.textContent = c.name || "Unnamed";
+    const ad = document.createElement("span"); ad.className = "ad"; ad.textContent = `${c.ip}  ${c.mac}`;
+    const st = document.createElement("span"); st.className = "on";
+    st.innerHTML = c.online ? icon("good") + "online" : icon("neutral") + "offline";
+    li.append(nm, st, ad); ul.append(li);
+  }
+}
+
+function renderDetails(st) {
+  const n = st.network, w = st.wan, sy = st.system, b = st.battery;
+  const REG = { home: "Home network", roaming: "Roaming", searching: "Searching for network", denied: "Denied", none: "Not registered", unknown: "Unknown" };
+  const SESSION = { connected: `Connected${w.session_s ? " for " + duration(w.session_s) : ""}`, connecting: "Connecting", disconnected: "Not connected" };
+  const rows = [
+    ["Operator", n.operator || "—"],
+    ["Network type", n.tech ? n.tech + (n.tech_name && n.tech_name !== n.tech ? ` (${n.tech_name})` : "") : "—"],
+    ["Band", n.band ? n.band + (n.freq_mhz ? ` · ${MHZ(n.freq_mhz)}` : "") : (n.tech === "3G" ? "Not reported on 3G" : "—")],
+    ["Channel (EARFCN)", n.earfcn ?? "—"], ["Cell ID", n.cell_id || "—"],
+    [n.tech === "3G" ? "Area code (LAC)" : "Area code (TAC)", n.tac || "—"],
+    ["Registration", REG[n.reg] || "—"], ["Data session", SESSION[w.state] || "—"], ["Interface", w.iface || "—"],
+    ["Uptime", duration(sy.uptime_s)], ["Load", num(sy.load1, 1)],
+    ["Memory used", sy.mem_used_pct ? num(sy.mem_used_pct) + "%" : "—"],
+    ["Battery temperature", b.temp_c != null ? num(b.temp_c, 1) + " °C" : "—"],
+  ];
+  const kv = $("#kv");
+  kv.replaceChildren();
+  for (const [k, v] of rows) {
+    const d = document.createElement("div");
+    const dt = document.createElement("dt"); dt.textContent = k;
+    const dd = document.createElement("dd"); dd.textContent = String(v);
+    d.append(dt, dd); kv.append(d);
+  }
+}
+
+/* ---------- Cells page ---------- */
+let view = "overview";
+function setView(v) {
+  view = v;
+  $("#view-overview").hidden = v !== "overview";
+  $("#view-cells").hidden = v !== "cells";
+  $("#view-screen").hidden = v !== "screen";
+  document.querySelectorAll(".tabs a").forEach((a) => a.setAttribute("aria-selected", String(a.dataset.view === v)));
+  if (v === "cells") loadCells();
+  if (v === "screen") openScreen();
+}
+const viewFromHash = () => ({ "#cells": "cells", "#screen": "screen" })[location.hash] || "overview";
+
+async function loadCells() {
+  try {
+    const [cv, ev] = await Promise.all([api.cells(), api.events()]);
+    renderServing(cv.serving);
+    renderCells(cv.cells || [], cv.source, cv.serving.tech);
+    renderScan(cv.scan);
+    renderEvents(ev.events || []);
+  } catch (e) { /* the status poll reports a dead panel */ }
+}
+
+function renderServing(sv) {
+  const chip = $("#srv-chip");
+  const tech = sv.tech ? sv.tech + (sv.tech_name && sv.tech_name !== sv.tech ? ` (${sv.tech_name})` : "") : "";
+  chip.hidden = !tech; chip.textContent = tech;
+  const opt = (v, f = (x) => x) => (v == null || v === "" ? "—" : f(v));
+  let rows;
+  if (!sv.tech) {
+    rows = [["Network", "No network right now"]];
+  } else if (sv.tech === "LTE") {
+    rows = [
+      ["Band", sv.band ? `${sv.band} · ${sv.band_name}` : "—"],
+      ["Downlink frequency", opt(sv.freq_mhz, (x) => MHZ(x))],
+      ["EARFCN", opt(sv.earfcn)], ["PCI", opt(sv.pci)],
+      ["Cell ID", opt(sv.cell_id)], ["eNB ID", opt(sv.enb)], ["Sector", opt(sv.sector)],
+      ["TAC", areaCode(sv.area_code) || "Not reported"],
+    ];
+  } else {
+    rows = [
+      ["Band", "Not reported on 3G"], ["Cell ID", opt(sv.cell_id)],
+      ["RNC ID", opt(sv.rnc)], ["Cell (CID)", opt(sv.cid)], [sv.area_label || "LAC", areaCode(sv.area_code) || "—"],
+    ];
+  }
+  if (sv.tech) rows.push(["Operator", sv.operator || "—"], ["MCC", sv.mcc || "—"], ["MNC", sv.mnc || "—"]);
+  fillKV($("#srv-kv"), rows);
+
+  const notes = [];
+  if (sv.tech === "LTE" && sv.enb != null && sv.mcc) {
+    notes.push(`To find this tower on CellMapper (cellmapper.net), choose MCC ${sv.mcc}, MNC ${sv.mnc}, network type LTE, and search for eNB ${sv.enb}.`);
+  } else if (sv.tech === "3G" && sv.mcc) {
+    notes.push(`The tower can be looked up on CellMapper (cellmapper.net) with MCC ${sv.mcc}, MNC ${sv.mnc} and the IDs above.`);
+  }
+  if (sv.tech === "LTE" && !sv.area_code) notes.push("The modem reports the TAC only with extended registration info turned on (AT+CEREG=2), so it is not shown.");
+  $("#srv-note").textContent = notes.join(" ");
+}
+
+// Area codes are decimal (as CellMapper uses them); the modem itself reports them in hex.
+const areaCode = (v) => (v && isFinite(+v) ? `${v} (hex ${(+v).toString(16).toUpperCase()})` : "");
+
+function fillKV(kv, rows) {
+  kv.replaceChildren();
+  for (const [k, v] of rows) {
+    const d = document.createElement("div");
+    const dt = document.createElement("dt"); dt.textContent = k;
+    const dd = document.createElement("dd"); dd.textContent = String(v);
+    d.append(dt, dd); kv.append(d);
+  }
+}
+
+function renderCells(list, source, tech) {
+  let sub;
+  if (source === "no-at") sub = "The cell list needs the modem AT port, which is not set (-at).";
+  else if (!list.length) sub = "The modem reports no LTE cells right now.";
+  else if (tech === "3G") sub = "The modem is on 3G. These are LTE cells it measures in the background. Values marked ≈ are estimates: on 3G the modem reports them in a different format.";
+  else sub = "The cell the modem uses and the LTE cells it hears nearby. A cell stays in the list for a minute after it was last heard.";
+  $("#nb-sub").textContent = sub;
+  const ul = $("#nb-list");
+  ul.replaceChildren();
+  const m = METRICS.rsrp;
+  for (const c of list) {
+    const li = document.createElement("li");
+    if (c.seen_ago_s >= 10) li.className = "old";
+    const nm = document.createElement("span"); nm.className = "nm";
+    nm.textContent = (c.band || "Unknown band") + (c.freq_mhz ? ` · ${MHZ(c.freq_mhz)}` : "");
+    if (c.serving) nm.insertAdjacentHTML("beforeend", '<span class="chip serving">Serving</span>');
+    const q = quality("rsrp", c.rsrp);
+    const val = document.createElement("span"); val.className = "val";
+    val.innerHTML = (q ? icon(q.st) : icon("neutral")) +
+      `<span>${c.estimated && c.rsrp != null ? "≈" : ""}${num(c.rsrp, 1)}</span><small>dBm${q ? ", " + q.t.toLowerCase() : ""}</small>`;
+    const meter = document.createElement("div"); meter.className = "meter"; meter.setAttribute("aria-hidden", "true");
+    const bar = document.createElement("i");
+    bar.style.width = c.rsrp == null ? "0" : Math.max(0, Math.min(100, (c.rsrp - m.min) / (m.max - m.min) * 100)) + "%";
+    bar.style.background = q ? `var(--${q.st})` : "var(--muted)";
+    meter.append(bar);
+    const meta = document.createElement("span"); meta.className = "meta";
+    meta.textContent = [`PCI ${c.pci}`, `EARFCN ${c.earfcn}`,
+      `RSRQ ${c.estimated && c.rsrq != null ? "≈" : ""}${num(c.rsrq, 1)} dB`,
+      c.seen_ago_s >= 10 ? `last heard ${c.seen_ago_s} s ago` : ""].filter(Boolean).join(" · ");
+    li.append(nm, val, meter, meta); ul.append(li);
+  }
+}
+
+const SCAN_STATUS = { current: ["good", "In use now"], available: ["neutral", "Available"],
+                      forbidden: ["critical", "Not allowed for this SIM"], unknown: ["neutral", "Unknown"] };
+function renderScan(scan) {
+  const out = $("#scan-out");
+  out.replaceChildren();
+  if (!scan) {
+    const p = document.createElement("p"); p.className = "empty";
+    p.textContent = "No search has been run since the panel started.";
+    out.append(p); return;
+  }
+  const order = { current: 0, available: 1, unknown: 2, forbidden: 3 };
+  const nets = [...scan.networks].sort((a, b) => order[a.status] - order[b.status]);
+  const tbl = document.createElement("table"); tbl.className = "tbl";
+  tbl.innerHTML = "<thead><tr><th>Operator</th><th>Network</th><th>Status</th><th>Code</th></tr></thead>";
+  const tb = document.createElement("tbody");
+  for (const n of nets) {
+    const st = SCAN_STATUS[n.status] || SCAN_STATUS.unknown;
+    const tr = document.createElement("tr");
+    const td = (html) => { const d = document.createElement("td"); d.innerHTML = html; tr.append(d); };
+    td(esc(n.name || "—")); td(esc(n.tech || "—")); td(icon(st[0]) + esc(st[1]));
+    td(n.mccmnc ? esc(n.mccmnc.slice(0, 3) + " " + n.mccmnc.slice(3)) : "—");
+    tb.append(tr);
+  }
+  tbl.append(tb);
+  const p = document.createElement("p"); p.className = "sub"; p.style.marginTop = "8px";
+  p.textContent = nets.length ? `Searched at ${clock(scan.ts)}.` : `Searched at ${clock(scan.ts)}: the modem reported no networks.`;
+  out.append(tbl, p);
+}
+
+function renderScanMsg(a) {
+  const box = $("#scan-msg");
+  if (!a || a.name !== "scan" || (a.state !== "running" && a.state !== "error")) { box.hidden = true; return; }
+  box.hidden = false; box.replaceChildren();
+  if (a.state === "running") { const sp = document.createElement("span"); sp.className = "spin"; box.append(sp); }
+  else box.insertAdjacentHTML("afterbegin", icon("critical"));
+  const t = document.createElement("span"); t.textContent = a.state === "error" ? `Failed: ${a.message}` : a.message; box.append(t);
+}
+
+function renderEvents(list) {
+  const ol = $("#ev-list");
+  ol.replaceChildren();
+  if (!list.length) {
+    const li = document.createElement("li"); li.className = "empty"; li.style.display = "block";
+    li.textContent = "Nothing has changed yet."; ol.append(li); return;
+  }
+  for (const e of list) {
+    const li = document.createElement("li");
+    const t = document.createElement("time");
+    t.dateTime = new Date(e.ts + skew).toISOString(); t.textContent = clock(e.ts);
+    const tx = document.createElement("span"); tx.textContent = e.text;
+    li.append(t); li.insertAdjacentHTML("beforeend", icon(e.level || "neutral")); li.append(tx);
+    ol.append(li);
+  }
+}
+
+/* ---------- Screen page ---------- */
+const WNAMES = { metric: "Big signal value", band: "Band and cell", bars: "Signal bars", speed: "Download / upload speed",
+  traffic: "Traffic total", battery: "Battery", clock: "Clock", operator: "Operator", devices: "Connected devices",
+  chart: "Signal chart", aim: "Antenna aiming", data: "Data session and IP", text: "Free text" };
+const WSIZE = { metric: [304, 96], band: [304, 36], bars: [32, 20], speed: [200, 64], traffic: [240, 20], battery: [96, 20],
+  clock: [96, 32], operator: [200, 24], devices: [160, 20], chart: [304, 72], aim: [320, 240], data: [304, 20], text: [160, 20] };
+const OPTS = {
+  metric: ["Metric", [["auto", "Main for the network (RSRP or RSCP)"], ["rsrp", "RSRP"], ["sinr", "SINR"], ["rsrq", "RSRQ"], ["rscp", "RSCP (3G)"], ["ecio", "Ec/Io (3G)"]]],
+  size: ["Text size", [["s", "Small, 12 px"], ["m", "Medium, 16 px"], ["mb", "Medium bold, 16 px"], ["l", "Large, 24 px"], ["xl", "Extra large, 32 px"], ["xxl", "Huge, 48 px"], ["huge", "Giant, 64 px"]]],
+  align: ["Align", [["left", "Left"], ["center", "Centre"], ["right", "Right"]]],
+  label: ["Label", [["on", "Show name and quality"], ["off", "Hide"]]],
+  color: ["Colour"], text: ["Text"], offset: ["Time zone"],
+};
+const SC = { layout: null, page: 0, sel: -1, widgets: {}, persistent: false, dirty: false, loaded: false, previewT: 0, lastPreview: 0, lastMirror: 0 };
+const snapOn = () => $("#snap").checked;
+const curPage = () => SC.layout.pages[SC.page];
+
+async function openScreen() {
+  if (!SC.loaded) {
+    try {
+      const r = await api.layoutGet();
+      SC.layout = r.layout; SC.persistent = r.persistent; SC.widgets = r.widgets || {}; SC.loaded = true;
+    } catch (e) {
+      $("#lay-note").textContent = "The screen designer needs the panel itself: open it from the router or run mifi-panel -demo.";
+      return;
+    }
+    const sel = $("#w-type"); sel.replaceChildren();
+    for (const k of Object.keys(WNAMES)) if (SC.widgets[k]) sel.append(new Option(WNAMES[k], k));
+    noteSaved();
+  }
+  drawDesigner(); refreshPreview(); refreshMirror();
+}
+
+function screenTick() { // called by the status poll while the Screen page is open
+  if (!SC.loaded) return;
+  refreshSession();
+  if (Date.now() - SC.lastMirror >= 2000) refreshMirror();
+  if (Date.now() - SC.lastPreview >= 3000) refreshPreview();
+}
+
+async function refreshMirror() {
+  SC.lastMirror = Date.now();
+  try {
+    const url = await api.mirror();
+    const img = $("#mirror"), old = img.src;
+    img.src = url; if (old.startsWith("blob:")) URL.revokeObjectURL(old);
+    $("#mirror-msg").textContent = "";
+  } catch (e) { $("#mirror-msg").textContent = e.message; }
+}
+
+function refreshPreview(delay = 0) {
+  clearTimeout(SC.previewT);
+  SC.previewT = setTimeout(async () => {
+    SC.lastPreview = Date.now();
+    try {
+      const url = await api.preview(SC.layout, SC.page);
+      const img = $("#preview"), old = img.src;
+      img.src = url; if (old.startsWith("blob:")) URL.revokeObjectURL(old);
+      $("#preview-msg").textContent = "";
+    } catch (e) { $("#preview-msg").textContent = "Preview not available: " + e.message; }
+  }, delay);
+}
+
+async function refreshSession() {
+  let st;
+  try { st = await api.session(); } catch (e) { return; }
+  $("#show-start").disabled = st.active;
+  $("#show-stop").hidden = !st.active;
+  const box = $("#show-msg");
+  box.replaceChildren();
+  if (st.active) {
+    const left = Math.max(0, Math.round((st.ends_ts - (Date.now() - skew)) / 1000));
+    box.insertAdjacentHTML("afterbegin", icon("good"));
+    const t = document.createElement("span");
+    t.textContent = `On the router now: page ${st.page + 1} of ${st.pages}, ${left} s left.`;
+    box.append(t); box.hidden = false;
+  } else if (st.error) {
+    box.insertAdjacentHTML("afterbegin", icon("critical"));
+    const t = document.createElement("span"); t.textContent = `${st.message}: ${st.error}`; box.append(t); box.hidden = false;
+  } else if (st.reason) {
+    box.insertAdjacentHTML("afterbegin", icon("neutral"));
+    const t = document.createElement("span"); t.textContent = `Back to the stock screen (${st.reason}).`; box.append(t); box.hidden = false;
+  } else box.hidden = true;
+}
+
+function changed() { SC.dirty = true; noteSaved(); drawBoxes(); refreshPreview(250); }
+
+function noteSaved() {
+  const n = $("#lay-note");
+  if (SC.dirty) n.textContent = "Unsaved changes.";
+  else if (SC.persistent) n.textContent = "Saved on the router. The picture under the frames is drawn by the router exactly as its screen will show it.";
+  else n.textContent = "Kept in the panel's memory until it restarts (keeping layouts across restarts needs -layout-dir). The picture under the frames is drawn by the router exactly as its screen will show it.";
+}
+
+function drawDesigner() {
+  const seg = $("#page-seg"); seg.replaceChildren();
+  SC.layout.pages.forEach((p, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(i === SC.page));
+    b.setAttribute("aria-checked", String(i === SC.page)); b.textContent = p.name || `Page ${i + 1}`;
+    b.addEventListener("click", () => { SC.page = i; SC.sel = -1; drawDesigner(); refreshPreview(); });
+    seg.append(b);
+  });
+  $("#page-del").disabled = SC.layout.pages.length <= 1;
+  $("#page-add").disabled = SC.layout.pages.length >= 8;
+  drawBoxes(); drawForm();
+}
+
+function scale() { return $("#stage").clientWidth / 320; }
+
+function drawBoxes() {
+  const stage = $("#stage"), k = scale();
+  stage.style.setProperty("--g", 8 * k + "px");
+  stage.classList.toggle("grid-on", snapOn());
+  const host = $("#boxes"); host.replaceChildren();
+  curPage().widgets.forEach((w, i) => {
+    const b = document.createElement("div");
+    b.className = "wbox" + (i === SC.sel ? " sel" : "");
+    Object.assign(b.style, { left: w.x * k + "px", top: w.y * k + "px", width: w.w * k + "px", height: w.h * k + "px" });
+    b.innerHTML = `<span>${esc(WNAMES[w.type] || w.type)}</span><i aria-hidden="true"></i>`;
+    b.addEventListener("pointerdown", (e) => startDrag(e, i, e.target.tagName === "I"));
+    host.append(b);
+  });
+}
+
+function startDrag(e, i, resize) {
+  e.preventDefault(); e.stopPropagation();
+  if (SC.sel !== i) { SC.sel = i; drawBoxes(); drawForm(); }
+  const w = curPage().widgets[i], k = scale(), g = snapOn() ? 8 : 1;
+  const sx = e.clientX, sy = e.clientY, o = { ...w };
+  const box = $("#boxes").children[i];
+  box.setPointerCapture(e.pointerId);
+  const move = (ev) => {
+    const dx = (ev.clientX - sx) / k, dy = (ev.clientY - sy) / k;
+    if (resize) {
+      w.w = Math.max(8, Math.min(320 - w.x, Math.round((o.w + dx) / g) * g));
+      w.h = Math.max(8, Math.min(240 - w.y, Math.round((o.h + dy) / g) * g));
+    } else {
+      w.x = Math.max(0, Math.min(320 - w.w, Math.round((o.x + dx) / g) * g));
+      w.y = Math.max(0, Math.min(240 - w.h, Math.round((o.y + dy) / g) * g));
+    }
+    Object.assign(box.style, { left: w.x * k + "px", top: w.y * k + "px", width: w.w * k + "px", height: w.h * k + "px" });
+  };
+  const up = () => {
+    box.removeEventListener("pointermove", move); box.removeEventListener("pointerup", up); box.removeEventListener("pointercancel", up);
+    if (w.x !== o.x || w.y !== o.y || w.w !== o.w || w.h !== o.h) { drawForm(); changed(); }
+  };
+  box.addEventListener("pointermove", move); box.addEventListener("pointerup", up); box.addEventListener("pointercancel", up);
+}
+
+function drawForm() {
+  const f = $("#w-form"); f.replaceChildren();
+  const w = curPage().widgets[SC.sel];
+  if (!w) { f.innerHTML = '<p class="sub">Select a widget on the screen to change it.</p>'; return; }
+  const h = document.createElement("h3"); h.textContent = WNAMES[w.type] || w.type; f.append(h);
+  const xywh = document.createElement("div"); xywh.className = "xywh";
+  for (const [k, lab, max] of [["x", "X", 319], ["y", "Y", 239], ["w", "Width", 320], ["h", "Height", 240]]) {
+    const l = document.createElement("label"); l.textContent = lab;
+    const inp = document.createElement("input"); inp.type = "number"; inp.min = k === "w" || k === "h" ? 8 : 0; inp.max = max; inp.value = w[k];
+    inp.addEventListener("change", () => {
+      const v = Math.round(+inp.value || 0);
+      if (k === "x") w.x = Math.max(0, Math.min(320 - w.w, v)); else if (k === "y") w.y = Math.max(0, Math.min(240 - w.h, v));
+      else if (k === "w") w.w = Math.max(8, Math.min(320 - w.x, v)); else w.h = Math.max(8, Math.min(240 - w.y, v));
+      inp.value = w[k]; changed();
+    });
+    l.append(inp); xywh.append(l);
+  }
+  f.append(xywh);
+  w.opts = w.opts || {};
+  for (const o of SC.widgets[w.type] || []) {
+    const def = OPTS[o]; if (!def) continue;
+    const row = document.createElement("label"); row.className = "row";
+    const t = document.createElement("span"); t.textContent = def[0]; row.append(t);
+    let inp;
+    if (def[1]) {
+      inp = document.createElement("select");
+      for (const [v, name] of def[1]) inp.append(new Option(name, v));
+      inp.value = w.opts[o] || def[1][0][0];
+    } else {
+      inp = document.createElement("input");
+      inp.type = o === "color" ? "color" : "text";
+      if (o === "offset") inp.placeholder = "+2";
+      inp.value = w.opts[o] || (o === "color" ? "#000000" : "");
+    }
+    inp.addEventListener(o === "text" || o === "offset" ? "input" : "change", () => { w.opts[o] = inp.value; changed(); });
+    row.append(inp); f.append(row);
+  }
+  const del = document.createElement("button"); del.type = "button"; del.className = "btn"; del.style.marginTop = "14px";
+  del.textContent = "Remove widget";
+  del.addEventListener("click", () => { curPage().widgets.splice(SC.sel, 1); SC.sel = -1; drawForm(); changed(); });
+  f.append(del);
+}
+
+$("#w-add").addEventListener("click", () => {
+  const type = $("#w-type").value, [w, h] = WSIZE[type] || [120, 24];
+  const opts = {};
+  if (type === "clock") { // the router keeps UTC: start with this computer's time zone
+    const m = -new Date().getTimezoneOffset();
+    opts.offset = (m >= 0 ? "+" : "-") + Math.floor(Math.abs(m) / 60) + (Math.abs(m) % 60 ? ":" + String(Math.abs(m) % 60).padStart(2, "0") : "");
+  }
+  if (type === "text") opts.text = "Text";
+  curPage().widgets.push({ type, x: Math.max(0, Math.floor((320 - w) / 16) * 8), y: Math.max(0, Math.floor((240 - h) / 16) * 8), w, h, opts });
+  SC.sel = curPage().widgets.length - 1; drawForm(); changed();
+});
+$("#stage").addEventListener("pointerdown", () => { if (SC.sel >= 0) { SC.sel = -1; drawBoxes(); drawForm(); } });
+$("#stage").addEventListener("keydown", (e) => {
+  const w = SC.loaded && curPage().widgets[SC.sel]; if (!w) return;
+  const st = e.shiftKey ? 8 : 1, mv = { ArrowLeft: [-st, 0], ArrowRight: [st, 0], ArrowUp: [0, -st], ArrowDown: [0, st] }[e.key];
+  if (mv) {
+    e.preventDefault();
+    w.x = Math.max(0, Math.min(320 - w.w, w.x + mv[0])); w.y = Math.max(0, Math.min(240 - w.h, w.y + mv[1]));
+    drawForm(); changed();
+  } else if (e.key === "Delete" || e.key === "Backspace") {
+    e.preventDefault(); curPage().widgets.splice(SC.sel, 1); SC.sel = -1; drawForm(); changed();
+  }
+});
+$("#snap").addEventListener("change", drawBoxes);
+new ResizeObserver(() => SC.loaded && drawBoxes()).observe($("#stage"));
+$("#page-add").addEventListener("click", () => {
+  SC.layout.pages.push({ name: `Page ${SC.layout.pages.length + 1}`, bg: "#ffffff", widgets: [] });
+  SC.page = SC.layout.pages.length - 1; SC.sel = -1; drawDesigner(); changed();
+});
+$("#page-rename").addEventListener("click", () => {
+  const n = prompt("Page name", curPage().name || ""); if (n == null) return;
+  curPage().name = n.trim().slice(0, 30); drawDesigner(); changed();
+});
+$("#page-del").addEventListener("click", () => {
+  if (SC.layout.pages.length <= 1 || !confirm(`Delete the page "${curPage().name}"?`)) return;
+  SC.layout.pages.splice(SC.page, 1); SC.page = Math.max(0, SC.page - 1); SC.sel = -1; drawDesigner(); changed();
+});
+$("#show-start").addEventListener("click", () => { const d = $("#show-dlg"); d.returnValue = ""; d.showModal(); });
+$("#show-dlg").addEventListener("close", async () => {
+  if ($("#show-dlg").returnValue !== "ok") return;
+  try { await api.show(SC.layout, SC.page, +$("#show-for").value); }
+  catch (e) {
+    const box = $("#show-msg"); box.hidden = false; box.replaceChildren();
+    box.insertAdjacentHTML("afterbegin", icon("critical"));
+    const t = document.createElement("span"); t.textContent = e.message; box.append(t);
+  }
+  refreshSession(); setTimeout(refreshMirror, 1500);
+});
+$("#show-stop").addEventListener("click", async () => { try { await api.showStop(); } catch (e) {} refreshSession(); setTimeout(refreshMirror, 1500); });
+
+$("#lay-save").addEventListener("click", async () => {
+  try { const r = await api.layoutPut(SC.layout); SC.dirty = false; SC.persistent = !!r.saved; noteSaved(); }
+  catch (e) { $("#lay-note").textContent = "Not saved: " + e.message; }
+});
+$("#lay-download").addEventListener("click", () => {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(SC.layout, null, 1)], { type: "application/json" }));
+  a.download = "mifi-screen-layout.json"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+$("#lay-file").addEventListener("change", async (e) => {
+  const file = e.target.files[0]; e.target.value = ""; if (!file) return;
+  try {
+    const l = JSON.parse(await file.text());
+    if (!Array.isArray(l.pages) || !l.pages.length) throw new Error("no pages in this file");
+    SC.layout = l; SC.page = 0; SC.sel = -1; drawDesigner(); changed();
+  } catch (err) { $("#lay-note").textContent = "Could not load the file: " + err.message; }
+});
+$("#lay-reset").addEventListener("click", async () => {
+  if (!confirm("Replace this layout with the default one?")) return;
+  try { const r = await api.layoutDefault(); SC.layout = r; SC.page = 0; SC.sel = -1; drawDesigner(); changed(); }
+  catch (e) { $("#lay-note").textContent = e.message; }
+});
+
+/* ---------- Antenna aiming ---------- */
+const aim = { peak: null, sound: false, ctx: null, lastTs: 0 };
+function aimUpdate(st) {
+  const dlg = $("#aim");
+  if (!dlg.open) return;
+  const m = METRICS[metric], v = st.signal[metric], q = quality(metric, v);
+  $("#aim-v").textContent = num(v, m.d);
+  $("#aim-u").textContent = m.unit;
+  $("#aim-v").parentElement.hidden = v == null;
+  setQ($("#aim-q"), q);
+  if (v != null && (aim.peak == null || v > aim.peak)) aim.peak = v;
+  const pct = (x) => Math.max(0, Math.min(100, (x - m.min) / (m.max - m.min) * 100));
+  $("#aim-bar").style.width = v == null ? "0" : pct(v) + "%";
+  $("#aim-peak-mark").style.left = aim.peak == null ? "-9px" : `calc(${pct(aim.peak)}% - 1px)`;
+  let delta = "No signal";
+  if (v != null) {
+    delta = v >= aim.peak ? "Best position this session"
+      : `${num(aim.peak - v, m.d)} ${m.unit} below the best (${num(aim.peak, m.d)})`;
+  }
+  $("#aim-delta").textContent = delta;
+  const others = SETS[mset].filter((k) => k !== metric)
+    .map((k) => `${METRICS[k].name} ${num(st.signal[k], METRICS[k].d)} ${METRICS[k].unit}`);
+  $("#aim-sub").textContent = others.join(", ");
+  if (aim.sound && v != null && st.ts !== aim.lastTs) beep(300 + pct(v) * 12);
+  aim.lastTs = st.ts;
+}
+function beep(freq) {
+  try {
+    aim.ctx = aim.ctx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = aim.ctx.createOscillator(), g = aim.ctx.createGain(), t = aim.ctx.currentTime;
+    o.frequency.value = freq; o.type = "sine";
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.25, t + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+    o.connect(g).connect(aim.ctx.destination); o.start(t); o.stop(t + 0.13);
+  } catch (e) { /* no sound */ }
+}
+
+/* ---------- API (real or demo) ---------- */
+function realApi() {
+  const j = async (r) => { const d = await r.json().catch(() => ({})); if (!r.ok) throw new Error(d.error || r.statusText); return d; };
+  const img = async (r) => {
+    if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || r.statusText); }
+    return URL.createObjectURL(await r.blob());
+  };
+  return {
+    info: () => fetch("api/info").then(j),
+    status: () => fetch("api/status", { cache: "no-store" }).then(j),
+    history: () => fetch("api/history", { cache: "no-store" }).then(j),
+    cells: () => fetch("api/cells", { cache: "no-store" }).then(j),
+    layoutGet: () => fetch("api/screen/layout", { cache: "no-store" }).then(j),
+    layoutPut: (l) => fetch("api/screen/layout", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(l) }).then(j),
+    layoutDefault: () => fetch("api/screen/default", { cache: "no-store" }).then(j),
+    preview: (l, page) => fetch(`api/screen/preview?page=${page}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(l) }).then(img),
+    mirror: () => fetch("api/screen/mirror.png", { cache: "no-store" }).then(img),
+    session: () => fetch("api/screen/session", { cache: "no-store" }).then(j),
+    show: (layout, page, seconds) => fetch("api/screen/show", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ layout, page, seconds }) }).then(j),
+    showStop: () => fetch("api/screen/stop", { method: "POST" }).then(j),
+    events: () => fetch("api/events", { cache: "no-store" }).then(j),
+    action: (name) => fetch("api/action", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) }).then(j),
+    at: (cmd) => fetch("api/at", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cmd }) }).then(j),
+  };
+}
+
+// Demo data for viewing the file without the device (opened from disk or with ?demo=1; ?demo=3g shows a 3G network).
+function mockApi() {
+  const G3 = new URLSearchParams(location.search).get("demo") === "3g";
+  const S = { rsrp: -97, rsrq: -11, sinr: 7, rscp: -78, ecio: -7, batt: 78, rx: 3.4e9, tx: 4.1e8, burst: 0, br: 0, until: 0, action: null };
+  const nrm = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const walk = (v, mean, pull, noise, lo, hi) => Math.max(lo, Math.min(hi, v + (mean - v) * pull + nrm() * noise));
+  const r1 = (v) => Math.round(v * 10) / 10;
+  function step(ts) {
+    const searching = ts < S.until;
+    let sig = { rsrp: null, rsrq: null, sinr: null, rssi: null, rscp: null, ecio: null };
+    if (!searching && G3) {
+      S.rscp = walk(S.rscp, -78, .08, 1.5, -115, -55);
+      S.ecio = walk(S.ecio, -7 + (S.rscp + 78) * .1, .15, .8, -20, -2);
+      sig = { ...sig, rscp: Math.round(S.rscp), ecio: Math.round(S.ecio), rssi: Math.round(S.rscp - S.ecio) };
+    } else if (!searching) {
+      S.rsrp = walk(S.rsrp, -97, .08, 1.4, -125, -70);
+      S.rsrq = walk(S.rsrq, -11 + (S.rsrp + 97) * .08, .15, .6, -20, -3);
+      S.sinr = walk(S.sinr, 7 + (S.rsrp + 97) * .35, .15, 1.1, -5, 28);
+      sig = { ...sig, rsrp: r1(S.rsrp), rsrq: r1(S.rsrq), sinr: r1(S.sinr), rssi: r1(S.rsrp + 24) };
+    }
+    let rx = 0, tx = 0;
+    if (!searching) {
+      if (S.burst > 0) S.burst--; else if (Math.random() < .12) { S.burst = 3 + (Math.random() * 12 | 0); S.br = .6e6 + Math.random() * 2.8e6; }
+      rx = 8e3 + Math.random() * 3e4 + (S.burst ? S.br * (.7 + Math.random() * .6) : 0);
+      tx = 3e3 + Math.random() * 1.2e4 + rx * .04;
+    }
+    S.rx += rx * 2; S.tx += tx * 2;
+    return {
+      ts, mode: "demo",
+      network: searching ? { reg: "searching" }
+        : G3 ? { operator: "Vodafone UA", tech: "3G", tech_name: "HSPA+", cell_id: "86690833", tac: "3221", mcc: "255", mnc: "01", reg: "home" }
+        : { operator: "Kyivstar", tech: "LTE", tech_name: "LTE", band: "B3", earfcn: 1300, pci: 212, freq_mhz: 1815, cell_id: "174092810", tac: "8010", mcc: "255", mnc: "03", reg: "home" },
+      signal: sig,
+      wan: { iface: "rmnet_data0", ip: searching ? "" : "10.87.142.19", up: !searching, state: searching ? "connecting" : "connected",
+             session_s: searching ? 0 : 2820 + ts / 1000 % 1000, rx_bytes: S.rx, tx_bytes: S.tx, rx_rate: rx, tx_rate: tx },
+      battery: { present: true, percent: Math.round(S.batt), status: "charging", ext_power: true, temp_c: 31.5 },
+      system: { uptime_s: 11520 + ts / 1000 % 1000, load1: .31, mem_used_pct: 46 },
+      clients: [
+        { ip: "192.168.1.2", mac: "a4:83:e7:1c:22:9f", name: "laptop", online: true },
+        { ip: "192.168.1.5", mac: "3c:06:30:8d:41:aa", name: "Pixel-7", online: true },
+        { ip: "192.168.1.9", mac: "f0:2f:74:55:10:03", name: "kitchen-tv", online: false },
+      ],
+      action: S.action ? { ...S.action } : null, warnings: [],
+    };
+  }
+  const hist = { t: [], rsrp: [], rsrq: [], sinr: [], rscp: [], ecio: [], rx: [], tx: [] };
+  const now = Date.now();
+  for (let i = 300; i > 0; i--) {
+    const s = step(now - i * 2000);
+    hist.t.push(s.ts); hist.rsrp.push(s.signal.rsrp); hist.rsrq.push(s.signal.rsrq); hist.sinr.push(s.signal.sinr);
+    hist.rscp.push(s.signal.rscp); hist.ecio.push(s.signal.ecio);
+    hist.rx.push(s.wan.rx_rate); hist.tx.push(s.wan.tx_rate);
+  }
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  // Cells: the same shapes /api/cells returns. Neighbours come and go; a cell is kept for a minute.
+  const seen = {};
+  const cell = (earfcn, pci, band, name, mhz, rsrp, rsrq, extra = {}) =>
+    ({ earfcn, pci, band, band_name: name, freq_mhz: mhz, rsrp: r1(rsrp), rsrq: r1(rsrq), estimated: false, serving: false, seen_ago_s: 0, ...extra });
+  function cells() {
+    const t = Date.now(), list = [];
+    const heard = (c, p = 1) => { if (Math.random() < p) seen[c.earfcn + "/" + c.pci] = { c, at: t }; };
+    if (Date.now() >= S.until) {
+      if (G3) {
+        heard(cell(2900, 237, "B7", "2600 MHz", 2635, -127 + nrm(), -17, { estimated: true }), .8);
+        heard(cell(2900, 165, "B7", "2600 MHz", 2635, -125 + nrm(), -18, { estimated: true }), .5);
+      } else {
+        heard(cell(1300, 212, "B3", "1800 MHz", 1815, S.rsrp, S.rsrq, { serving: true }));
+        heard(cell(1300, 318, "B3", "1800 MHz", 1815, S.rsrp - 7 + nrm(), S.rsrq - 2.5));
+        heard(cell(6300, 91, "B20", "800 MHz", 806, S.rsrp - 4 + nrm(), S.rsrq - 1));
+        heard(cell(3050, 77, "B7", "2600 MHz", 2650, S.rsrp - 16 + nrm(), -17.5), .6);
+        if ((t / 150000 | 0) % 2 === 0) heard(cell(1300, 402, "B3", "1800 MHz", 1815, S.rsrp - 12 + nrm(), -15));
+      }
+    }
+    for (const [k, v] of Object.entries(seen)) {
+      const ago = (t - v.at) / 1000 | 0;
+      if (ago > 60) { delete seen[k]; continue; }
+      list.push({ ...v.c, serving: v.c.serving && ago === 0, seen_ago_s: ago });
+    }
+    return list.sort((a, b) => (b.serving - a.serving) || (b.rsrp - a.rsrp));
+  }
+  const ago = (m) => Date.now() - m * 60000;
+  const E = [
+    { ts: ago(58), kind: "start", level: "neutral", text: "Monitoring started: LTE B3, cell 174092810, data session connected" },
+    { ts: ago(44), kind: "cell", level: "neutral", text: "Serving cell changed: 174092810 → 174092811 (PCI 318, B3)" },
+    { ts: ago(43.5), kind: "cell", level: "neutral", text: "Serving cell changed: 174092811 → 174092810 (PCI 212, B3)" },
+    { ts: ago(31), kind: "network", level: "neutral", text: "Network type changed: LTE B3 → 3G" },
+    { ts: ago(31), kind: "data", level: "warning", text: "Data session: connecting" },
+    { ts: ago(30.8), kind: "data", level: "good", text: "Data session: connected, IP address 10.87.140.7" },
+    { ts: ago(29), kind: "network", level: "neutral", text: "Network type changed: 3G → LTE B3" },
+    { ts: ago(12), kind: "registration", level: "warning", text: "Registration: home network → searching for a network" },
+    { ts: ago(11.4), kind: "registration", level: "good", text: "Registration: searching for a network → home network" },
+    { ts: ago(11.3), kind: "ip", level: "neutral", text: "IP address changed: 10.87.140.7 → 10.87.142.19" },
+  ];
+  const ev = (kind, level, text) => E.push({ ts: Date.now(), kind, level, text });
+  const serving = () => {
+    if (Date.now() < S.until) return { tech: "" };
+    return G3
+      ? { tech: "3G", tech_name: "HSPA+", operator: "Vodafone UA", mcc: "255", mnc: "01", band: "", cell_id: "86690833", rnc: 1322, cid: 52241, area_code: "3221", area_label: "LAC" }
+      : { tech: "LTE", tech_name: "LTE", operator: "Kyivstar", mcc: "255", mnc: "03", band: "B3", band_name: "1800 MHz", freq_mhz: 1815, earfcn: 1300, pci: 212,
+          cell_id: "174092810", enb: 680050, sector: 10, area_code: "8010", area_label: "TAC" };
+  };
+  // Screen designer: the layout works here, but its picture is drawn by the panel, so there is none from a file.
+  const W = (type, x, y, w, h, opts = {}) => ({ type, x, y, w, h, opts });
+  const defLayout = () => ({ version: 1, pages: [
+    { name: "Signal", bg: "#ffffff", widgets: [W("operator", 8, 4, 184, 24, { size: "mb" }), W("battery", 232, 4, 80, 24, { size: "mb", align: "right" }),
+      W("band", 8, 30, 304, 20), W("metric", 8, 56, 304, 96, { metric: "auto", size: "huge" }), W("chart", 8, 160, 304, 72, { metric: "auto" })] },
+    { name: "Aiming", bg: "#ffffff", widgets: [W("aim", 0, 0, 320, 240, { metric: "auto" })] },
+    { name: "Internet", bg: "#ffffff", widgets: [W("data", 8, 8, 304, 24, { size: "mb" }), W("speed", 8, 40, 304, 80, { size: "l" }),
+      W("traffic", 8, 128, 304, 24), W("devices", 8, 160, 200, 24), W("clock", 208, 200, 104, 32, { size: "l", align: "right", offset: "+2" })] } ] });
+  const wopts = { metric: ["metric", "size", "align", "color", "label"], band: ["size", "align", "color"], bars: ["metric", "color"],
+    speed: ["size", "align", "color"], traffic: ["size", "align", "color"], battery: ["size", "align", "color"], clock: ["size", "align", "color", "offset"],
+    operator: ["size", "align", "color"], devices: ["size", "align", "color"], chart: ["metric", "color"], aim: ["metric", "color"],
+    data: ["size", "align", "color"], text: ["text", "size", "align", "color"] };
+  const noPicture = async () => { throw new Error("the picture is drawn by the panel itself; run mifi-panel -demo to see it"); };
+  return {
+    layoutGet: async () => ({ layout: defLayout(), from: "default", persistent: false, widgets: wopts }),
+    layoutPut: async () => ({ saved: false }),
+    layoutDefault: async () => defLayout(),
+    preview: noPicture,
+    mirror: noPicture,
+    session: async () => (S.show && Date.now() < S.show.ends_ts ? { ...S.show } : { active: false }),
+    show: async (l, page, seconds) => { S.show = { active: true, page, pages: l.pages.length, ends_ts: Date.now() + seconds * 1000 }; return S.show; },
+    showStop: async () => { S.show = null; return { active: false }; },
+    cells: async () => ({ serving: serving(), cells: cells(), scan: S.scan || null, source: "demo" }),
+    events: async () => ({ events: [...E].reverse() }),
+    info: async () => ({ version: "", demo: true, at_console: true, interval: 2000 }),
+    status: async () => step(Date.now()),
+    history: async () => hist,
+    action: async (name) => {
+      if (S.action && S.action.state === "running") throw new Error("wait, the previous action is still running");
+      S.action = { name, state: "running", message: "Detaching from the network…", started: Date.now(), finished: 0 };
+      (async () => {
+        if (name === "restart_data") { S.action.message = "Stopping the data session…"; await wait(1000); S.until = Date.now() + 4000;
+          ev("data", "warning", "Data session: connecting");
+          S.action.message = "Starting the data session again…"; await wait(2000); S.action.message = "Waiting for the network to give an IP address…"; await wait(2000);
+          ev("data", "good", "Data session: connected, IP address 10.87.142.19");
+          Object.assign(S.action, { state: "done", message: "Data session restarted, IP address 10.87.142.19", finished: Date.now() }); }
+        else if (name === "scan") { S.action.message = "Searching for available networks, this can take up to 3 minutes…"; S.until = Date.now() + 8000;
+          ev("registration", "warning", "Registration: home network → searching for a network"); await wait(9000);
+          ev("registration", "good", "Registration: searching for a network → home network");
+          S.scan = { ts: Date.now(), networks: [
+            { name: "Kyivstar", mccmnc: "25503", tech: "LTE", status: "current" }, { name: "Vodafone UA", mccmnc: "25501", tech: "LTE", status: "available" },
+            { name: "lifecell", mccmnc: "25506", tech: "LTE", status: "forbidden" }, { name: "Vodafone UA", mccmnc: "25501", tech: "3G", status: "available" } ] };
+          Object.assign(S.action, { state: "done", message: "Found: Kyivstar (LTE, current), Vodafone UA (LTE), lifecell (LTE, forbidden), Vodafone UA (3G)", finished: Date.now() }); }
+        else { await wait(2000); S.until = Date.now() + 5000; S.action.message = "Registering again, this can take up to a minute…";
+          ev("registration", "warning", "Registration: home network → searching for a network"); await wait(5000);
+          ev("registration", "good", "Registration: searching for a network → home network");
+          Object.assign(S.action, { state: "done", message: "Re-registration complete", finished: Date.now() }); }
+      })();
+      return { ok: name };
+    },
+    at: async (cmd) => ({ lines: ["(demo) " + cmd, "OK"] }),
+  };
+}
+
+const DEMO = location.protocol === "file:" || new URLSearchParams(location.search).has("demo");
+const api = DEMO ? mockApi() : realApi();
+
+/* ---------- Refresh loop ---------- */
+let timer = null, failures = 0;
+async function poll() {
+  clearTimeout(timer);
+  try {
+    const st = await api.status();
+    failures = 0;
+    document.body.classList.remove("stale");
+    skew = Date.now() - st.ts;
+    pushHist(st);
+    render(st);
+    if (view === "cells") loadCells();
+    if (view === "screen") screenTick();
+  } catch (e) {
+    if (++failures >= 2) {
+      document.body.classList.add("stale");
+      const nt = $("#notice");
+      nt.hidden = false;
+      nt.replaceChildren();
+      nt.insertAdjacentHTML("afterbegin", icon("critical"));
+      const p = document.createElement("p");
+      p.textContent = "The panel is not responding. Make sure your phone or laptop is connected to this router's Wi-Fi. The data below is out of date.";
+      nt.append(p);
+    }
+  }
+  if (!document.hidden) timer = setTimeout(poll, info.interval || 2000);
+}
+
+async function start() {
+  buildSeg();
+  setView(viewFromHash());
+  ["#sig-chart", "#net-chart"].forEach((s) => setupChart($(s)));
+  try { info = await api.info(); } catch (e) { /* keep defaults */ }
+  $("#foot").textContent = ["MiFi Panel " + (info.version || "")].map((x) => x.trim()).concat(info.demo ? ["demo mode"] : []).join(", ") + `. Refreshes every ${NF2.format((info.interval || 2000) / 1000)} s.`;
+  if (info.at_console) $("#console").hidden = false;
+  try { loadHist(await api.history()); } catch (e) { /* start with an empty history */ }
+  poll();
+}
+
+document.addEventListener("visibilitychange", async () => {
+  if (document.hidden) { clearTimeout(timer); return; }
+  try { loadHist(await api.history()); } catch (e) {}
+  poll();
+});
+
+$("#metric-seg").addEventListener("keydown", (e) => {
+  if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+  const btns = [...document.querySelectorAll("#metric-seg button")];
+  const i = btns.findIndex((b) => b.dataset.m === metric);
+  const nb = btns[(i + (e.key === "ArrowRight" ? 1 : btns.length - 1)) % btns.length];
+  nb.click(); nb.focus();
+});
+
+document.querySelectorAll("[data-action]").forEach((b) => b.addEventListener("click", async () => {
+  try {
+    await api.action(b.dataset.action);
+    setTimeout(poll, 300);
+  } catch (e) {
+    const box = $("#action-msg"); box.hidden = false; box.replaceChildren();
+    box.insertAdjacentHTML("afterbegin", icon("critical"));
+    const s = document.createElement("span"); s.textContent = e.message; box.append(s);
+  }
+}));
+
+window.addEventListener("hashchange", () => setView(viewFromHash()));
+
+// Find all networks takes the router off the network for a while: ask first.
+document.querySelectorAll("[data-scan]").forEach((b) => b.addEventListener("click", () => {
+  const d = $("#scan-dlg"); d.returnValue = ""; d.showModal();
+}));
+$("#scan-dlg").addEventListener("close", async () => {
+  if ($("#scan-dlg").returnValue !== "ok") return;
+  try { await api.action("scan"); setTimeout(poll, 300); }
+  catch (e) {
+    const box = view === "cells" ? $("#scan-msg") : $("#action-msg"); box.hidden = false; box.replaceChildren();
+    box.insertAdjacentHTML("afterbegin", icon("critical"));
+    const s = document.createElement("span"); s.textContent = e.message; box.append(s);
+  }
+});
+
+$("#aim-open").addEventListener("click", () => { aim.peak = null; $("#aim").showModal(); if (last) aimUpdate(last); });
+$("#aim-close").addEventListener("click", () => $("#aim").close());
+$("#aim-reset").addEventListener("click", () => { aim.peak = null; if (last) aimUpdate(last); });
+$("#aim-sound").addEventListener("click", (e) => {
+  aim.sound = !aim.sound;
+  e.currentTarget.setAttribute("aria-pressed", String(aim.sound));
+  if (aim.sound) beep(600);
+});
+
+$("#at-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const cmd = $("#at-in").value.trim(); if (!cmd) return;
+  const out = $("#at-out");
+  out.textContent += `> ${cmd}\n`;
+  try {
+    const r = await api.at(cmd);
+    out.textContent += (r.lines || []).join("\n") + (r.error ? `\n${r.error}` : "") + "\n\n";
+  } catch (err) { out.textContent += `${err.message}\n\n`; }
+  out.scrollTop = out.scrollHeight;
+});
+
+start();
+</script>
+</body>
+</html>
