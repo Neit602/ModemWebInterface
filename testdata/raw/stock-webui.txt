@@ -1,0 +1,49 @@
+### GET /srv/status
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{"loginStatus":0,"statusData":{"statusBarAirplaneMode":"AirplaneModeOff","statusBarBatteryChargingSource":"ChargingSourceUSB","statusBarBatteryChargingState":"false","statusBarBatteryDetection":"Present","statusBarBatteryPercent":"100","statusBarBytesReceived":"4877","statusBarBytesTotal":"13542","statusBarBytesTransmitted":"8665","statusBarClientListSize":"2","statusBarConnectionDuration":"647","statusBarConnectionState":"Connected","statusBarFemtoCellStatus":"0","statusBarGpsStatus":"GpsOff","statusBarGuestClientListSize":"0","statusBarGuestWifiEnabled":1,"statusBarMaxWiFiClientListSize":"5","statusBarMnsAvailable":1,"statusBarMnsInUse":0,"statusBarMnsScan":0,"statusBarMobileDataEnabled":1,"statusBarNetwork":"Vodafone UA","statusBarNetworkID":"25501","statusBarNotificationFlag":"0","statusBarPrimaryClientListSize":"2","statusBarRoaming":"None","statusBarSdCardFreeSpace":"0","statusBarSdCardInUse":0,"statusBarSdCardStatus":"SmbOn","statusBarSdCardUsedSpace":"0","statusBarSignalBars":"5","statusBarSimStatus":"Ready","statusBarSmsUnreadCount":"20","statusBarTechnology":"LTE","statusBarTechnologyText":"","statusBarTrafficStatus":"None","statusBarWiFiClientListSize":"1","statusBarWiFiEnabled":1}}
+@ms 90
+### GET /srv/notification
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{"loginStatus":0,"notificationsList":[]}
+@ms 40
+### GET /gps/status/
+HTTP/1.1 406 Not Acceptable
+
+Content-Type: text/html
+
+(HTML page omitted: the stock login page)
+@ms 170
+### GET /getGPSStatus.cgi
+HTTP/1.1 404 Not Found
+
+Content-Type: text/html
+
+(HTML page omitted: the stock login page)
+@ms 30
+### GET /fieldtest/
+HTTP/1.1 200 OK
+
+Content-Type: text/html
+
+(HTML page omitted: the stock login page)
+@ms 770
+### GET /internet/
+HTTP/1.1 200 OK
+
+Content-Type: text/html
+
+(HTML page omitted: the stock login page)
+@ms 770
+### GET /jetpackinfo/
+HTTP/1.1 200 OK
+
+Content-Type: text/html
+
+(HTML page omitted: the stock login page)
+@ms 770

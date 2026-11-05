@@ -40,10 +40,12 @@ Keep docs/history.md up to date: when something important is learned or decided,
 - LTE data interfaces: rmnet_data0..7 (all down at probe time: no data session), rmnet_ipa0 (IPA offload,
   so /proc/net/dev counters may undercount traffic once data flows).
 - LAN: br0 192.168.1.1 with wlan0 and wlan1; USB network rndis0 169.254.3.1.
-- Firewall: every iptables policy is ACCEPT with no INPUT rules (router2d may add rules when LTE is up).
-  That is why the panel listens only on 127.0.0.1 and the br0 address by default.
+- Firewall: before LTE is up every iptables policy is ACCEPT with no INPUT rules. With LTE up (seen 2026-11-05)
+  router2d sets INPUT to DROP (accepts br0 and lo) and rejects new TCP/UDP connections to the WAN IP on
+  rmnet_data0; IPv6 stays all ACCEPT (IPv6 is off). The panel still listens only on 127.0.0.1 and the br0
+  address by default, so it does not depend on those rules.
 - DHCP: ISC dhcpd, leases in /opt/nvtl/tmp/router2/dhcpd.leases (not dnsmasq).
-- Battery: /sys/class/power_supply/bq27520-battery (fuel gauge: capacity, status, voltage_now,
+- Battery: /sys/class/power_supply/bq27520-battery (fuel gauge: capacity, status, voltage_now, temp_ambient in 0.1 °C,
   current_now); smb1351-charger also says type=Battery but has no capacity; usb has online=1 on external power.
 - The clock starts at 1970 after boot until the network sets it; timestamps must survive that jump.
 - Available on the device: busybox (incl. microcom, lsof, fuser, crond, start-stop-daemon), curl, wget,

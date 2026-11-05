@@ -1,0 +1,3792 @@
+### modem2_cli get_info
+cmd_get_info returned 0 (MDM_MAIN: success.)
+
+FW Version:[SDx20ALP-1.22.11  1  [2020-04-13 08:37:23]]
+HW Version:[4]
+Model:[MIFI8800L]
+fid:[FZ000000000000]
+mdn:[]
+min:[]
+imei:[990016870000000]
+imei sv:[1]
+imsi:[255010000000000]
+iccid:[8938000000000000000]
+meid:[]
+esn:[0]
+sid:[]
+home_sid:[]
+nid:[]
+home_nid:[]
+Prl Version:[0]
+Eri Version:[0]
+Eri Indication:[0]
+Eri Alert:[0]
+Pri Version:[151]
+Manufacture:[Inseego]
+Manufacture OUI:[0015FF]
+Pri Version Full:[151]
+@rc 0
+real 0.03
+user 0.01
+sys 0.02
+### modem2_cli get_state
+cmd_get_state returned 0 (MDM_MAIN: success.)
+state:[Connected]
+reg state:[1]
+
+Current Signal
+
+tech:[10] (LTE)
+roam:[0]
+rssi:[-38]
+dbm:[0]
+bars:[5]
+ecio:[0]
+sinr:[0]
+rsrq:[-14]
+snr:[14]
+rsrp:[-72]
+tx power:[0]
+radio temp[-1301287780]
+oper name:[Vodafone UA]
+oper id:[25501]
+cell id:[143415071]
+lac:[3221]
+femto:[0]
+p_rev:[0]
+sid:[0]
+nid:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_signal
+cmd_get_signal returned 0 (MDM_MAIN: success.)
+
+tech:[10] (LTE)
+roam:[0]
+rssi:[-38]
+dbm:[0]
+bars:[5]
+ecio:[0]
+sinr:[0]
+rsrq:[-14]
+snr:[14]
+rsrp:[-72]
+tx power:[0]
+radio temp[-1301287780]
+oper name:[Vodafone UA]
+oper id:[25501]
+cell id:[143415071]
+lac:[3221]
+femto:[0]
+p_rev:[0]
+sid:[0]
+nid:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_voice_signal
+cmd_get_voice_signal returned 0 (MDM_MAIN: success.)
+
+tech:[0] (NONE)
+roam:[0]
+rssi:[0]
+dbm:[0]
+bars:[0]
+ecio:[0]
+sinr:[0]
+rsrq:[0]
+snr:[0]
+rsrp:[0]
+tx power:[0]
+radio temp[0]
+oper name:[]
+oper id:[]
+cell id:[]
+lac:[]
+femto:[0]
+p_rev:[0]
+sid:[0]
+nid:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_service_info
+cmd_get_service_info returned 0 (MDM_MAIN: success.)
+
+Service:[10] (LTE)
+Roam:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_oper_info
+cmd_get_oper_info returned 0 (MDM_MAIN: success.)
+
+Operator:[Vodafone UA]
+Mcc Mnc:[25501]
+Freq band:[0]
+@rc 0
+real 0.03
+user 0.01
+sys 0.02
+### modem2_cli get_network_time
+cmd_get_network_time returned 0 (MDM_MAIN: success.)
+
+Time:[11/05/26 03:23:07 pm]
+Time zone:[8]
+DST:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli get_cached_time
+cmd_get_cached_time returned 0 (MDM_MAIN: success.)
+
+Time:[11/05/26 03:23:07 pm]
+Time zone:[8]
+DST:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli get_carrier_unlock
+cmd_get_carrier_unlock returned 1 (MDM_MAIN: general error.)
+
+State:[0]
+Carrier block:[0]
+Verify retries:[0]
+Unblock retries:[0]
+@rc 1
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli sim_get_status
+cmd_sim_get_status returned 0 (MDM_MAIN: success.)
+status is:[3] (SIM_READY)
+retries is:[3]
+unblocks is:[10]
+@rc 0
+real 0.08
+user 0.03
+sys 0.00
+### modem2_cli active_tech_get
+cmd_get_active_tech returned 0 (MDM_MAIN: success.)
+
+Active tech modes:[31] ( GSM UMTS CDMA EVDO LTE)
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli enabled_tech_get
+cmd_get_enabled_tech returned 0 (MDM_MAIN: success.)
+
+Enabled tech modes:[31] ( GSM UMTS CDMA EVDO LTE)
+@rc 0
+real 0.03
+user 0.03
+sys 0.00
+### modem2_cli call_get_status
+Internet = 1
+Device Management = 2
+Data Usage = 3
+Enter APN: Enter ip_family (V4=0, V6=2): cmd_get_call_status returned 2 (MDM_MAIN: one or more bad parameters passed into a function.)
+WWAN State:[-1234826124] (Unknown)
+APN:[-1] (Unknown)
+IP Family:[-1225859660] (Unknown)
+@rc 2
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_call_throttle_status
+
+Enter call fail code code [0-65535]: cmd_get_call_throttle_status returned 0 (MDM_MAIN: success.)
+Throttle:[0]
+@rc 0
+real 0.03
+user 0.03
+sys 0.00
+### modem2_cli get_reject_cause_code
+modem2_get_reject_cause_code returned 0 (MDM_MAIN: success.)
+Reject cause code:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli 1xrtt_get_ext_timer
+cmd_1xrtt_get_ext_timer returned 1 (MDM_MAIN: general error.)
+1XRTT CDMA Ext timer:[-1095758101]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli active_band_get
+cmd_active_band_get returned 0 (MDM_MAIN: success.)
+Active band:[3]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli band_class_get_enabled
+BAND_CLASS_10 = 1
+BAND_CLASS_14 = 2
+Enter bandclass: cmd_band_class_get_enabled returned 2 (MDM_MAIN: one or more bad parameters passed into a function.)
+Invalid band class 
+@rc 2
+real 0.03
+user 0.01
+sys 0.02
+### modem2_cli bsr_get_timers
+cmd_get_bsr_timers returned 0 (MDM_MAIN: success.)
+
+BSR time:[180]
+Max_time:[180]
+Next lte scan:[300]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli cai_get
+cmd_get_cai_rev returned 1 (MDM_MAIN: general error.)
+
+CAI rev:[0]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli ca_get_enabled
+cmd_ca_get_enabled returned 1 (MDM_MAIN: general error.)
+CA enabled:[-1092481296]
+@rc 1
+real 1.54
+user 0.03
+sys 0.00
+### modem2_cli ca_bands_get_enabled
+Enter CA band 1: Enter CA band 2: cmd_ca_bands_get_enabled returned 1 (MDM_MAIN: general error.)
+LTE band enabled:[-1224978432]
+@rc 1
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli ca_tri_bands_get_enabled
+Enter CA band 1: Enter CA band 2: Enter CA band 3: cmd_ca_tri_bands_get_enabled returned 1 (MDM_MAIN: general error.)
+LTE band enabled:[0]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli get_autonomous_gap_enabled
+cmd_get_autonomous_gap_enabled returned 1 (MDM_MAIN: general error.)
+Autonomous gap enabled:[0]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli check_lte_ca_status
+cmd_check_lte_ca_status returned 0 (MDM_MAIN: success.)
+
+Failure. returned code = 0
+@rc 0
+real 1.04
+user 0.03
+sys 0.00
+### modem2_cli ddtm_get
+cmd_get_ddtm_state returned 0 (MDM_MAIN: success.)
+
+Status:[0]
+DDTM pref:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli ehrpd_get_enabled
+cmd_ehrpd_get_enabled returned 1 (MDM_MAIN: general error.)
+eHRPD enabled:[0]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli ehrpd_get_state
+cmd_ehrpd_get_state returned 1 (MDM_MAIN: general error.)
+0 - Rev0
+1 - RevA with MFPA
+2 - RevA with MFPA and EMPA
+3 - RevB with MMPA
+4 - RevA with EHRPD
+5 - RevB with EHRPD
+6 - RevA with EHRPD and IRAT
+7 - RevB with EHRPD and IRAT
+eHRPD state:[0]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli emergency_get_mode
+cmd_emergency_get_mode returned 0 (MDM_MAIN: success.)
+Emergency Mode enabled:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_diag_info
+cmd_get_diag_info returned 0 (MDM_MAIN: success.)
+
+[===============
+Diagnostic Data
+===============
+
+NAM: N/A
+Mobile Directory Number (MDN): N/A
+IMSI_S: 255010000000000
+Mobile Network Code (MNC): 01
+Mobile Country Code (MCC): 255
+Primary CDMA Channel A: 0
+Secondary CDMA Channel A: 0
+Primary CDMA Channel B: 0
+Secondary CDMA Channel B: 0
+Access Overload Class (ACCOLC): 0
+Register On Home SID: N/A
+Register On Foreign SID: N/A
+Register On Foreign NID: N/A
+CDMA Band Class: [WCDMA_EU_J_CH_IMT_2100] [WCDMA_US_PCS_1900] [WCDMA_US_850] [WCDMA_EU_J_900] 
+LTE Band Class: [E_UTRA_BAND_1] [E_UTRA_BAND_2] [E_UTRA_BAND_3] [E_UTRA_BAND_4] [E_UTRA_BAND_5] [E_UTRA_BAND_6] [E_UTRA_BAND_7] [E_UTRA_BAND_8] [E_UTRA_BAND_9] [E_UTRA_BAND_10] [E_UTRA_BAND_11] [E_UTRA_BAND_12] [E_UTRA_BAND_13] [E_UTRA_BAND_14] [E_UTRA_BAND_17] [E_UTRA_BAND_18] [E_UTRA_BAND_19] [E_UTRA_BAND_20] [E_UTRA_BAND_21] [E_UTRA_BAND_24] [E_UTRA_BAND_25] [E_UTRA_BAND_28] [E_UTRA_BAND_33] [E_UTRA_BAND_34] [E_UTRA_BAND_35] [E_UTRA_BAND_36] [E_UTRA_BAND_37] [E_UTRA_BAND_38] [E_UTRA_BAND_39] [E_UTRA_BAND_40] [E_UTRA_BAND_41] [E_UTRA_BAND_42] [E_UTRA_BAND_43] 
+Active Band: N/A
+Slot Cycle Index: N/A
+MIP Mode: MIP off
+MIP Registration Retries: 0
+MIP Registration Retries Timeout: 0
+Reverse Tunneling: 0
+DNS Primary: N/A
+DNS Secondary: N/A
+Supplemental Channel Request Message (SCRM): 0
+Network ID (NID): 0
+Error Rate: 
+RSSI: [0]:-125 
+Ec/Io: 
+Latitude: 0
+Longitude: 0
+Tx Power (EVDO): 0
+Rx Power 0 (EVDO): 0
+Rx Power 1 (EVDO): 0
+Packet Zone ID: 0
+Call State: Unknown
+Dormant State: Dormant
+MAC Index: N/A
+Subnet Mask: 255.255.255.252
+Color Code: 0
+UATI024: 00000000 00000000 00000000 00000000
+PN Offset: N/A
+]
+@rc 0
+real 0.05
+user 0.02
+sys 0.01
+### modem2_cli get_refurb_info
+cmd_get_refurb_info returned 1 (MDM_MAIN: general error.)
+
+Status:[0]
+Date:[01/01/70 12:00:00 am]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli get_act_date
+cmd_get_activation_date returned 1 (MDM_MAIN: general error.)
+
+Date:[01/01/70 12:00:00 am]
+@rc 1
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_sup_tech
+cmd_get_sup_tech returned 0 (MDM_MAIN: success.)
+
+Available tech modes:[79] ( GSM UMTS CDMA EVDO)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli ims_pres_get_config
+cmd_ims_pres_get_config returned 1 (MDM_MAIN: general error.)
+Gzip Enabled:[0]
+User opted in status:[0]
+Publish expiry timer:[0]
+Publish expiry timer ext:[0]
+Capabilities cache exp:[0]
+Availability cache expl:[0]
+capabilities poll int:[0]
+capabilities poll list sub exp:[0])
+Min publish interval:[0])
+Min sublist entries:[0])
+@rc 1
+real 0.05
+user 0.03
+sys 0.00
+### modem2_cli ims_lvc_get_enabled
+cmd_ims_lvc_get_enabled returned 1 (MDM_MAIN: general error.)
+IMS LVC enabled:[-1097658645]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli ims_get_sip_data
+cmd_ims_get_sip_data returned 0 (MDM_MAIN: success.)
+SIP local port:[0]
+Timer SIP value:[2000]
+Timer SIP subscribe value:[16000]
+Timer T1:[17000]
+Timer T2:[0]
+Timer T4:[0]
+Timer Tf:[0]
+Timer Tj:[0]
+I TCP threshold:[0]
+Compact form enabled:[0]
+Sig Comp enabled:[0]
+FMC config:[0]
+IP sec int scheme:[125]
+IP sec enc algo:[0]
+Auth scheme:[0]
+Initial auth config:[0]
+Auth Header:[]
+Proxy Route:[]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli ims_get_sms_data
+cmd_ims_get_sms_data returned 0 (MDM_MAIN: success.)
+SMS VDN:[]
+SMS format:[0]
+Accept contact:[]
+SMS rat config mask:[]
+Rat mask value:[]
+URI:[]
+SMS over ip networks:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lbs_get
+cmd_get_lbs_idle returned 0 (MDM_MAIN: success.)
+
+Lbs_idle mode query: disabled
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lifetime_counters_get
+cmd_lifetime_counters_get returned 1 (MDM_MAIN: general error.)
+Rx = 0 KB, Tx = 0 KB
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_prior
+cmd_lte_band_get_prior returned 1 (MDM_MAIN: general error.)
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli pdn_get_ext_params
+Enter profile number: Enter profile type (0-3GPP, 1-3GPP2): cmd_pdn_get_ext_params returned 1 (MDM_MAIN: general error.)
+Extra PDN index:[0]
+Extra PDN type:[0]
+Extra PDN max connections:[0]
+Extra PDN wait timer:[0]
+Extra PDN connection timer:[0]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli prof_get_tech
+Enter profile type (3GPP=0, 3GPP2=1): Enter profile index: cmd_prof_get_tech returned 2 (MDM_MAIN: one or more bad parameters passed into a function.)
+
+Profile Type:[-1095033103](3GPP=0, 3GPP2=1)
+idx:[-1225093116]
+APN:[]
+User Name:[]
+Password:[]
+Name:[]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[0] (none=0, enabled=1)
+DNS1:[]
+DNS2:[]
+PDP Type:[0] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[]
+IPV6 address:[]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 2
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli prof_get_pri_tech
+Enter APN Technology (LTE=0, UMTS=1, eHRPD=2): cmd_prof_get_pri_tech returned 0 (MDM_MAIN: success.)
+
+APN:[sos]
+User Name:[]
+Password:[]
+Name:[]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.05
+user 0.02
+sys 0.01
+### modem2_cli prof_get_cust_tech
+Enter APN Technology (LTE=0, UMTS=1, eHRPD=2): cmd_prof_get_cust_tech returned 0 (MDM_MAIN: success.)
+
+APN:[]
+User Name:[]
+Password:[]
+Name:[profile1]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[::]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli prof_get_act_tech
+Enter profile type (3GPP=0, 3GPP2=1): cmd_prof_get_act_tech returned 0 (MDM_MAIN: success.)
+
+Profile Type:[0](3GPP=0, 3GPP2=1)
+idx:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli roam_get_enabled
+cmd_roam_get_enabled returned 0 (MDM_MAIN: success.)
+
+Roaming enabled:[0]
+@rc 0
+real 0.03
+user 0.03
+sys 0.00
+### modem2_cli roam_get_intl_enabled
+cmd_roam_get_intl_enabled returned 0 (MDM_MAIN: success.)
+
+Roaming International:[0]
+@rc 0
+real 0.03
+user 0.03
+sys 0.00
+### modem2_cli roam_get_eri
+cmd_roam_get_eri returned 0 (MDM_MAIN: success.)
+Roaming eri prl ver :[0]
+Roaming eri eri ver :[0]
+Roaming eri ind id :[0]
+Roaming eri alert :[0]
+Roaming eri icon id:[0]
+Roaming eri icon mode:[0]
+Roaming eri text :[]
+
+@rc 0
+real 0.03
+user 0.03
+sys 0.00
+### modem2_cli mip_get_settings
+cmd_mip_get_settings returned 0 (MDM_MAIN: success.)
+mask:[0x0]
+mode (off=0, prefered=1, only=2):[0]
+reg retry count:[0]
+reg retry interval:[0]
+reg retry period:[0]
+rereg if traffic type (disabled=0, enabled=1):[0] 
+authenticator (disabled=0, enabled=1):[0]
+authenticator using RFC2002bis (disabled=0, enabled=1):[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli mip_get_profile
+cmd_mip_get_profile returned 0 (MDM_MAIN: success.)
+index:[0]
+mask:[0x0]
+state: (disabled=0, enabled=1) [0]
+Home Address:[0x00000000]
+Primary HA Address:[0x00000000]
+Secondary HA Address:[0x00000000]
+Reverse tunneling pref: (disabled=0, enabled=1) [0]
+NAI string:[]
+HA security parameter:[0]
+AAA server security:[0]
+HA Key state: (unset=0, default=1, set=2) [0]
+AAA Key state: (unset=0, default=1, set=2) [0]
+HA Key string:[]
+AAA Key string:[]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli mns_get_info
+cmd_get_mns_info returned 0 (MDM_MAIN: success.)
+
+Is Allowed:[1]
+Is Selected:[0]
+Scan Status:[0]
+@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### modem2_cli mns_get_list
+cmd_get_mns_list returned 1008 (MDM_MAIN: No scan results available.)
+
+Mns list output:[]
+@rc 240
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli radio_is_enabled
+cmd_radio_is_enabled returned 0 (MDM_MAIN: success.)
+Radio enabled: (disabled=0, enabled=1):[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli sd_config_get_setting
+Enter sd_config type: cmd_sd_config_get_setting returned 1 (MDM_MAIN: general error.)
+SD config for type [0] data:[-1092862836]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli sim_pin_get_status
+cmd_sim_pin_get_status returned 0 (MDM_MAIN: success.)
+status is:[3]
+retries is:[3]
+unlocks is:[10]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli sim_get_carrier
+cmd_sim_get_carrier returned 0 (MDM_MAIN: success.)
+carrier is:[SIM_CARRIER_UNKNOWN(6)]
+@rc 0
+real 0.03
+user 0.03
+sys 0.00
+### modem2_cli sim_get_gid1
+cmd_sim_get_gid1 returned 1 (MDM_MAIN: general error.)
+gid_length : 0
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli sim_get_gid2
+cmd_sim_get_gid2 returned 1 (MDM_MAIN: general error.)
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli sim_get_iccid
+cmd_sim_get_iccid returned 0 (MDM_MAIN: success.)
+iccid : 8938000000000000000
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli get_imsi
+cmd_get_imsi returned 0 (MDM_MAIN: success.)
+imsi : 255010000000000
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli sim_get_mnc_length
+cmd_sim_get_mnc_length returned 0 (MDM_MAIN: success.)
+Length of MNC is:[2]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli volte_get_amr_mode
+cmd_volte_get_amr_mode returned 1 (MDM_MAIN: general error.)
+VoLTE AMR mode:[-1094955284]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli volte_get_amr_wb_mode
+cmd_volte_get_amr_wb_mode returned 1 (MDM_MAIN: general error.)
+VoLTE AMR WB mode:[-1090916631]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli volte_get_dcmo_timer
+cmd_volte_get_dcmo_timer returned 1 (MDM_MAIN: general error.)
+VoLTE DCMO timer:[-1098260758]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli volte_get_dcmo_tdelay
+cmd_volte_get_dcmo_tdelay returned 1 (MDM_MAIN: general error.)
+VoLTE DCMO tdelay:[48827]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli volte_get_enabled
+cmd_volte_get_enabled returned 1 (MDM_MAIN: general error.)
+VoLTE enabled:[0]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli volte_get_hd_voice_enab
+cmd_volte_get_hd_voice_enab returned 1 (MDM_MAIN: general error.)
+VoLTE HD voice enabled:[-1091707161]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli volte_get_hys
+cmd_volte_get_hys returned 1 (MDM_MAIN: general error.)
+VoLTE hys:[48893]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli volte_get_rcl_max_entries
+cmd_volte_get_rcl_max_entries returned 1 (MDM_MAIN: general error.)
+VoLTE rcl max entries:[-1098223899]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli volte_get_sess_config
+cmd_volte_get_sess_config returned 1 (MDM_MAIN: general error.)
+Silent redial enabled:[0]
+Session expiry timer:[0]
+Minimum session expiry:[0]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli volte_get_silent_redial
+cmd_volte_get_silent_redial returned 1 (MDM_MAIN: general error.)
+VoLTE Silent redial:[-1092120857]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli volte_get_src_thttle
+cmd_volte_get_src_thttle returned 1 (MDM_MAIN: general error.)
+VoLTE source throttle:[-1095184662]
+@rc 1
+real 0.04
+user 0.01
+sys 0.02
+### modem2_cli volte_get_tlte_911fail
+cmd_volte_get_tlte_911fail returned 1 (MDM_MAIN: general error.)
+VoLTE tlte 911fail:[-1095565592]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli get_world_mode_enabled
+modem2_enable_data_call returned 0 (MDM_MAIN: success.)
+enabled:[1]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_pco_event
+cmd_get_pco_event returned 0 (MDM_MAIN: success.)
+pco_value:[0]
+pdn:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli get_apn_from_database
+
+Enter the mccmnc: 
+Enter the Gid1 (comma separated list of byte values): 
+Enter the Gid2 (comma separated list of byte values): cmd_get_apn_from_database returned 2 (MDM_MAIN: one or more bad parameters passed into a function.)
+@rc 2
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli is_running
+cmd_is_running returned 0 (MDM_MAIN: success.)
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### ccm2_cli get_ipv6_enabled
+ccm_get_ipv6_enabled returned 0 (CCM: success.)
+enabled:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_cell_data_enabled
+ccm_get_cell_data_enabled returned 0 (CCM: success.)
+enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### ccm2_cli get_wifi_enabled
+ccm_get_wifi_enabled returned 0 (CCM: success.)
+enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_wifi_ap_enabled
+ccm_get_wifi_ap_enabled returned 0 (CCM: success.)
+enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### ccm2_cli get_wifi_stn_enabled
+ccm_get_wifi_stn_enabled returned 0 (CCM: success.)
+enabled:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### ccm2_cli get_air_mode_enabled
+ccm_get_air_mode_enabled returned 0 (CCM: success.)
+enabled:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_wifi_while_usbteth
+ccm_get_wifi_while_usbteth returned 0 (CCM: success.)
+enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_static_ip
+ccm_get_static_ip returned 0 (CCM: success.)
+ip:[0.0.0.0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### ccm2_cli get_ntp_url
+ccm_get_ntp_url returned 0 (CCM: success.)
+ip:[pool.ntp.org]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_curr_wan
+ccm_get_curr_wan returned 0 (CCM: success.)
+Wan:[WWAN]
+V4:[Connect]
+V4 IF:[rmnet_data0]
+V6:[Waiting]
+V6 IF:[]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_curr_wan_stats
+Wan:[1=WWAN]
+Wan:[2=WiFi WAN]
+Wan:[3=Ethernet WAN]
+What is WAN:  ccm_get_curr_wan_stats returned 2 (CCM: one or more bad parameters passed into a function.)
+Wan:[No WAN]
+V4 Connection State:[NotAvailable]
+V4 Bytes Rx:[0]
+V4 Bytes Tx:[0]
+V4 Duration:[0]
+V4 ifc:[]
+V4 IP Addr:[]
+V4 Subnet:[]
+V4 Gateway:[]
+V6 Connection State:[NotAvailable]
+V6 Bytes Rx:[0]
+V6 Bytes Tx:[0]
+V6 Duration:[0]
+V6 ifc:[]
+V6 IP Addr:[]
+V6 Gateway:[]
+@rc 2
+real 0.04
+user 0.02
+sys 0.01
+### ccm2_cli get_conn_state
+ccm_get_conn_state returned 0 (CCM: success.)
+Wan:[WWAN]
+V4:[Connect]
+V4 IF:[rmnet_data0]
+V6:[Waiting]
+V6 IF:[]
+
+Wan:[WiFi WAN]
+V4:[NotAvailable]
+V4 IF:[]
+V6:[NotAvailable]
+V6 IF:[]
+
+Wan:[Ethernet WAN]
+V4:[NotAvailable]
+V4 IF:[]
+V6:[NotAvailable]
+V6 IF:[]
+
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_wan_prio
+ccm_get_wan_prio returned 0 (CCM: success.)
+Prio:[1] Wan:[Ethernet WAN]
+Prio:[2] Wan:[WiFi WAN]
+Prio:[3] Wan:[WWAN]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_wwan_ac
+ccm_get_wwan_ac returned 0 (CCM: success.)
+Autoconnect Type:[2] Autoconnect when service is available
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_wwan_ac_state
+ccm_get_wwan_ac_state returned 0 (CCM: success.)
+Run:[1]
+Feature V6:[1]
+AC Enabled:[2] Autoconnect when service is available
+AC Interval:[10]
+V6 Enabled:[0]
+V4 apn:[1]
+V4 wwan_state:[Connected]
+V6 apn:[1]
+V6 wwan_state:[Idle]
+Did User Connect:[0]
+Did User Disconnect:[0]
+LAN Client Count:[2]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### ccm2_cli get_airplane_mode_disable_status
+ccm_get_airplane_mode_disable_status returned 0 (CCM: success.)
+Radio Disable status = [0x3]
+WiFi Disabled
+Cellular Disabled
+@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### ccm2_cli get_call_throttle_state
+ccm2_autoconnect_get_call_throttle_status returned 0 (CCM: success.)
+IPv4 Throttled = [0]
+IPv6 Throttled = [0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### router2_cli get_ippt
+command [get_ippt]
+
+cmd_get_ippt returned 0 (ROUTER: success.)
+Is active:       [0]
+Interface:       [1]
+Start Port: [0]  [1720]
+Port Type:  [0]  [2]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### router2_cli get_dns_name
+command [get_dns_name]
+
+cmd_get_dns_name returned 0 (ROUTER: success.)
+Host DNS name:       [my.jetpack]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### router2_cli get_port_forwarding
+command [get_port_forwarding]
+
+cmd_get_port_forwarding_status returned 0 (ROUTER: success.)
+Port forwarding is:   [Disable]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### router2_cli get_port_fwd_list
+command [get_port_fwd_list]
+
+cmd_get_port_fwd_app_list returned 0 (ROUTER: success.)
+
+Port forwarding List...
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### router2_cli get_port_filter
+command [get_port_filter]
+
+cmd_get_port_filtering_status returned 0 (ROUTER: success.)
+Port filtering is:   [Disable]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### router2_cli get_port_filter_list
+command [get_port_filter_list]
+
+cmd_get_port_filter_app_list returned 0 (ROUTER: success.)
+@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### router2_cli get_vpnpassthrough
+command [get_vpnpassthrough]
+
+cmd_get_vpnpassthrough_status returned 0 (ROUTER: success.)
+VPN passthrough is:   [Enable]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### router2_cli get_http_redirect
+command [get_http_redirect]
+
+cmd_get_http_redirect_status returned 0 (ROUTER: success.)
+HTTP redirect is:   [Enable]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### router2_cli get_mtu
+command [get_mtu]
+
+cmd_get_mtu returned 0 (ROUTER: success.)
+LAN MTU is [1428]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### router2_cli get_v6_fw
+command [get_v6_fw]
+
+cmd_get_ipv6_firewall_status returned 0 (ROUTER: success.)
+Ipv6 firewall status is:  [Enable]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### router2_cli get_lan_settings
+command [get_lan_settings]
+
+cmd_get_lan_settings returned 0 (ROUTER: success.)
+LAN IP address is:  [192.168.1.1]
+LAN subnet mask is: [255.255.255.0]
+LAN IPV6 Link Local: [fe80::200:ff:fe00:1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### router2_cli get_dmz
+command [get_dmz]
+
+cmd_get_dmz_settings returned 0 (ROUTER: success.)
+DMZ IP:  []
+DMZ status: [Disabled]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### router2_cli get_dhcp
+command [get_dhcp]
+
+cmd_get_dhcp_settings returned 0 (ROUTER: success.)
+DHCP status is: [Enabled]
+DHCP IP range: [192.168.1.2] - [192.168.1.102]
+Maximum DHCP pool hosts: [100]
+DHCP lease (in seconds): [86400]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### router2_cli get_manual_dns
+command [get_manual_dns]
+
+cmd_get_manual_dns_settings returned 0 (ROUTER: success.)
+Manual DNS status is: [Disabled]
+Manual DNS IP1: []
+Manual DNS IP2: []
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### router2_cli get_pub_access
+command [get_pub_access]
+
+cmd_get_public_access_settings returned 0 (ROUTER: success.)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### router2_cli get_active_dns
+command [get_active_dns]
+
+cmd_get_active_dns returned 0 (ROUTER: success.)
+Active DNS values
+   Primary   v4 DNS [11.111.11.11]
+   Secondary v4 DNS [11.111.11.11]
+   Primary   v6 DNS []
+   Secondary v6 DNS []
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### router2_cli get_ntp
+command [get_ntp]
+
+cmd_get_ntp_settings returned 0 (ROUTER: success.)
+NTP status is: [Disabled]
+NTP Primary server is: []
+NTP Secondary server is: []
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### router2_cli list_rout_mon_service
+command [list_rout_mon_service]
+
+cmd_list_rout_mon_services returned 0 (ROUTER: success.)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_ap_profile
+WIFI_CLI_MBH: Init MsgBus donecommand [get_ap_profile]
+
+Enter the Wifi profile index (1-4):Invalid profile index.
+WIFI_CLI_MBH: Disable Message bus interface@rc 2
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_caps
+WIFI_CLI_MBH: Init MsgBus donecommand [get_caps]
+
+wifi_get_capabilities returned 0 (WIFI: success.)
+WPS Available                      : [1]
+Allowed Wifi modes                 : [BGN, GN, AN, ACN5., AC5ONLY, ]
+Wifi support max clients           : [15]
+Wifi system max clients allowed    : [15]
+Wifi Max number of interface       : [2]
+Countries Supported                : [US,JP]
+Wifi US 2.4 GHz supported channels : [ 1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  ]
+Wifi US 5 GHz supported channels   : [36,  40,  44,  48,  149,  153,  157,  161,  165,  ]
+Wifi JP 2.4 GHz supported channels : [ 1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  ]
+Wifi JP 5 GHz supported channels   : [36,  40,  44,  48,  ]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_mac
+WIFI_CLI_MBH: Init MsgBus donecommand [get_mac]
+
+Enter the Wifi interface index 0/1:Invalid Wifi interface index.
+WIFI_CLI_MBH: Disable Message bus interface@rc 2
+real 0.04
+user 0.02
+sys 0.01
+### wifi_cli get_enable
+WIFI_CLI_MBH: Init MsgBus donecommand [get_enable]
+
+wifi_get_enable returned 0 (WIFI: success.)
+Wifi feature is :[1] 
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### wifi_cli get_ap_enable
+WIFI_CLI_MBH: Init MsgBus donecommand [get_ap_enable]
+
+wifi_get_ap_enabled returned 0 (WIFI: success.)
+Wifi AP mode is :[1] 
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### wifi_cli get_sta_enable
+WIFI_CLI_MBH: Init MsgBus donecommand [get_sta_enable]
+
+wifi_get_sta_enabled returned 0 (WIFI: success.)
+Wifi STA mode is :[0] 
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_sta_list
+WIFI_CLI_MBH: Init MsgBus donecommand [get_sta_list]
+
+wifi_ap_get_associate_sta_list returned 0 (WIFI: success.)
+STA associated with the AP are : [1]
+ MAC Addr[1]: [02:00:00:00:00:01]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.05
+user 0.02
+sys 0.01
+### wifi_cli get_ap_settings
+WIFI_CLI_MBH: Init MsgBus donecommand [get_ap_settings]
+
+wifi_get_ap_settings returned 0 (WIFI: success.)
+AP mode is             : [1] 
+Max Number of Clients  : [5]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### wifi_cli get_settings
+WIFI_CLI_MBH: Init MsgBus donecommand [get_settings]
+
+wifi_get_wlan_settings returned 0 (WIFI: success.)
+Wifi is                     : [1]
+Country Code                : [US]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_pindex
+WIFI_CLI_MBH: Init MsgBus donecommand [get_pindex]
+
+Enter the Wifi interface index 0/1:Invalid Wifi interface index.
+WIFI_CLI_MBH: Disable Message bus interface@rc 2
+real 0.03
+user 0.02
+sys 0.01
+### wifi_cli get_band_status
+WIFI_CLI_MBH: Init MsgBus donecommand [get_band_status]
+
+Enter the Wifi band (0=2.4GHZ, 1=5GHZ) to wait for 0/1:Invalid band.
+WIFI_CLI_MBH: Disable Message bus interface@rc 2
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_configuration
+command [get_configuration]
+
+cmd_get_configuration returned 0 (DMDB: success.)
+max_devices:[300]
+max_data_sessions:[600]
+data_usage_write_freq:[900]
+max_site_access_records:[2000]
+site_access_threshold:[0]
+traffic_status_low_transfer_threshold:[10000]
+traffic_status_receive_threshold:[80]
+traffic_status_transmit_threshold:[30]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_known_device_list
+command [get_known_device_list]
+
+size 573604 bytes passed in.
+cmd_get_known_device_list returned 0 (DMDB: success.)
+count:[24]
+list[0].mac:[02:00:00:00:00:02]
+list[0].settings.name:[]
+list[0].settings.type:[0]
+list[0].settings.blacklist:[0]
+list[0].settings.whitelist:[0]
+list[0].settings.internet_blocked:[0]
+list[0].settings.reserved_ip:[]
+list[0].entry.id:[11]
+list[0].entry.hostname:[host-1]
+list[0].entry.vendor_class:[]
+list[0].entry.param_req_list:[\001\002\006\014\017\032\034y\003!()*w\371\374\021]
+list[0].entry.last_connected:[2026-11-05 13:17:04]
+list[0].entry.interface:[USB]
+list[0].data.connected:[1]
+list[0].data.iptype:[DHCP]
+list[0].data.ipv4:[192.168.1.7]
+list[0].data.ipv6:[]
+list[0].data.link_local:[]
+list[0].data.lease_time:[1793884621]
+list[0].data.wifi_band:[0]
+
+list[1].mac:[02:00:00:00:00:01]
+list[1].settings.name:[]
+list[1].settings.type:[0]
+list[1].settings.blacklist:[0]
+list[1].settings.whitelist:[0]
+list[1].settings.internet_blocked:[0]
+list[1].settings.reserved_ip:[]
+list[1].entry.id:[18]
+list[1].entry.hostname:[host-2]
+list[1].entry.vendor_class:[android-dhcp-17]
+list[1].entry.param_req_list:[\001\003\006\017\032\0343:]
+list[1].entry.last_connected:[2026-11-05 13:19:56]
+list[1].entry.interface:[WIFI Primary]
+list[1].data.connected:[1]
+list[1].data.iptype:[DHCP]
+list[1].data.ipv4:[192.168.1.2]
+list[1].data.ipv6:[]
+list[1].data.link_local:[]
+list[1].data.lease_time:[1793884786]
+list[1].data.wifi_band:[2]
+
+list[2].mac:[02:00:00:00:00:03]
+list[2].settings.name:[]
+list[2].settings.type:[0]
+list[2].settings.blacklist:[0]
+list[2].settings.whitelist:[0]
+list[2].settings.internet_blocked:[0]
+list[2].settings.reserved_ip:[]
+list[2].entry.id:[1]
+list[2].entry.hostname:[host-3]
+list[2].entry.vendor_class:[]
+list[2].entry.param_req_list:[\001y\003\006\017lrw\374_,.]
+list[2].entry.last_connected:[2024-11-21 11:05:08]
+list[2].entry.interface:[WIFI Primary]
+list[2].data.connected:[0]
+list[2].data.iptype:[DHCP]
+list[2].data.ipv4:[]
+list[2].data.ipv6:[]
+list[2].data.link_local:[]
+list[2].data.lease_time:[0]
+list[2].data.wifi_band:[0]
+
+list[3].mac:[02:00:00:00:00:04]
+list[3].settings.name:[]
+list[3].settings.type:[0]
+list[3].settings.blacklist:[0]
+list[3].settings.whitelist:[0]
+list[3].settings.internet_blocked:[0]
+list[3].settings.reserved_ip:[]
+list[3].entry.id:[2]
+list[3].entry.hostname:[host-4]
+list[3].entry.vendor_class:[android-dhcp-12]
+list[3].entry.param_req_list:[\001\003\006\017\032\0343:]
+list[3].entry.last_connected:[2024-11-22 11:02:21]
+list[3].entry.interface:[WIFI Primary]
+list[3].data.connected:[0]
+list[3].data.iptype:[DHCP]
+list[3].data.ipv4:[]
+list[3].data.ipv6:[]
+list[3].data.link_local:[]
+list[3].data.lease_time:[0]
+list[3].data.wifi_band:[0]
+
+list[4].mac:[02:00:00:00:00:05]
+list[4].settings.name:[]
+list[4].settings.type:[0]
+list[4].settings.blacklist:[0]
+list[4].settings.whitelist:[0]
+list[4].settings.internet_blocked:[0]
+list[4].settings.reserved_ip:[]
+list[4].entry.id:[3]
+list[4].entry.hostname:[]
+list[4].entry.vendor_class:[]
+list[4].entry.param_req_list:[\001y\003\006\017lrw\374]
+list[4].entry.last_connected:[2024-12-27 15:26:43]
+list[4].entry.interface:[WIFI Primary]
+list[4].data.connected:[0]
+list[4].data.iptype:[DHCP]
+list[4].data.ipv4:[]
+list[4].data.ipv6:[]
+list[4].data.link_local:[]
+list[4].data.lease_time:[0]
+list[4].data.wifi_band:[0]
+
+list[5].mac:[02:00:00:00:00:06]
+list[5].settings.name:[]
+list[5].settings.type:[0]
+list[5].settings.blacklist:[0]
+list[5].settings.whitelist:[0]
+list[5].settings.internet_blocked:[0]
+list[5].settings.reserved_ip:[]
+list[5].entry.id:[4]
+list[5].entry.hostname:[host-5]
+list[5].entry.vendor_class:[android-dhcp-11]
+list[5].entry.param_req_list:[\001\003\006\017\032\0343:]
+list[5].entry.last_connected:[2023-01-17 14:48:19]
+list[5].entry.interface:[WIFI Primary]
+list[5].data.connected:[0]
+list[5].data.iptype:[DHCP]
+list[5].data.ipv4:[]
+list[5].data.ipv6:[]
+list[5].data.link_local:[]
+list[5].data.lease_time:[0]
+list[5].data.wifi_band:[0]
+
+list[6].mac:[02:00:00:00:00:07]
+list[6].settings.name:[]
+list[6].settings.type:[0]
+list[6].settings.blacklist:[0]
+list[6].settings.whitelist:[0]
+list[6].settings.internet_blocked:[0]
+list[6].settings.reserved_ip:[]
+list[6].entry.id:[5]
+list[6].entry.hostname:[host-6]
+list[6].entry.vendor_class:[MSFT 5.0]
+list[6].entry.param_req_list:[\001\003\006\017\037!+,./wy\371\374]
+list[6].entry.last_connected:[2023-01-29 09:58:39]
+list[6].entry.interface:[WIFI Primary]
+list[6].data.connected:[0]
+list[6].data.iptype:[DHCP]
+list[6].data.ipv4:[]
+list[6].data.ipv6:[]
+list[6].data.link_local:[]
+list[6].data.lease_time:[0]
+list[6].data.wifi_band:[0]
+
+list[7].mac:[02:00:00:00:00:08]
+list[7].settings.name:[]
+list[7].settings.type:[0]
+list[7].settings.blacklist:[0]
+list[7].settings.whitelist:[0]
+list[7].settings.internet_blocked:[0]
+list[7].settings.reserved_ip:[]
+list[7].entry.id:[6]
+list[7].entry.hostname:[host-7]
+list[7].entry.vendor_class:[android-dhcp-7.1.2]
+list[7].entry.param_req_list:[\001\003\006\017\032\0343:]
+list[7].entry.last_connected:[2024-08-28 11:02:56]
+list[7].entry.interface:[WIFI Primary]
+list[7].data.connected:[0]
+list[7].data.iptype:[DHCP]
+list[7].data.ipv4:[]
+list[7].data.ipv6:[]
+list[7].data.link_local:[]
+list[7].data.lease_time:[0]
+list[7].data.wifi_band:[0]
+
+list[8].mac:[02:00:00:00:00:09]
+list[8].settings.name:[]
+list[8].settings.type:[0]
+list[8].settings.blacklist:[0]
+list[8].settings.whitelist:[0]
+list[8].settings.internet_blocked:[0]
+list[8].settings.reserved_ip:[]
+list[8].entry.id:[7]
+list[8].entry.hostname:[]
+list[8].entry.vendor_class:[]
+list[8].entry.param_req_list:[\001y\003\006\017lrw\374]
+list[8].entry.last_connected:[2023-02-02 08:11:34]
+list[8].entry.interface:[WIFI Primary]
+list[8].data.connected:[0]
+list[8].data.iptype:[DHCP]
+list[8].data.ipv4:[]
+list[8].data.ipv6:[]
+list[8].data.link_local:[]
+list[8].data.lease_time:[0]
+list[8].data.wifi_band:[0]
+
+list[9].mac:[02:00:00:00:00:0a]
+list[9].settings.name:[]
+list[9].settings.type:[0]
+list[9].settings.blacklist:[0]
+list[9].settings.whitelist:[0]
+list[9].settings.internet_blocked:[0]
+list[9].settings.reserved_ip:[]
+list[9].entry.id:[8]
+list[9].entry.hostname:[]
+list[9].entry.vendor_class:[]
+list[9].entry.param_req_list:[\001y\003\006\017lrw\374]
+list[9].entry.last_connected:[2023-08-28 13:02:05]
+list[9].entry.interface:[WIFI Primary]
+list[9].data.connected:[0]
+list[9].data.iptype:[DHCP]
+list[9].data.ipv4:[]
+list[9].data.ipv6:[]
+list[9].data.link_local:[]
+list[9].data.lease_time:[0]
+list[9].data.wifi_band:[0]
+
+list[10].mac:[02:00:00:00:00:0b]
+list[10].settings.name:[]
+list[10].settings.type:[0]
+list[10].settings.blacklist:[0]
+list[10].settings.whitelist:[0]
+list[10].settings.internet_blocked:[0]
+list[10].settings.reserved_ip:[]
+list[10].entry.id:[9]
+list[10].entry.hostname:[host-8]
+list[10].entry.vendor_class:[]
+list[10].entry.param_req_list:[\001y\003\006\017rw\374_,.]
+list[10].entry.last_connected:[2024-10-30 08:38:53]
+list[10].entry.interface:[WIFI Primary]
+list[10].data.connected:[0]
+list[10].data.iptype:[DHCP]
+list[10].data.ipv4:[]
+list[10].data.ipv6:[]
+list[10].data.link_local:[]
+list[10].data.lease_time:[0]
+list[10].data.wifi_band:[0]
+
+list[11].mac:[02:00:00:00:00:0c]
+list[11].settings.name:[]
+list[11].settings.type:[0]
+list[11].settings.blacklist:[0]
+list[11].settings.whitelist:[0]
+list[11].settings.internet_blocked:[0]
+list[11].settings.reserved_ip:[]
+list[11].entry.id:[10]
+list[11].entry.hostname:[host-9]
+list[11].entry.vendor_class:[android-dhcp-14]
+list[11].entry.param_req_list:[\001\003\006\017\032\0343:]
+list[11].entry.last_connected:[2025-05-12 10:46:07]
+list[11].entry.interface:[WIFI Primary]
+list[11].data.connected:[0]
+list[11].data.iptype:[DHCP]
+list[11].data.ipv4:[]
+list[11].data.ipv6:[]
+list[11].data.link_local:[]
+list[11].data.lease_time:[0]
+list[11].data.wifi_band:[0]
+
+list[12].mac:[02:00:00:00:00:0d]
+list[12].settings.name:[]
+list[12].settings.type:[0]
+list[12].settings.blacklist:[0]
+list[12].settings.whitelist:[0]
+list[12].settings.internet_blocked:[0]
+list[12].settings.reserved_ip:[]
+list[12].entry.id:[12]
+list[12].entry.hostname:[host-10]
+list[12].entry.vendor_class:[]
+list[12].entry.param_req_list:[\001y\003\006\017w\374]
+list[12].entry.last_connected:[2024-10-30 09:31:05]
+list[12].entry.interface:[WIFI Primary]
+list[12].data.connected:[0]
+list[12].data.iptype:[DHCP]
+list[12].data.ipv4:[]
+list[12].data.ipv6:[]
+list[12].data.link_local:[]
+list[12].data.lease_time:[0]
+list[12].data.wifi_band:[0]
+
+list[13].mac:[02:00:00:00:00:0e]
+list[13].settings.name:[]
+list[13].settings.type:[0]
+list[13].settings.blacklist:[0]
+list[13].settings.whitelist:[0]
+list[13].settings.internet_blocked:[0]
+list[13].settings.reserved_ip:[]
+list[13].entry.id:[13]
+list[13].entry.hostname:[]
+list[13].entry.vendor_class:[]
+list[13].entry.param_req_list:[\001y\003\006\017lrw\374]
+list[13].entry.last_connected:[2024-12-15 15:03:55]
+list[13].entry.interface:[WIFI Primary]
+list[13].data.connected:[0]
+list[13].data.iptype:[DHCP]
+list[13].data.ipv4:[]
+list[13].data.ipv6:[]
+list[13].data.link_local:[]
+list[13].data.lease_time:[0]
+list[13].data.wifi_band:[0]
+
+list[14].mac:[02:00:00:00:00:0f]
+list[14].settings.name:[]
+list[14].settings.type:[0]
+list[14].settings.blacklist:[0]
+list[14].settings.whitelist:[0]
+list[14].settings.internet_blocked:[0]
+list[14].settings.reserved_ip:[]
+list[14].entry.id:[14]
+list[14].entry.hostname:[host-11]
+list[14].entry.vendor_class:[]
+list[14].entry.param_req_list:[\001y\003\006\017rw\374_,.]
+list[14].entry.last_connected:[2025-02-07 14:24:32]
+list[14].entry.interface:[WIFI Primary]
+list[14].data.connected:[0]
+list[14].data.iptype:[DHCP]
+list[14].data.ipv4:[]
+list[14].data.ipv6:[]
+list[14].data.link_local:[]
+list[14].data.lease_time:[0]
+list[14].data.wifi_band:[0]
+
+list[15].mac:[02:00:00:00:00:10]
+list[15].settings.name:[]
+list[15].settings.type:[0]
+list[15].settings.blacklist:[0]
+list[15].settings.whitelist:[0]
+list[15].settings.internet_blocked:[0]
+list[15].settings.reserved_ip:[]
+list[15].entry.id:[15]
+list[15].entry.hostname:[host-11]
+list[15].entry.vendor_class:[]
+list[15].entry.param_req_list:[\001y\003\006\017lrw\242\374_,.]
+list[15].entry.last_connected:[2026-11-03 10:38:51]
+list[15].entry.interface:[WIFI Primary]
+list[15].data.connected:[0]
+list[15].data.iptype:[DHCP]
+list[15].data.ipv4:[]
+list[15].data.ipv6:[]
+list[15].data.link_local:[]
+list[15].data.lease_time:[0]
+list[15].data.wifi_band:[0]
+
+list[16].mac:[02:00:00:00:00:11]
+list[16].settings.name:[]
+list[16].settings.type:[0]
+list[16].settings.blacklist:[0]
+list[16].settings.whitelist:[0]
+list[16].settings.internet_blocked:[0]
+list[16].settings.reserved_ip:[]
+list[16].entry.id:[16]
+list[16].entry.hostname:[]
+list[16].entry.vendor_class:[android-dhcp-8.1.0]
+list[16].entry.param_req_list:[\001!\003\006\017\0343:]
+list[16].entry.last_connected:[2024-11-24 15:02:04]
+list[16].entry.interface:[WIFI Secondary]
+list[16].data.connected:[0]
+list[16].data.iptype:[DHCP]
+list[16].data.ipv4:[]
+list[16].data.ipv6:[]
+list[16].data.link_local:[]
+list[16].data.lease_time:[0]
+list[16].data.wifi_band:[0]
+
+list[17].mac:[02:00:00:00:00:12]
+list[17].settings.name:[]
+list[17].settings.type:[0]
+list[17].settings.blacklist:[0]
+list[17].settings.whitelist:[0]
+list[17].settings.internet_blocked:[0]
+list[17].settings.reserved_ip:[]
+list[17].entry.id:[17]
+list[17].entry.hostname:[host-12]
+list[17].entry.vendor_class:[android-dhcp-7.1.2]
+list[17].entry.param_req_list:[\001\003\006\017\032\0343:]
+list[17].entry.last_connected:[2024-11-24 15:34:51]
+list[17].entry.interface:[WIFI Secondary]
+list[17].data.connected:[0]
+list[17].data.iptype:[DHCP]
+list[17].data.ipv4:[]
+list[17].data.ipv6:[]
+list[17].data.link_local:[]
+list[17].data.lease_time:[0]
+list[17].data.wifi_band:[0]
+
+list[18].mac:[02:00:00:00:00:13]
+list[18].settings.name:[]
+list[18].settings.type:[0]
+list[18].settings.blacklist:[0]
+list[18].settings.whitelist:[0]
+list[18].settings.internet_blocked:[0]
+list[18].settings.reserved_ip:[]
+list[18].entry.id:[19]
+list[18].entry.hostname:[]
+list[18].entry.vendor_class:[android-dhcp-9]
+list[18].entry.param_req_list:[\001\003\006\017\032\0343:]
+list[18].entry.last_connected:[2026-11-04 16:06:41]
+list[18].entry.interface:[WIFI Secondary]
+list[18].data.connected:[0]
+list[18].data.iptype:[DHCP]
+list[18].data.ipv4:[]
+list[18].data.ipv6:[]
+list[18].data.link_local:[]
+list[18].data.lease_time:[0]
+list[18].data.wifi_band:[0]
+
+list[19].mac:[02:00:00:00:00:14]
+list[19].settings.name:[]
+list[19].settings.type:[0]
+list[19].settings.blacklist:[0]
+list[19].settings.whitelist:[0]
+list[19].settings.internet_blocked:[0]
+list[19].settings.reserved_ip:[]
+list[19].entry.id:[20]
+list[19].entry.hostname:[host-13]
+list[19].entry.vendor_class:[udhcp 1.31.1]
+list[19].entry.param_req_list:[\001\003\006\014\017\034*]
+list[19].entry.last_connected:[2026-01-24 12:00:51]
+list[19].entry.interface:[WIFI Secondary]
+list[19].data.connected:[0]
+list[19].data.iptype:[DHCP]
+list[19].data.ipv4:[]
+list[19].data.ipv6:[]
+list[19].data.link_local:[]
+list[19].data.lease_time:[0]
+list[19].data.wifi_band:[0]
+
+list[20].mac:[02:00:00:00:00:15]
+list[20].settings.name:[]
+list[20].settings.type:[0]
+list[20].settings.blacklist:[0]
+list[20].settings.whitelist:[0]
+list[20].settings.internet_blocked:[0]
+list[20].settings.reserved_ip:[]
+list[20].entry.id:[21]
+list[20].entry.hostname:[host-1]
+list[20].entry.vendor_class:[]
+list[20].entry.param_req_list:[\001\002\006\014\017\032\034y\003!()*w\371\374\021]
+list[20].entry.last_connected:[2026-11-04 18:03:46]
+list[20].entry.interface:[WIFI Primary]
+list[20].data.connected:[0]
+list[20].data.iptype:[DHCP]
+list[20].data.ipv4:[]
+list[20].data.ipv6:[]
+list[20].data.link_local:[]
+list[20].data.lease_time:[0]
+list[20].data.wifi_band:[0]
+
+list[21].mac:[02:00:00:00:00:16]
+list[21].settings.name:[]
+list[21].settings.type:[0]
+list[21].settings.blacklist:[0]
+list[21].settings.whitelist:[0]
+list[21].settings.internet_blocked:[0]
+list[21].settings.reserved_ip:[]
+list[21].entry.id:[22]
+list[21].entry.hostname:[host-11]
+list[21].entry.vendor_class:[]
+list[21].entry.param_req_list:[\001y\003\006\017lrw\242\374_,.]
+list[21].entry.last_connected:[1970-01-01 00:14:54]
+list[21].entry.interface:[WIFI Secondary]
+list[21].data.connected:[0]
+list[21].data.iptype:[DHCP]
+list[21].data.ipv4:[]
+list[21].data.ipv6:[]
+list[21].data.link_local:[]
+list[21].data.lease_time:[0]
+list[21].data.wifi_band:[0]
+
+list[22].mac:[02:00:00:00:00:17]
+list[22].settings.name:[]
+list[22].settings.type:[0]
+list[22].settings.blacklist:[0]
+list[22].settings.whitelist:[0]
+list[22].settings.internet_blocked:[0]
+list[22].settings.reserved_ip:[]
+list[22].entry.id:[23]
+list[22].entry.hostname:[host-14]
+list[22].entry.vendor_class:[]
+list[22].entry.param_req_list:[\001\002\006\014\017\032\034y\003!()*w\371\374\021]
+list[22].entry.last_connected:[2026-11-04 15:56:16]
+list[22].entry.interface:[WIFI Secondary]
+list[22].data.connected:[0]
+list[22].data.iptype:[DHCP]
+list[22].data.ipv4:[]
+list[22].data.ipv6:[]
+list[22].data.link_local:[]
+list[22].data.lease_time:[0]
+list[22].data.wifi_band:[0]
+
+list[23].mac:[02:00:00:00:00:18]
+list[23].settings.name:[]
+list[23].settings.type:[0]
+list[23].settings.blacklist:[0]
+list[23].settings.whitelist:[0]
+list[23].settings.internet_blocked:[0]
+list[23].settings.reserved_ip:[]
+list[23].entry.id:[24]
+list[23].entry.hostname:[host-15]
+list[23].entry.vendor_class:[]
+list[23].entry.param_req_list:[\001\003\006\014\017\032!*rwxy]
+list[23].entry.last_connected:[2026-07-03 13:08:58]
+list[23].entry.interface:[WIFI Primary]
+list[23].data.connected:[0]
+list[23].data.iptype:[DHCP]
+list[23].data.ipv4:[]
+list[23].data.ipv6:[]
+list[23].data.link_local:[]
+list[23].data.lease_time:[0]
+list[23].data.wifi_band:[0]
+
+@rc 0
+real 0.05
+user 0.02
+sys 0.02
+### dmdb_cli get_connected_device_list
+command [get_connected_device_list]
+
+size 573604 bytes passed in.
+cmd_get_connected_device_list returned 0 (DMDB: success.)
+count:[2]
+list[0].mac:[02:00:00:00:00:02]
+list[0].settings.name:[]
+list[0].settings.type:[0]
+list[0].settings.blacklist:[0]
+list[0].settings.whitelist:[0]
+list[0].settings.internet_blocked:[0]
+list[0].settings.reserved_ip:[]
+list[0].entry.id:[11]
+list[0].entry.hostname:[host-1]
+list[0].entry.vendor_class:[]
+list[0].entry.param_req_list:[\001\002\006\014\017\032\034y\003!()*w\371\374\021]
+list[0].entry.last_connected:[2026-11-05 13:17:04]
+list[0].entry.interface:[USB]
+list[0].data.connected:[1]
+list[0].data.iptype:[DHCP]
+list[0].data.ipv4:[192.168.1.7]
+list[0].data.ipv6:[]
+list[0].data.link_local:[]
+list[0].data.lease_time:[1793884621]
+list[0].data.wifi_band:[0]
+
+list[1].mac:[02:00:00:00:00:01]
+list[1].settings.name:[]
+list[1].settings.type:[0]
+list[1].settings.blacklist:[0]
+list[1].settings.whitelist:[0]
+list[1].settings.internet_blocked:[0]
+list[1].settings.reserved_ip:[]
+list[1].entry.id:[18]
+list[1].entry.hostname:[host-2]
+list[1].entry.vendor_class:[android-dhcp-17]
+list[1].entry.param_req_list:[\001\003\006\017\032\0343:]
+list[1].entry.last_connected:[2026-11-05 13:19:56]
+list[1].entry.interface:[WIFI Primary]
+list[1].data.connected:[1]
+list[1].data.iptype:[DHCP]
+list[1].data.ipv4:[192.168.1.2]
+list[1].data.ipv6:[]
+list[1].data.link_local:[]
+list[1].data.lease_time:[1793884786]
+list[1].data.wifi_band:[2]
+
+@rc 0
+real 0.05
+user 0.03
+sys 0.01
+### dmdb_cli get_device_settings_list
+command [get_device_settings_list]
+
+size 573604 bytes passed in.
+cmd_get_device_settings_list returned 0 (DMDB: success.)
+count:[0]
+@rc 0
+real 0.04
+user 0.04
+sys 0.00
+### dmdb_cli get_whitelist
+command [get_whitelist]
+
+cmd_get_whitelist returned 0 (DMDB: success.)
+count:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_blacklist
+command [get_blacklist]
+
+cmd_get_blacklist returned 0 (DMDB: success.)
+count:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### dmdb_cli get_internet_blocked_list
+command [get_internet_blocked_list]
+
+cmd_get_internet_blocked_list returned 0 (DMDB: success.)
+count:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_reserved_ip_list
+command [get_reserved_ip_list]
+
+cmd_get_reserved_ip_list returned 0 (DMDB: success.)
+count:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_mac_filter_enabled
+command [get_mac_filter_enabled]
+
+cmd_get_mac_filter_enabled returned 0 (DMDB: success.)
+enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_mac_filter_type
+command [get_mac_filter_type]
+
+cmd_get_mac_filter_type returned 0 (DMDB: success.)
+type:[blacklist]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### dmdb_cli get_data_usage_statistics
+command [get_data_usage_statistics]
+
+Enter a start date or leave emtpy to skip: Enter a end date or leave emtpy to skip: Enter a mdn or leave emtpy to skip: Enter a bearer type (1 = 3G, 2 = LTE, 4 = WIMAX, 8 = WIFI, 16 = USB, 32 = ETH, -1 = ALL or leave emtpy to skip: cmd_get_data_usage_statistics returned 2 (DMDB: one or more bad parameters passed into a function.)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_usage_reset_date
+command [get_usage_reset_date]
+
+cmd_get_usage_reset_date returned 0 (DMDB: success.)
+reset_date:[]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_session_log
+command [get_session_log]
+
+Enter a start date (in YYYY-mm-dd hh:MM:SS format) or leave emtpy to skip: Enter a end date (in YYYY-mm-dd hh:MM:SS format) or leave emtpy to skip: Enter an mdn or leave emtpy to skip: Enter an interface type (1 -4) or leave empty to skip: Enter a data_bearer (1 -4) or leave empty to skip: Enter a roam status or leave empty to skip: cmd_get_session_log returned 1 (DMDB: general error.)
+
+total_rx:[0]
+total_tx:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### dmdb_cli get_usage_log
+command [get_usage_log]
+
+Enter a start date (in YYYY-mm-dd hh:MM:SS format) or leave emtpy to skip: Enter a end date (in YYYY-mm-dd hh:MM:SS format) or leave emtpy to skip: Enter an mac or leave emtpy to skip: cmd_get_usage_log returned 1000 (DMDB: device database record not found.)
+
+total_rx:[0]
+total_tx:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### dmdb_cli get_traffic_status
+command [get_traffic_status]
+
+cmd_get_traffic_status returned 0 (DMDB: success.)
+traffic_status:[0] (None)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_client_upload_records
+command [get_client_upload_records]
+
+Enter an mdn to filter the list: cmd_get_client_upload_records returned 1000 (DMDB: device database record not found.)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_site_access_monitor_enabled
+command [get_site_access_monitor_enabled]
+
+cmd_get_site_access_monitor_enabled returned 0 (DMDB: success.)
+enabled:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dmdb_cli get_site_access_statistics
+command [get_site_access_statistics]
+
+Enter a start date or leave emtpy to skip: Enter a end date or leave emtpy to skip: Enter a mac or leave emtpy to skip: cmd_get_site_access_statistics returned 1000 (DMDB: device database record not found.)
+@rc 0
+real 0.05
+user 0.03
+sys 0.01
+### dua_cli get_data_usage_info
+command [get_data_usage_info]
+
+dua_get_data_usage_info returned 0 (DUA: success.)
+status:[1](0 => DATA_USAGE_INFO_STATUS_VALID, 1 => DATA_USAGE_INFO_STATUS_INVALID)
+plan_type:[]
+cycle_end_date:[]
+usage_timestamp:[]
+plan_limit:[]
+line_usage:[]
+shared_usage:[]
+unit:[]
+prepay_indicator:[]
+mdn:[]
+@rc 0
+real 0.07
+user 0.06
+sys 0.00
+### dua_cli get_data_usage_settings_info
+command [get_data_usage_settings_info]
+
+dua_get_data_usage_settings_info returned 0 (DUA: success.)
+cycle_day:[0]
+usage_limit:[]
+@rc 0
+real 0.07
+user 0.05
+sys 0.01
+### gps_cli get_last_fix
+command [get_last_fix]
+
+cmd_get_last_fix returned 1001 (GPS: unable to comply because the privacy policy has not been accepted.)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### gps_cli gps_status
+command [gps_status]
+
+cmd_gps_status returned 0 (GPS: success.)
+status:[Disabled]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### gps_cli get_active
+command [get_active]
+
+cmd_get_active returned 0 (GPS: success.)
+default_status:[on]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### gps_cli get_nmea_tcp
+command [get_nmea_tcp]
+
+cmd_get_nmea_tcp returned 0 (GPS: success.)
+enabled:[0]
+port:[11010]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### gps_cli get_privacy
+command [get_privacy]
+
+cmd_get_privacy returned 0 (GPS: success.)
+accepted:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### gps_cli get_mode
+command [get_mode]
+
+cmd_get_mode returned 0 (GPS: success.)
+mode:[XTRA]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### sms_cli get_unread
+command [get_unread]
+
+cmd_get_unread returned 0 (SMS: success.)
+count:[20]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### sms_cli get_list
+command [get_list]
+
+Enter 0,1, 2 or 3: PreInbox(0), Inbox(1), Outbox(2), Sentbox(3): cmd_get_list returned 0 (SMS: success.)
+count:[120]
+list[0].id:[0]
+list[0].state:[Read]
+list[0].storage:[0]
+list[1].id:[1]
+list[1].state:[Read]
+list[1].storage:[0]
+list[2].id:[2]
+list[2].state:[Read]
+list[2].storage:[0]
+list[3].id:[3]
+list[3].state:[Unread]
+list[3].storage:[0]
+list[4].id:[4]
+list[4].state:[Unread]
+list[4].storage:[0]
+list[5].id:[5]
+list[5].state:[Unread]
+list[5].storage:[0]
+list[6].id:[6]
+list[6].state:[Read]
+list[6].storage:[0]
+list[7].id:[7]
+list[7].state:[Read]
+list[7].storage:[0]
+list[8].id:[8]
+list[8].state:[Read]
+list[8].storage:[0]
+list[9].id:[9]
+list[9].state:[Read]
+list[9].storage:[0]
+list[10].id:[10]
+list[10].state:[Read]
+list[10].storage:[0]
+list[11].id:[11]
+list[11].state:[Read]
+list[11].storage:[0]
+list[12].id:[12]
+list[12].state:[Read]
+list[12].storage:[0]
+list[13].id:[13]
+list[13].state:[Read]
+list[13].storage:[0]
+list[14].id:[14]
+list[14].state:[Read]
+list[14].storage:[0]
+list[15].id:[15]
+list[15].state:[Read]
+list[15].storage:[0]
+list[16].id:[16]
+list[16].state:[Read]
+list[16].storage:[0]
+list[17].id:[17]
+list[17].state:[Read]
+list[17].storage:[0]
+list[18].id:[18]
+list[18].state:[Read]
+list[18].storage:[0]
+list[19].id:[19]
+list[19].state:[Read]
+list[19].storage:[0]
+list[20].id:[20]
+list[20].state:[Read]
+list[20].storage:[0]
+list[21].id:[21]
+list[21].state:[Read]
+list[21].storage:[0]
+list[22].id:[22]
+list[22].state:[Read]
+list[22].storage:[0]
+list[23].id:[23]
+list[23].state:[Read]
+list[23].storage:[0]
+list[24].id:[24]
+list[24].state:[Read]
+list[24].storage:[0]
+list[25].id:[25]
+list[25].state:[Read]
+list[25].storage:[0]
+list[26].id:[26]
+list[26].state:[Read]
+list[26].storage:[0]
+list[27].id:[27]
+list[27].state:[Read]
+list[27].storage:[0]
+list[28].id:[28]
+list[28].state:[Read]
+list[28].storage:[0]
+list[29].id:[29]
+list[29].state:[Read]
+list[29].storage:[0]
+list[30].id:[30]
+list[30].state:[Read]
+list[30].storage:[0]
+list[31].id:[31]
+list[31].state:[Read]
+list[31].storage:[0]
+list[32].id:[32]
+list[32].state:[Read]
+list[32].storage:[0]
+list[33].id:[33]
+list[33].state:[Read]
+list[33].storage:[0]
+list[34].id:[34]
+list[34].state:[Read]
+list[34].storage:[0]
+list[35].id:[35]
+list[35].state:[Read]
+list[35].storage:[0]
+list[36].id:[36]
+list[36].state:[Read]
+list[36].storage:[0]
+list[37].id:[37]
+list[37].state:[Read]
+list[37].storage:[0]
+list[38].id:[38]
+list[38].state:[Read]
+list[38].storage:[0]
+list[39].id:[39]
+list[39].state:[Read]
+list[39].storage:[0]
+list[40].id:[40]
+list[40].state:[Read]
+list[40].storage:[0]
+list[41].id:[41]
+list[41].state:[Read]
+list[41].storage:[0]
+list[42].id:[42]
+list[42].state:[Read]
+list[42].storage:[0]
+list[43].id:[43]
+list[43].state:[Read]
+list[43].storage:[0]
+list[44].id:[44]
+list[44].state:[Read]
+list[44].storage:[0]
+list[45].id:[45]
+list[45].state:[Read]
+list[45].storage:[0]
+list[46].id:[46]
+list[46].state:[Unread]
+list[46].storage:[0]
+list[47].id:[47]
+list[47].state:[Read]
+list[47].storage:[0]
+list[48].id:[48]
+list[48].state:[Read]
+list[48].storage:[0]
+list[49].id:[49]
+list[49].state:[Read]
+list[49].storage:[0]
+list[50].id:[50]
+list[50].state:[Read]
+list[50].storage:[0]
+list[51].id:[51]
+list[51].state:[Read]
+list[51].storage:[0]
+list[52].id:[52]
+list[52].state:[Read]
+list[52].storage:[0]
+list[53].id:[53]
+list[53].state:[Read]
+list[53].storage:[0]
+list[54].id:[54]
+list[54].state:[Read]
+list[54].storage:[0]
+list[55].id:[55]
+list[55].state:[Read]
+list[55].storage:[0]
+list[56].id:[56]
+list[56].state:[Unread]
+list[56].storage:[0]
+list[57].id:[57]
+list[57].state:[Unread]
+list[57].storage:[0]
+list[58].id:[58]
+list[58].state:[Read]
+list[58].storage:[0]
+list[59].id:[59]
+list[59].state:[Read]
+list[59].storage:[0]
+list[60].id:[60]
+list[60].state:[Read]
+list[60].storage:[0]
+list[61].id:[61]
+list[61].state:[Unread]
+list[61].storage:[0]
+list[62].id:[62]
+list[62].state:[Unread]
+list[62].storage:[0]
+list[63].id:[63]
+list[63].state:[Unread]
+list[63].storage:[0]
+list[64].id:[64]
+list[64].state:[Unread]
+list[64].storage:[0]
+list[65].id:[65]
+list[65].state:[Read]
+list[65].storage:[0]
+list[66].id:[66]
+list[66].state:[Read]
+list[66].storage:[0]
+list[67].id:[67]
+list[67].state:[Read]
+list[67].storage:[0]
+list[68].id:[68]
+list[68].state:[Read]
+list[68].storage:[0]
+list[69].id:[69]
+list[69].state:[Read]
+list[69].storage:[0]
+list[70].id:[70]
+list[70].state:[Read]
+list[70].storage:[0]
+list[71].id:[71]
+list[71].state:[Read]
+list[71].storage:[0]
+list[72].id:[72]
+list[72].state:[Read]
+list[72].storage:[0]
+list[73].id:[73]
+list[73].state:[Read]
+list[73].storage:[0]
+list[74].id:[74]
+list[74].state:[Read]
+list[74].storage:[0]
+list[75].id:[75]
+list[75].state:[Read]
+list[75].storage:[0]
+list[76].id:[76]
+list[76].state:[Read]
+list[76].storage:[0]
+list[77].id:[77]
+list[77].state:[Read]
+list[77].storage:[0]
+list[78].id:[78]
+list[78].state:[Read]
+list[78].storage:[0]
+list[79].id:[79]
+list[79].state:[Read]
+list[79].storage:[0]
+list[80].id:[80]
+list[80].state:[Read]
+list[80].storage:[0]
+list[81].id:[81]
+list[81].state:[Unread]
+list[81].storage:[0]
+list[82].id:[82]
+list[82].state:[Read]
+list[82].storage:[0]
+list[83].id:[83]
+list[83].state:[Unread]
+list[83].storage:[0]
+list[84].id:[84]
+list[84].state:[Read]
+list[84].storage:[0]
+list[85].id:[85]
+list[85].state:[Read]
+list[85].storage:[0]
+list[86].id:[86]
+list[86].state:[Unread]
+list[86].storage:[0]
+list[87].id:[87]
+list[87].state:[Unread]
+list[87].storage:[0]
+list[88].id:[88]
+list[88].state:[Unread]
+list[88].storage:[0]
+list[89].id:[89]
+list[89].state:[Unread]
+list[89].storage:[0]
+list[90].id:[90]
+list[90].state:[Unread]
+list[90].storage:[0]
+list[91].id:[91]
+list[91].state:[Read]
+list[91].storage:[0]
+list[92].id:[92]
+list[92].state:[Read]
+list[92].storage:[0]
+list[93].id:[93]
+list[93].state:[Read]
+list[93].storage:[0]
+list[94].id:[94]
+list[94].state:[Read]
+list[94].storage:[0]
+list[95].id:[95]
+list[95].state:[Read]
+list[95].storage:[0]
+list[96].id:[96]
+list[96].state:[Read]
+list[96].storage:[0]
+list[97].id:[97]
+list[97].state:[Read]
+list[97].storage:[0]
+list[98].id:[98]
+list[98].state:[Read]
+list[98].storage:[0]
+list[99].id:[99]
+list[99].state:[Read]
+list[99].storage:[0]
+list[100].id:[100]
+list[100].state:[Read]
+list[100].storage:[0]
+list[101].id:[101]
+list[101].state:[Read]
+list[101].storage:[0]
+list[102].id:[102]
+list[102].state:[Read]
+list[102].storage:[0]
+list[103].id:[103]
+list[103].state:[Read]
+list[103].storage:[0]
+list[104].id:[104]
+list[104].state:[Read]
+list[104].storage:[0]
+list[105].id:[105]
+list[105].state:[Read]
+list[105].storage:[0]
+list[106].id:[106]
+list[106].state:[Read]
+list[106].storage:[0]
+list[107].id:[107]
+list[107].state:[Read]
+list[107].storage:[0]
+list[108].id:[108]
+list[108].state:[Read]
+list[108].storage:[0]
+list[109].id:[109]
+list[109].state:[Read]
+list[109].storage:[0]
+list[110].id:[110]
+list[110].state:[Read]
+list[110].storage:[0]
+list[111].id:[111]
+list[111].state:[Read]
+list[111].storage:[0]
+list[112].id:[112]
+list[112].state:[Read]
+list[112].storage:[0]
+list[113].id:[113]
+list[113].state:[Read]
+list[113].storage:[0]
+list[114].id:[114]
+list[114].state:[Read]
+list[114].storage:[0]
+list[115].id:[115]
+list[115].state:[Unread]
+list[115].storage:[0]
+list[116].id:[116]
+list[116].state:[Unread]
+list[116].storage:[0]
+list[117].id:[117]
+list[117].state:[Unread]
+list[117].storage:[0]
+list[118].id:[118]
+list[118].state:[Read]
+list[118].storage:[0]
+list[119].id:[119]
+list[119].state:[Read]
+list[119].storage:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### sms_cli ab_get_list
+command [ab_get_list]
+
+cmd_ab_get_list returned 0 (SMS: success.)
+count:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### settings_cli get_features
+command [get_features]
+
+settings_get_features returned 0 (SETTINGS: success.)
+usb_tethering_supported:[1]
+radio_technologies_supported:[0x0000005f]
+wifi_accesspoint_supported:[1]
+wifi_dualssid_supported:[1]
+wifi_station_supported:[0]
+gps_supported:[1]
+power_save_supported:[1]
+ipv6_supported:[1]
+data_download_acceleration_supported:[0]
+sms_mt_supported:[1]
+sms_mo_supported:[0]
+voice_supported:[0]
+parental_controls_supported:[0]
+tr069_supported:[0]
+wdcp_supported:[1]
+ethernet_supported:[0]
+smart_agent_supported:[0]
+one_wire_supported:[0]
+accelerometer_supported:[0]
+battery_pack_supported:[1]
+usb_serial_supported:[0]
+ip_passthrough_supported:[0]
+webui_supported:[1]
+deviceui_supported:[1]
+vpn_supported:[1]
+dns_supported:[1]
+omadm_supported:[1]
+fota_supported:[1]
+ans_supported:[1]
+file_sharing_supported:[1]
+dus_supported:[1]
+dua_supported:[1]
+sam_supported:[0]
+led_supported:[1]
+cdra_supported:[1]
+pco_supported:[1]
+auto_apn_supported:[0]
+cc_supported:[0]
+cumclient_supported:[0]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### settings_cli get_branding_info
+command [get_branding_info]
+
+settings_get_branding_info returned 0 (SETTINGS: success.)
+product_sku:[8800]
+model:[MiFi 8800L]
+carrier_brand:[MIFI8800]
+cute_version:[2N]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### dsm_cli get_state
+command [get_state]
+
+cmd_get_state returned 0 (DSM: success.)
+power_on_cause: [power_button]
+power_state: [online_usb]
+charger_det: [usb]
+battery_det: [true]
+battery_state: [full]
+battery_voltage_state: [normal]
+battery_temperature_state: [normal]
+battery_capacity: [100]
+battery_current: [91000]
+battery_temperature: [278] deci-c
+battery_voltage: [4272000]
+battery_id: [1]
+usb_det: [configured]
+usb_state: [resumed]
+dcp_det: [disconnected]
+battery_pack_state: [available]
+power_button: [released]
+display_state: [off]
+typec_pwr_role: [sink]
+usb_device_type: [none]
+@rc 0
+real 0.03
+user 0.01
+sys 0.01
+### dsm_cli get_settings
+command [get_settings]
+
+cmd_get_settings returned 0 (DSM: success.)
+settings.critical_battery_threshold: [1]
+settings.battery_pack_active: [1]
+settings.battery_pack_low_battery_threshold: [25]
+@rc 0
+real 0.03
+user 0.01
+sys 0.01
+### dsm_cli get_ui_controls_shutdown_enabled
+command [get_ui_controls_shutdown_enabled]
+
+cmd_get_ui_controls_shutdown_enabled returned 0 (DSM: success.)
+ui_controls_shutdown_enabled: [1]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### dsm_cli get_default_usb_mode
+command [get_default_usb_mode]
+
+cmd_get_default_usb_mode returned 0 (DSM: success.)
+USB mode=[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### dsm_cli get_usb_mac_address
+command [get_usb_mac_address]
+
+USB_Host=[02:00:00:00:00:02]
+USB_Device=[02:00:00:00:00:19]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### dsm_cli get_wifi_mac_address
+command [get_wifi_mac_address]
+
+What is the no of WiFi Macs:WiFi1=[18:E]
+WiFi2=[]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### dsm_cli get_persistent_rl
+command [get_persistent_rl]
+
+is_persistent=[0]
+     Runlevel=[3]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### devui_cli get_guest_wifi_info_display_settings
+command [get_guest_wifi_info_display_settings]
+
+deviceui_get_guest_wifi_info_display_settings returned 0 (DEVUI_FRAMEWORK: success.)
+show_wifi_name_enabled:[1]
+show_wifi_key_enabled:[1]
+@rc 0
+real 0.02
+user 0.02
+sys 0.00
+### devui_cli get_primary_wifi_info_display_settings
+command [get_primary_wifi_info_display_settings]
+
+deviceui_get_primary_wifi_info_display_settings returned 0 (DEVUI_FRAMEWORK: success.)
+show_wifi_name_enabled:[1]
+show_wifi_key_enabled:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.01
+### devui_cli get_display_setting_enabled
+command [get_display_setting_enabled]
+
+deviceui_get_display_setting_enabled returned 0 (DEVUI_FRAMEWORK: success.)
+display_setting_enabled:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.02
+### devui_cli get_screen_timeout_settings
+command [get_screen_timeout_settings]
+
+deviceui_get_screen_timeout_settings returned 0 (DEVUI_FRAMEWORK: success.)
+screen_timeout:[30000]
+@rc 0
+real 0.02
+user 0.02
+sys 0.00
+### devui_cli get_quickstart_enabled
+command [get_quickstart_enabled]
+
+deviceui_get_quickstart_enabled returned 0 (DEVUI_FRAMEWORK: success.)
+quickstart_enabled:[0]
+@rc 0
+real 0.02
+user 0.01
+sys 0.01
+### devui_cli get_usb_connection_prompt_enabled
+command [get_usb_connection_prompt_enabled]
+
+deviceui_get_usb_connection_prompt_enabled returned 0 (DEVUI_FRAMEWORK: success.)
+usb_connection_prompt_enabled:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.01
+### devui_cli get_features
+command [get_features]
+
+deviceui_get_features returned 0 (DEVUI_FRAMEWORK: success.)
+features[0].feature_name:[SnapShotEnabled] features[0].feature_enabled:[0]
+features[1].feature_name:[ShowBlockedLimitCheck] features[1].feature_enabled:[0]
+features[2].feature_name:[ShowLanguageSelection] features[2].feature_enabled:[1]
+features[3].feature_name:[ShowInfoPanelList] features[3].feature_enabled:[1]
+features[4].feature_name:[ShowDataUsageSettings] features[4].feature_enabled:[0]
+features[5].feature_name:[ShowRealVersion] features[5].feature_enabled:[0]
+features[6].feature_name:[ShowConfigurationVersion] features[6].feature_enabled:[0]
+features[7].feature_name:[ShowRoamSetting] features[7].feature_enabled:[0]
+features[8].feature_name:[ProductCarrierValidation] features[8].feature_enabled:[1]
+features[9].feature_name:[ShowMenuIcons] features[9].feature_enabled:[0]
+features[10].feature_name:[ShowSystemUpdateOption] features[10].feature_enabled:[1]
+features[11].feature_name:[ShowUsbPromptOnWifiOff] features[11].feature_enabled:[1]
+features[12].feature_name:[ShowSMSLocalTimeSupport] features[12].feature_enabled:[1]
+features[13].feature_name:[ShowStartupShutdownAudioAlert] features[13].feature_enabled:[1]
+features[14].feature_name:[ShowExternalChargingAudioAlert] features[14].feature_enabled:[1]
+features[15].feature_name:[ShowSimErrorAudioAlert] features[15].feature_enabled:[1]
+features[16].feature_name:[ShowServiceNotificationAudioAlert] features[16].feature_enabled:[1]
+features[17].feature_name:[ShowLowBatteryAudioAlert] features[17].feature_enabled:[1]
+features[18].feature_name:[ShowBatteryChargingAudioAlert] features[18].feature_enabled:[1]
+features[19].feature_name:[ShowCriticalLowBatteryAudioAlert] features[19].feature_enabled:[1]
+features[20].feature_name:[ShowUsbModeAudioAlert] features[20].feature_enabled:[1]
+features[21].feature_name:[ShowNewMessageAudioAlert] features[21].feature_enabled:[1]
+features[22].feature_name:[ShowMassStorageAudioAlert] features[22].feature_enabled:[1]
+features[23].feature_name:[ShowRoamingAudioAlert] features[23].feature_enabled:[1]
+features[24].feature_name:[ShowWifiOffAudioAlert] features[24].feature_enabled:[1]
+features[25].feature_name:[ShowNewDeviceJoinedAudioAlert] features[25].feature_enabled:[1]
+features[26].feature_name:[ShowNetworkSelectionAudioAlert] features[26].feature_enabled:[1]
+features[27].feature_name:[ShowSoftwareUpdateAudioAlert] features[27].feature_enabled:[1]
+features[28].feature_name:[ShowAPNValidationSupport] features[28].feature_enabled:[1]
+features[29].feature_name:[ShowNonVerizonRoamingIcon] features[29].feature_enabled:[1]
+features[30].feature_name:[ShowLastUpdateStatus] features[30].feature_enabled:[1]
+features[31].feature_name:[ShowInstallConfirmationPrompt] features[31].feature_enabled:[0]
+features[32].feature_name:[ShowNewRoamingIndicator] features[32].feature_enabled:[1]
+features[33].feature_name:[ShowTetherIcon] features[33].feature_enabled:[1]
+features[34].feature_name:[ShowUCImage] features[34].feature_enabled:[0]
+features[35].feature_name:[ShowAPNName] features[35].feature_enabled:[1]
+features[36].feature_name:[ShowIpAddress] features[36].feature_enabled:[1]
+features[37].feature_name:[ShowWpsTryAgainButton] features[37].feature_enabled:[1]
+features[38].feature_name:[ShowSUAvailablePrompt] features[38].feature_enabled:[0]
+features[39].feature_name:[SwapButtonPositions] features[39].feature_enabled:[1]
+features[40].feature_name:[ShowCombinedConnectedDevicesCount] features[40].feature_enabled:[1]
+features[41].feature_name:[ShowUnlockSimNavigation] features[41].feature_enabled:[0]
+features[42].feature_name:[SwapPinPushButton] features[42].feature_enabled:[1]
+features[43].feature_name:[ShowRoundedButton] features[43].feature_enabled:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.01
+### devui_cli get_configurations
+command [get_configurations]
+
+deviceui_get_configurations returned 0 (DEVUI_FRAMEWORK: success.)
+configurations[0].config_name:[Brightness] configurations[0].value:[80]
+configurations[1].config_name:[FotaNoPackageTimeout] configurations[1].value:[60]
+configurations[2].config_name:[ProductCarrierNetwork] configurations[2].value:[1]
+configurations[3].config_name:[MaxBlockedDevices] configurations[3].value:[10]
+configurations[4].config_name:[LowBatteryPercentage] configurations[4].value:[15]
+configurations[5].config_name:[ToggleButtonEnableColor] configurations[5].value:[#000000]
+configurations[6].config_name:[ArrowEnableColor] configurations[6].value:[#000000]
+configurations[7].config_name:[DisableColor] configurations[7].value:[#747676]
+configurations[8].config_name:[TextColor] configurations[8].value:[#000000]
+configurations[9].config_name:[HomeScreenButtonsColor] configurations[9].value:[#fff]
+configurations[10].config_name:[ScrollBarColor] configurations[10].value:[#747676]
+configurations[11].config_name:[SoftwareUpdateBarColor] configurations[11].value:[#959595]
+configurations[12].config_name:[SoftwareUpdateBarBackGroundColor] configurations[12].value:[#fff]
+configurations[13].config_name:[ScrollBarWidth] configurations[13].value:[5]
+configurations[14].config_name:[DefaultScrollBarSize] configurations[14].value:[2]
+configurations[15].config_name:[FontWeight] configurations[15].value:[1]
+configurations[16].config_name:[CriticalBatteryThreshold] configurations[16].value:[1]
+configurations[17].config_name:[SMSValidYear] configurations[17].value:[2017]
+configurations[18].config_name:[MDNDelimiter] configurations[18].value:[1]
+configurations[19].config_name:[AutomaticTechMode] configurations[19].value:[18]
+configurations[20].config_name:[MnsTechMode] configurations[20].value:[2]
+configurations[21].config_name:[DefaultAPN] configurations[21].value:[VZWINTERNET]
+@rc 0
+real 0.02
+user 0.01
+sys 0.01
+### devui_cli get_apps_menu_info
+command [get_apps_menu_info]
+
+apps menu item[1] app_enabled:[1]
+apps menu item[1] app_name:[sim_unlock]
+apps menu item[2] app_enabled:[1]
+apps menu item[2] app_name:[wifi]
+apps menu item[3] app_enabled:[1]
+apps menu item[3] app_name:[connected_devices]
+apps menu item[4] app_enabled:[1]
+apps menu item[4] app_name:[data_usage]
+apps menu item[5] app_enabled:[1]
+apps menu item[5] app_name:[settings]
+apps menu item[6] app_enabled:[1]
+apps menu item[6] app_name:[universal_charging]
+apps menu item[7] app_enabled:[1]
+apps menu item[7] app_name:[file_sharing]
+apps menu item[8] app_enabled:[1]
+apps menu item[8] app_name:[software_update]
+apps menu item[9] app_enabled:[1]
+apps menu item[9] app_name:[sms]
+apps menu item[10] app_enabled:[1]
+apps menu item[10] app_name:[mifi_info]
+apps menu item[11] app_enabled:[1]
+apps menu item[11] app_name:[help]
+apps menu item[12] app_enabled:[1]
+apps menu item[12] app_name:[home]
+@rc 0
+real 0.03
+user 0.01
+sys 0.01
+### devui_cli get_file_sharing_display_setting_enabled
+command [get_file_sharing_display_setting_enabled]
+
+deviceui_get_file_sharing_display_setting_enabled returned 0 (DEVUI_FRAMEWORK: success.)
+file_sharing_display_setting_enabled:[1]
+@rc 0
+real 0.02
+user 0.02
+sys 0.00
+### devui_cli get_wifi_display_setting_enabled
+command [get_wifi_display_setting_enabled]
+
+deviceui_get_wifi_display_setting_enabled returned 0 (DEVUI_FRAMEWORK: success.)
+deviceui_get_wifi_display_setting_enabled:[1]
+@rc 0
+real 0.02
+user 0.02
+sys 0.00
+### devui_cli get_admin_password_enabled
+command [get_admin_password_enabled]
+
+deviceui_get_admin_password_enabled returned 0 (DEVUI_FRAMEWORK: success.)
+admin_password_setting_enabled:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.02
+### devui_cli get_notification_display_wakeup_setting_enabled
+command [get_notification_display_wakeup_setting_enabled]
+
+deviceui_get_notification_display_wakeup_setting_enabled returned 0 (DEVUI_FRAMEWORK: success.)
+deviceui_get_notification_display_wakeup_setting_enabled:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.01
+### devui_cli get_info_panels_list
+command [get_info_panels_list]
+
+Number of panels:[6]
+default panel index:[4]
+Info panel item[1] enabled:[1]
+Info panel item[1] qml_name:[InfoPanelNetwork.qml]
+Info panel item[2] enabled:[1]
+Info panel item[2] qml_name:[InfoPanelMessages.qml]
+Info panel item[3] enabled:[1]
+Info panel item[3] qml_name:[InfoPanelUniversalCharging.qml]
+Info panel item[4] enabled:[1]
+Info panel item[4] qml_name:[InfoPanelMiFiSharing.qml]
+Info panel item[5] enabled:[1]
+Info panel item[5] qml_name:[InfoPanelDataUsage.qml]
+Info panel item[6] enabled:[0]
+Info panel item[6] qml_name:[InfoPanelNotifications.qml]
+@rc 0
+real 0.02
+user 0.01
+sys 0.01
+### cc_cli carrier_count
+command [carrier_count]
+
+cc_get_carrier_count returned 1 (CC: general error.) Value -1094361355
+@rc 1
+real 0.07
+user 0.04
+sys 0.02
+### cc_cli carrier_enable
+command [carrier_enable]
+
+ returned 1 (CC: general error.) 
+@rc 1
+real 0.06
+user 0.05
+sys 0.01
+### cc_cli carrier_data
+command [carrier_data]
+
+ returned 1 (CC: general error.) 
+@rc 1
+real 0.07
+user 0.05
+sys 0.01
+### cc_cli carrier_label_count
+command [carrier_label_count]
+
+ returned 1 (CC: general error.)
+@rc 1
+real 0.06
+user 0.06
+sys 0.00
+### cc_cli carrier_label_list
+command [carrier_label_list]
+
+returned 1 (CC: general error.) 
+No label list available in current carrier XML @rc 1
+real 0.09
+user 0.06
+sys 0.00
+### cc_cli current_carrier_id
+command [current_carrier_id]
+
+ returned 1 (CC: general error.) 
+ Current carrier id Not available or some SIM issue@rc 1
+real 0.08
+user 0.06
+sys 0.00
+### cc_cli cc_folder
+command [cc_folder]
+
+ returned 1 (CC: general error.) 
+ CC folder does'nt exits @rc 1
+real 0.07
+user 0.05
+sys 0.01
+### powersave_cli get_settings
+command [get_settings]
+
+cmd_get_settings returned 0 (POWERSAVE: success.)
+settings.enabled: [1]
+settings.deep_sleep_enabled: [1]
+settings.deep_sleep_idle_time: [300]
+settings.deep_sleep_wakeup_time: [7200]
+settings.shutdown_enabled: [0]
+settings.shutdown_idle_time: [0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### led_cli get_enabled
+command [get_enabled]
+
+led_get_enabled returned 0 (LED: success.)
+enabled[1]
+@rc 0
+real 0.06
+user 0.05
+sys 0.00
+### usb_cli get_usb_tethering_feature
+command [get_usb_tethering_feature]
+
+usb_get_usb_tethering_feature returned 0 (USB: success.)
+usb_tethering_feature=[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### usb_cli get_tether_enabled
+command [get_tether_enabled]
+
+usb_get_tether_enabled returned 0 (USB: success.)
+tether_enabled=[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### usb_cli get_config
+command [get_config]
+
+usb_get_config returned 0 (USB: success.)
+vid=[1410]
+man=[Novatel Wireless]
+prod=[MiFi 8800L]
+ser=[0123456789ABCDEF]
+dm_olm_func=[,serial,diag,ffs,blank5,blank6,blank7,blank8,blank9,blank10,blank11,acm,hid]
+dm_olm_nt_func=[rndis_gsi,serial,diag,ffs,blank5,blank6,blank7,blank8,blank9,blank10,blank11,acm,hid]
+dm_ftm_func=[,serial,diag,ffs,blank5,blank6,blank7,blank8,blank9,blank10,blank11,acm,hid]
+dm_ltm_func=[rmnet_gsi,blank1,serial,diag,ffs,blank5,blank6,blank7,blank8,blank9,blank10,blank11,acm,hid]
+dm_lpm_func=[blank0,blank1,blank2,blank3,ffs,blank5,blank6,blank7,blank8,blank9,blank10,blank11,blank12,blank13,hid]
+eum_olm_func=[,hid:acm:mass_storage]
+eum_lpm_func=[hid]
+ent_olm_func=[,hid,serial]
+dm_pid=[B023]
+eum_pid=[B020]
+eum_lpm_pid=[B010]
+ent_pid=[B022]
+nwif_mode=[2][AUTO]
+ipa_enabled=[0]
+auto_sample_period=[10]
+auto_iterations=[2]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### usb_cli get_state
+command [get_state]
+
+usb_get_state returned 0 (USB: success.)
+usb_default_mode=[0][Debug]
+enterprise_mode_enabled=[0]
+mac_addr_host=[02:00:00:00:00:02]
+mac_addr_dev=[02:00:00:00:00:19]
+start_mode=[3][Online]
+net_if_name=[rndis0]
+net_if_func_name=[rndis_gsi]
+pid=[B023]
+function_list=[rndis_gsi,serial,diag,ffs,blank5,blank6,blank7,blank8,blank9,blank10,blank11,acm,hid]
+usb_gadget_configured=[1]
+auto_detect_running=[0]
+usb_resumed_not_configured=[0]
+usb_tether_change_pending=[0]
+temp_tether=[1][Enabled]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### vpn_cli get_auto_connect
+command [get_auto_connect]
+
+vpn_get_auto_connect returned 0 (VPN: success.)
+VPN auto connect status (0=Disable, 1=Enable) is: [0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### vpn_cli get_settings
+command [get_settings]
+
+vpn_get_settings returned 0 (VPN: success.)
+VPN server type is(0-NONE, 1-PPTP, 2-OpenVPN, 3-L2TP over IPsec, 4-IPSec, 5-OpenVPN with config files): [0]
+VPN server retries is: [0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### vpn_cli get_connection_statistics
+command [get_connection_statistics]
+
+Server Type :-
+	0-NONE
+	1-PPTP
+	2-OpenVPN
+	3-L2TP Over IPSec
+	4-IPSec
+	5-OpenVPN with configuration
+
+connection state :-
+	0-VPN_STATE_NOTCONNECTED
+	1-VPN_STATE_CONNECTING
+	2-VPN_STATE_CONNECTED
+	3-VPN_STATE_DISCONNECTED
+	4-VPN_STATE_CONNECT_FAILED
+
+Vpn server type : [0]
+Connection state: [0]
+vpn_get_status_vpn returned 0 (VPN: success.)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### vpn_cli list_vpn_mon_service
+command [list_vpn_mon_service]
+
+
+vpn_list_vpn_mon_services returned 0 (VPN: success.)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### watchdog_cli get_settings
+command [get_settings]
+
+watchdog_get_settings returned 0 (WATCHDOG: success.)
+enabled:[1]
+interval:[60]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### watchdog_cli get_app_list
+command [get_app_list]
+
+watchdog_get_app_list returned 0 (WATCHDOG: success.)
+list[0].name:[devui_main_thread]
+list[1].name:[usb_main]
+list[2].name:[router2_moniter_thread]
+list[3].name:[webui_main_thread]
+list[4].name:[router2_main_thread]
+list[5].name:[sysser.fcgi]
+list[6].name:[dua_main_thread]
+list[7].name:[fota]
+list[8].name:[factory_reset_main_thread]
+list[9].name:[reset_key_thread]
+list[10].name:[bmt]
+list[11].name:[ccm_autoconnect]
+list[12].name:[modem2_net_scan_thread]
+list[13].name:[file_sharing_main_thread]
+list[14].name:[file_sharing_moniter_thread]
+list[15].name:[ccm_timesync]
+list[16].name:[ccm_cust_apn]
+list[17].name:[ccm_main_thread]
+list[18].name:[gps_main_thread]
+list[19].name:[sms_main_thread]
+list[20].name:[modem_at_server_main_thread]
+list[21].name:[modem2_main_thread]
+list[22].name:[vpn_main_thread]
+list[23].name:[vpn_moniter_thread]
+list[24].name:[dmdb_main_thread]
+list[25].name:[mifi_powersave]
+list[26].name:[dmdb_dus_thread]
+list[27].name:[dmdb_monitor_thread]
+list[28].name:[wdcp]
+list[29].name:[led]
+list[30].name:[devuiappd]
+list[31].name:[omadm_main]
+list[32].name:[wifi_hostapd_thread-0]
+list[33].name:[wifi_hostapd_thread-1]
+list[34].name:[wifi_main_thread]
+list[35].name:[dsm]
+list[36].name:[msgbus]
+list[37].name:[ans_main_thread]
+list[38].name:[ans_timer_thread]
+list[39].name:[settings_main_thread]
+@rc 0
+real 0.01
+user 0.01
+sys 0.00
+### webui_cli get_network_technology_list
+command [get_network_technology_list]
+
+webui_get_network_technology_list() returned 0 (WEBUI: success.)
+NetworkTechnologyOptionCount[1]
+NetworkTechnologyOption[0]: value[18] prepend_text[] append_text[] po_keys_count[2] locale_count[2] EncloseBraces[0]
+----------------------------------------------------------------------------
+po_key[0]:[radio_technology_lte_text]
+po_key[1]:[radio_technology_umts_text]
+format[0]:locale[en_US] specifier[T]
+
+format[1]:locale[es_MX] specifier[T]
+
+@rc 0
+real 0.03
+user 0.01
+sys 0.01
+### webui_cli get_login_settings
+command [get_login_settings]
+
+webui_get_login_settings returned 0 (WEBUI: success.)
+retries:[5]
+auto_logout_period(secs):[600]
+password:[xxxxxxxx]
+default_password:[xxxxxxxx]
+security.question: What is your Birth date?
+security.answer:[]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_log_settings
+command [get_log_settings]
+
+webui_get_log_settings returned 0 (WEBUI: success.)
+log_enabled:[1]
+log_life_time(in days):[3]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_i18n_settings
+command [get_i18n_settings]
+
+webui_get_i18n_settings returned 0 (WEBUI: success.)
+lang:[es_MX]
+date_fmt:[0](0 => mm/dd/yyyy, 1 => dd.mm.yyyy, 2 => dd/mm/yyyy, 3 => yyyy/mm/dd)
+hour_fmt:[0](0 => 12hr, 1 => 24hr)
+temp_fmt:[0](0 => Fahrenheit, 1 => Celsius)
+distance_fmt:[1](0 => US, 1 => Metric)
+numeric_fmt:[0](0 => period, 1 => comma)
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_app_properties
+command [get_app_properties]
+
+What is the app_id:  webui_get_app_properties returned 2 (WEBUI: one or more bad parameters passed into a function.)
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_app_features
+command [get_app_features]
+
+What is the app_id:  webui_get_app_features returned 2 (WEBUI: one or more bad parameters passed into a function.)
+@rc 0
+real 0.02
+user 0.01
+sys 0.01
+### webui_cli get_app_configurations
+command [get_app_configurations]
+
+What is the app_id:  webui_get_app_configurations returned 2 (WEBUI: one or more bad parameters passed into a function.)
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_uri_data
+command [get_uri_data]
+
+What is the uri_id:  webui_get_uri_data returned 2 (WEBUI: one or more bad parameters passed into a function.)
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_common_features
+command [get_common_features]
+
+webui_get_common_features returned 3 (WEBUI: one or more buffer type parameters passed into API is too small.)
+Buffer Insufficient node count[9]
+webui_get_common_features returned 0 (WEBUI: success.)
+features[0].feature_name:[ShowAllowFOTASoftwareUpdate] features[0].feature_enabled:[0]
+features[1].feature_name:[ShowNonVerizonTechnologies] features[1].feature_enabled:[1]
+features[2].feature_name:[ShowAdvancedSettings] features[2].feature_enabled:[0]
+features[3].feature_name:[ShowPromptOnUSB] features[3].feature_enabled:[1]
+features[4].feature_name:[ShowWifiDisplaySetting] features[4].feature_enabled:[1]
+features[5].feature_name:[ShowToolTip] features[5].feature_enabled:[1]
+features[6].feature_name:[ShowAddCustomAppButton] features[6].feature_enabled:[1]
+features[7].feature_name:[ShowModemVersionAsSoftwareVersion] features[7].feature_enabled:[0]
+features[8].feature_name:[ShowMNSInGlobalTech] features[8].feature_enabled:[1]
+@rc 0
+real 0.05
+user 0.02
+sys 0.00
+### webui_cli get_common_configurations
+command [get_common_configurations]
+
+webui_get_common_configurations returned 3 (WEBUI: one or more buffer type parameters passed into API is too small.)
+Buffer Insufficient node count[4]
+webui_get_common_configurations returned 0 (WEBUI: success.)
+configurations[0].config_name:[AutomaticTechMode] configurations[0].value:[18]
+configurations[1].config_name:[MnsTechMode] configurations[1].value:[2]
+configurations[2].config_name:[MDNDelimiter] configurations[2].value:[1]
+configurations[3].config_name:[SwapToggleButtonAction] configurations[3].value:[1]
+@rc 0
+real 0.05
+user 0.02
+sys 0.00
+### webui_cli get_supported_languages
+command [get_supported_languages]
+
+webui_get_supported_languages returned 3 (WEBUI: one or more buffer type parameters passed into API is too small.)
+Buffer Insufficient. count[2]
+webui_get_supported_languages returned 0 (WEBUI: success.)
+language_info[0].label:[ui_app_language_english_text] language_info[0].locale:[en_US]
+language_info[1].label:[ui_app_language_spanish_text] language_info[1].locale:[es_MX]
+@rc 0
+real 0.05
+user 0.01
+sys 0.01
+### webui_cli get_welcome_notification
+command [get_welcome_notification]
+
+webui_get_welcome_notification returned 0 (WEBUI: success.)
+welcome_notification:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_advanced_settings
+command [get_advanced_settings]
+
+webui_get_advanced_settings returned 0 (WEBUI: success.)
+login_enabled:[1]
+gps_login_enabled:[1]
+network_settings_login_enabled:[1]
+@rc 0
+real 0.03
+user 0.01
+sys 0.01
+### webui_cli get_customer_support_info
+command [get_customer_support_info]
+
+webui_get_customer_support_info returned 3 (WEBUI: one or more buffer type parameters passed into API is too small.)
+Buffer Insufficient. count[3]
+webui_get_customer_support_info returned 0 (WEBUI: success.)
+In section[0]: id is [1] and title is [customer_care_links_sub_header_verizon_text] content count is [4]
+----------------------------------------------------------------------------
+content[0].url:[https://wbillpay.verizonwireless.com/vzw/nos/topline.jsp]
+content[0].text:[customer_care_manage_account_verizon_link_text]
+content[0].label:[]
+content[0].value:[]
+
+content[1].url:[http://www.verizonwireless.com/b2c/explore/?page=why-verizon&section=our-network-coverage#our-network-coverage]
+content[1].text:[customer_care_coverage_map_verizon_link_text]
+content[1].label:[]
+content[1].value:[]
+
+content[2].url:[http://www.verizonwireless.com/datacalculator]
+content[2].text:[customer_care_data_calculator_verizon_link_text]
+content[2].label:[]
+content[2].value:[]
+
+content[3].url:[http://www.verizonwireless.com/tripplanner]
+content[3].text:[customer_care_trip_planner_verizon_link_text]
+content[3].label:[]
+content[3].value:[]
+
+In section[1]: id is [2] and title is [customer_care_support_sub_header_verizon_text] content count is [3]
+----------------------------------------------------------------------------
+content[0].url:[https://vzwworkshops.verizonwireless.com/vzwworkshops]
+content[0].text:[customer_care_workshop_verizon_link_text]
+content[0].label:[]
+content[0].value:[]
+
+content[1].url:[https://community.verizonwireless.com/community/additional-devices]
+content[1].text:[customer_care_forum_verizon_link_text]
+content[1].label:[]
+content[1].value:[]
+
+content[2].url:[https://www.verizonwireless.com/support/verizon-jetpack-mifi-8800L]
+content[2].text:[customer_care_device_support_verizon_link_text]
+content[2].label:[]
+content[2].value:[]
+
+In section[2]: id is [3] and title is [customer_care_numbers_sub_header_verizon_text] content count is [1]
+----------------------------------------------------------------------------
+content[0].url:[]
+content[0].text:[]
+content[0].label:[customer_care_contact_verizon_label]
+content[0].value:[1 800.922.0204]
+
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_site_title_info
+command [get_site_title_info]
+
+webui_get_site_title_info returned 3 (WEBUI: one or more buffer type parameters passed into API is too small.)
+Buffer Insufficient. count[19]
+webui_get_site_title_info returned 0 (WEBUI: success.)
+site_title:[Jetpack MiFi 8800L]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_software_update_status
+command [get_software_update_status]
+
+webui_get_software_update_status returned 0 (WEBUI: success.)
+status:[0]
+value:[0]
+version:[]
+isUserInitiated:[0]
+@rc 0
+real 0.03
+user 0.01
+sys 0.01
+### webui_cli get_software_installation_duration
+command [get_software_installation_duration]
+
+webui_get_software_installation_duration returned 0 (WEBUI: success.)
+installation_duration:[10]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_country_code
+command [get_country_code]
+
+What is the external mcc_id:  webui_get_country_code returned 0 (WEBUI: success.)
+mobile country code:[0]
+calling code:[0]
+mobile length:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_network_technology_options
+command [get_network_technology_options]
+
+webui_get_network_technology_options() returned 3 (WEBUI: one or more buffer type parameters passed into API is too small.)
+Buffer Insufficient. count[1]
+webui_get_network_technology_options() returned 0 (WEBUI: success.)
+Index[0]: Technology value(18) label(LTE/UMTS)
+@rc 0
+real 0.03
+user 0.01
+sys 0.01
+### file_sharing_cli settings_get
+command [settings_get]
+
+file sharing enabled - 1(enabled), 0(disabled): 1
+file sharing samba_host_name: JetpackMiFi8800
+file sharing_option - 1(share full partition), 0(share selected folders): 1
+file share_all_rw - 1(full partition share is RW), 0(full partition share is RO) : 1
+file_sharing_get_settings returned 0 (FILE_SHARING: success.)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### file_sharing_cli settings_list_get
+command [settings_list_get]
+
+file_sharing_get_folder_settings_list returned 0 (FILE_SHARING: success.)
+Settings item List:
+Settings ShareFoldersList[0]: Entry share_folder_name=Public, share_folder_type=1
+Settings ShareFoldersList[1]: Entry share_folder_name=Shared, share_folder_type=1
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### file_sharing_cli get_file_sharing_state
+command [get_file_sharing_state]
+
+file sharing in progress 1(yes), 0(no): 0 
+mass drive status: not_detected
+file_sharing_get_state returned 0 (FILE_SHARING: success.)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### file_sharing_cli get_file_system_type
+command [get_file_system_type]
+
+File system type is: fs_type_invalid
+file_sharing_get_fs_type returned 0 (FILE_SHARING: success.)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### file_sharing_cli get_smb_host_name
+command [get_smb_host_name]
+
+Samba host name: JetpackMiFi8800 
+file_sharing_get_samba_host_name returned 0 (FILE_SHARING: success.)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### file_sharing_cli service_monitor_list
+command [service_monitor_list]
+
+file_sharing_mon_list_services returned 0 (FILE_SHARING: success.)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### emd_cli get_iface_type
+command [get_iface_type]
+
+cmd_get_ethernet_iface_type returned 0 (EMD: success.)
+Ethernet interface type is :   [Disabled]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### emd_cli get_iface_status
+command [get_iface_status]
+
+cmd_get_ethernet_iface_status returned 0 (EMD: success.)
+Ethernet interface type is :   [Disabled]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### emd_cli get_eth_static
+command [get_eth_static]
+
+cmd_get_ethernet_static_wan_conf returned 0 (EMD: success.)
+Ethernet WAN Static Configuration :
+IP address: []
+Netmask []
+Gateway: []
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### ans_cli get_notification_settings
+command [get_notification_settings]
+
+ans_get_notification_settings returned 3 (ANS: one or more buffer type parameters passed into API is too small.)
+ans_get_notification_settings returned 0 (ANS: success.)
+ANS notifications item List:
+list[0].id:[startup]
+list[0].enabled:[1]
+list[0].audio_alert_enabled:[1]
+list[0].wake_display_enabled:[0]
+list[0].display_surfaces:[0](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[1].id:[shutdown]
+list[1].enabled:[1]
+list[1].audio_alert_enabled:[1]
+list[1].wake_display_enabled:[0]
+list[1].display_surfaces:[0](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[2].id:[battery10]
+list[2].enabled:[1]
+list[2].audio_alert_enabled:[1]
+list[2].wake_display_enabled:[1]
+list[2].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[3].id:[batteryCritical]
+list[3].enabled:[1]
+list[3].audio_alert_enabled:[1]
+list[3].wake_display_enabled:[1]
+list[3].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[4].id:[batteryCharging]
+list[4].enabled:[1]
+list[4].audio_alert_enabled:[1]
+list[4].wake_display_enabled:[1]
+list[4].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[5].id:[batteryFull]
+list[5].enabled:[1]
+list[5].audio_alert_enabled:[1]
+list[5].wake_display_enabled:[1]
+list[5].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[6].id:[lowCharger]
+list[6].enabled:[1]
+list[6].audio_alert_enabled:[1]
+list[6].wake_display_enabled:[1]
+list[6].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[7].id:[simNone]
+list[7].enabled:[1]
+list[7].audio_alert_enabled:[0]
+list[7].wake_display_enabled:[1]
+list[7].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[8].id:[simError]
+list[8].enabled:[1]
+list[8].audio_alert_enabled:[0]
+list[8].wake_display_enabled:[1]
+list[8].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[9].id:[simPINLocked]
+list[9].enabled:[1]
+list[9].audio_alert_enabled:[0]
+list[9].wake_display_enabled:[1]
+list[9].display_surfaces:[1](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[10].id:[simPUKLocked]
+list[10].enabled:[1]
+list[10].audio_alert_enabled:[0]
+list[10].wake_display_enabled:[1]
+list[10].display_surfaces:[1](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[11].id:[simNonVZW]
+list[11].enabled:[1]
+list[11].audio_alert_enabled:[0]
+list[11].wake_display_enabled:[1]
+list[11].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[12].id:[PCO2]
+list[12].enabled:[1]
+list[12].audio_alert_enabled:[1]
+list[12].wake_display_enabled:[1]
+list[12].display_surfaces:[1](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[13].id:[PCO3]
+list[13].enabled:[1]
+list[13].audio_alert_enabled:[1]
+list[13].wake_display_enabled:[1]
+list[13].display_surfaces:[1](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[14].id:[PCO5]
+list[14].enabled:[1]
+list[14].audio_alert_enabled:[1]
+list[14].wake_display_enabled:[1]
+list[14].display_surfaces:[1](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[15].id:[mnsAuto]
+list[15].enabled:[1]
+list[15].audio_alert_enabled:[0]
+list[15].wake_display_enabled:[1]
+list[15].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[16].id:[switchToGlobalMode]
+list[16].enabled:[1]
+list[16].audio_alert_enabled:[0]
+list[16].wake_display_enabled:[1]
+list[16].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[17].id:[noService]
+list[17].enabled:[1]
+list[17].audio_alert_enabled:[1]
+list[17].wake_display_enabled:[1]
+list[17].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[18].id:[roaming]
+list[18].enabled:[1]
+list[18].audio_alert_enabled:[1]
+list[18].wake_display_enabled:[1]
+list[18].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[19].id:[deviceJoinWiFi]
+list[19].enabled:[1]
+list[19].audio_alert_enabled:[0]
+list[19].wake_display_enabled:[1]
+list[19].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[20].id:[wifiDisabled]
+list[20].enabled:[1]
+list[20].audio_alert_enabled:[0]
+list[20].wake_display_enabled:[1]
+list[20].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[21].id:[smsReceived]
+list[21].enabled:[1]
+list[21].audio_alert_enabled:[1]
+list[21].wake_display_enabled:[1]
+list[21].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[22].id:[wdcpDone]
+list[22].enabled:[1]
+list[22].audio_alert_enabled:[0]
+list[22].wake_display_enabled:[1]
+list[22].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[23].id:[ucOK]
+list[23].enabled:[1]
+list[23].audio_alert_enabled:[1]
+list[23].wake_display_enabled:[1]
+list[23].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[24].id:[ucLowBattery]
+list[24].enabled:[1]
+list[24].audio_alert_enabled:[1]
+list[24].wake_display_enabled:[1]
+list[24].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[25].id:[ucTerminated]
+list[25].enabled:[1]
+list[25].audio_alert_enabled:[1]
+list[25].wake_display_enabled:[1]
+list[25].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[26].id:[usbModePrompt]
+list[26].enabled:[1]
+list[26].audio_alert_enabled:[0]
+list[26].wake_display_enabled:[1]
+list[26].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[27].id:[usbMassStorage]
+list[27].enabled:[1]
+list[27].audio_alert_enabled:[1]
+list[27].wake_display_enabled:[1]
+list[27].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[28].id:[usbMassStorageFailure]
+list[28].enabled:[1]
+list[28].audio_alert_enabled:[1]
+list[28].wake_display_enabled:[1]
+list[28].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[29].id:[softwareUpdate]
+list[29].enabled:[1]
+list[29].audio_alert_enabled:[0]
+list[29].wake_display_enabled:[1]
+list[29].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[30].id:[softwareUpdateSuccess]
+list[30].enabled:[1]
+list[30].audio_alert_enabled:[0]
+list[30].wake_display_enabled:[1]
+list[30].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[31].id:[softwareUpdateFailure]
+list[31].enabled:[1]
+list[31].audio_alert_enabled:[0]
+list[31].wake_display_enabled:[1]
+list[31].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[32].id:[systemUpdateSuccess]
+list[32].enabled:[1]
+list[32].audio_alert_enabled:[0]
+list[32].wake_display_enabled:[1]
+list[32].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[33].id:[systemUpdateFailure]
+list[33].enabled:[1]
+list[33].audio_alert_enabled:[0]
+list[33].wake_display_enabled:[1]
+list[33].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[34].id:[systemDiagnostics]
+list[34].enabled:[1]
+list[34].audio_alert_enabled:[0]
+list[34].wake_display_enabled:[1]
+list[34].display_surfaces:[2](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[35].id:[highTemp]
+list[35].enabled:[1]
+list[35].audio_alert_enabled:[1]
+list[35].wake_display_enabled:[1]
+list[35].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+list[36].id:[autoVpnFailure]
+list[36].enabled:[1]
+list[36].audio_alert_enabled:[1]
+list[36].wake_display_enabled:[1]
+list[36].display_surfaces:[3](0 => None, 1 => Browser, 2 => LCD, 3 => All)
+@rc 0
+real 0.05
+user 0.03
+sys 0.01
+### ans_cli get_stealth_mode_enabled
+command [get_stealth_mode_enabled]
+
+ans_get_stealth_mode_enabled returned 0 (ANS: success.)
+enabled:[0]
+@rc 0
+real 0.06
+user 0.03
+sys 0.01
+### ans_cli get_audio_alerts_enabled
+command [get_audio_alerts_enabled]
+
+ans_get_audio_alerts_enabled returned 0 (ANS: success.)
+enabled:[0]
+@rc 0
+real 0.05
+user 0.03
+sys 0.01
+### ans_cli get_current_notification_list
+command [get_current_notification_list]
+
+ans_get_current_notification_list returned 0 (ANS: success.)
+ANS notifications: count = 0; List:
+@rc 0
+real 0.05
+user 0.03
+sys 0.01
+### cumclient_cli is_connect_to_server
+Terminated
+@rc 143
+real 12.02
+user 0.06
+sys 0.00
+### cumclient_cli get_s1_version
+command [get_s1_version]
+
+Error getting Data Interval CUMCLIENT: process not running.
+@rc 5
+real 0.07
+user 0.06
+sys 0.00
+### cumclient_cli get_s1_name
+command [get_s1_name]
+
+Error getting Name is CUMCLIENT: process not running.
+@rc 5
+real 0.07
+user 0.05
+sys 0.01
+### cumclient_cli get_s1_packet
+command [get_s1_packet]
+
+Error getting packet type CUMCLIENT: process not running.
+@rc 5
+real 0.07
+user 0.06
+sys 0.00
+### cumclient_cli get_s1_traffic
+command [get_s1_traffic]
+
+Error getting traffic type CUMCLIENT: process not running.
+@rc 5
+real 0.07
+user 0.06
+sys 0.00
+### cumclient_cli get_s1_last_transmission
+command [get_s1_last_transmission]
+
+Error getting Last transmission is CUMCLIENT: process not running.
+@rc 5
+real 0.07
+user 0.06
+sys 0.00
+### cumclient_cli get_s1_gps_include
+command [get_s1_gps_include]
+
+Error getting GPS_INCLUDE CUMCLIENT: process not running.@rc 5
+real 0.07
+user 0.05
+sys 0.01
+### cumclient_cli get_s1_data_enable
+command [get_s1_data_enable]
+
+Error getting DATA ENABLE CUMCLIENT: general error.
+@rc 1
+real 0.07
+user 0.07
+sys 0.00
+### cumclient_cli get_s1_port
+command [get_s1_port]
+
+Error getting Port CUMCLIENT: process not running.
+@rc 5
+real 0.07
+user 0.06
+sys 0.00
+### cumclient_cli get_s1_conn
+command [get_s1_conn]
+
+Error getting Connection CUMCLIENT: process not running.
+@rc 5
+real 0.07
+user 0.05
+sys 0.01
+### cumclient_cli get_s1_url
+command [get_s1_url]
+
+Error getting URL is CUMCLIENT: process not running.
+@rc 5
+real 0.07
+user 0.05
+sys 0.01
+### cumclient_cli get_s1_data_int
+command [get_s1_data_int]
+
+Error getting Data Interval CUMCLIENT: general error.
+@rc 1
+real 0.07
+user 0.05
+sys 0.01
+### cdra_cli server_upload_status
+command [server_upload_status]
+
+Enter the server upload status(0=Success, 1=failed):Invalid upload status.
+@rc 2
+real 0.07
+user 0.06
+sys 0.00

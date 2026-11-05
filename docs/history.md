@@ -6,7 +6,7 @@ It complements CLAUDE.md (device facts, rules) and README.md (install steps).
 ## About me
 
 - I am in Ukraine, I write in Ukrainian. Replies to me in Ukrainian; code, comments, UI and docs in English.
-- I care about practical results and low cost. My computer most likely runs Windows.
+- I care about practical results and low cost. My computer runs Linux (Arch); the router is on its USB.
 - I have a ZTE MF920U and bought another budget modem as my daily driver; the 8800L is now a test bench.
 
 ## How this started
@@ -530,7 +530,51 @@ Screen: option A (mirror), then D (own screen on demand), built towards a widget
 - My layout with signal bars was saved from the phone: /data/mifi-panel/screen-layout.json now exists on flash.
 - adb lost the router twice after USB re-enumerations without a reboot; `adb kill-server` fixes it.
 
-## Resume here (state on 2026-11-02, end of the v0.6.0 session)
+## Data catalog survey (2026-11-05, read-only, no code changes)
+
+Result: `docs/data-catalog.md` (every value with source, example, units, availability, cost, privacy, and
+whether the panel shows it; every AT command and vendor subcommand classified; top-20 list of values to add)
+and masked raw outputs in `testdata/raw/` for parser tests. The router had just rebooted (uptime 2 min at the
+start); LTE B3, Vodafone UA. Survey scratch files lived in `/tmp/cat` on the router and were removed.
+
+- AT: `AT+CLAC` regenerated (240 commands). 186 queried with read forms only (386 queries, 309 OK), 54 never
+  sent (actions, setters, SIM access, `+COPS=?`/`$QCCOPS=?`/`$QCCSGCOPS=?` scans, `$QCMRUC`/`$QCACQDBC`/`$QCCLR`
+  clears, `+CMGL`/`+CMGR` which mark SMS read). Survey helper: one fd on /dev/smd8, poll for the final result
+  code, hard `timeout -t`.
+- **`AT+CEREG` n=2 does not survive a reboot** (`+CEREG: 0,1` after boot): the panel's startup `AT+CEREG=2` is needed.
+- modem2 `lac` showed 3221 on LTE this time (0 on 2026-11-02); `enabled_tech_get` now 31 (was 18). Not reliable.
+- **Firewall once LTE is up: iptables INPUT policy DROP**, accept br0 and lo, REJECT new connections to the WAN IP
+  on rmnet_data0 (router2d adds this; the "all ACCEPT" in CLAUDE.md was before LTE). IPv6 is all ACCEPT but off.
+- **Message bus**: 44 channels (`msgbus_cli print_channels`, `MsgBusGet` takes the channel on stdin, 20 ms).
+  `modem2.data_signal_change` is the get_signal struct in binary (offsets in the catalog), with a timestamp.
+  Subscribing is possible (not tried): a cheaper, event-driven source for later.
+- **Panel bug found**: sys.go reads `power_supply/*/temp`, but bq27520 exposes `temp_ambient` (0.1 °C), so the
+  battery temperature never shows. Also available: voltage_now, current_now, dsm `power_on_cause`, `power_state`.
+- Temperatures: tsens_tz_sensor0..4 = 35-38 °C (0.1 °C units), xo_therm 33 °C; ambient/PA thermistors read -40
+  and mdm_case 125: not fitted. CPU is pinned at 1.4 GHz (governor performance).
+- `dmdb.db` (plain sqlite, read a copy in /tmp; sqlite3 3.16 has no `-readonly`): 533 data sessions since first
+  use (start/end, IP, 3G/LTE), 2497 per-client usage rows, 24 known devices. Recent sessions have RX bytes = 0
+  (probably IPA offload). `get_data_usage_statistics`: lifetime tx 24.7 GB, rx 399.7 GB.
+- SMS: 20 unread of 120 in the inbox; `sms_cli get_list` gives headers; the sqlite files are encrypted;
+  `sms_mo_supported 0` (no sending). `sms_cli read` not run (may mark read).
+- GPS: privacy policy not accepted, so `get_last_fix` refuses; mode XTRA; gpsd still downloads XTRA data over LTE.
+  A stock NMEA TCP server exists (port 11010, off).
+- Wi-Fi: Broadcom BCM43596; `wl` gives per-client RSSI (`wl -i wlan0 rssi <MAC>`), `sta_info`, `chanim_stats`,
+  noise; `iw` gives nothing. hostapd control sockets are in /var/run/hostapd.
+- Stock web server: answers only with `Host: my.jetpack`; `/srv/status` (39 status-bar fields) and
+  `/srv/notification` need no login; pages need login and show nothing beyond the CLIs.
+- Secrets seen: `webui_cli get_login_settings` prints the web admin password in plain text, and it equals the
+  primary Wi-Fi key; `wifi_cli get_ap_profile` prints both Wi-Fi keys. Masked everywhere.
+- Surprises: `cdra_cli server_upload_status` is a setter (asks for a status to store; the empty input was rejected,
+  nothing changed). `wifi_cli get_band_status` asks for a state "to wait for". `diag_read` is not a diag logger but
+  the fuel-gauge/NV helper.
+- Diag: logging mode 0 (USB), no MD session, no DCI clients; the diag USB interface (MI_03) has no driver on this
+  computer, so SCAT/QCSuper could capture from the computer with nothing started on the router. `diag_mdlog`
+  exists on the router but no mask files. Proposal in the catalog, waiting for my OK.
+- adb lesson: `adb shell '(setsid cmd ... &)'` lost the process when the adb shell exited at once; adding
+  `; sleep 1` inside the same adb command fixed it.
+
+## Resume here (state on 2026-11-02, end of the v0.6.0 session; data catalog added 2026-11-05)
 
 ### Where things are
 
@@ -571,3 +615,8 @@ adb forward tcp:8080 tcp:8080                 # then http://localhost:8080, or h
 4. IPA offload undercount check (speed test while comparing rmnet_data0, wlan0/1 and /sys/kernel/debug/ipa).
 5. Roadmap in CLAUDE.md: Telegram bot with power-outage alerts and SMS forwarding, GPS signal logger,
    VPN, DNS ad blocking.
+6. From the data catalog (2026-11-05): waiting for my OK on `modem2_cli efs_read` of the listed paths and on the
+   diag step (SCAT on the computer over USB). Next features: the top-20 list in `docs/data-catalog.md`
+   section 17 (session history page, battery voltage/current/temperature with the `temp_ambient` fix,
+   power-on cause, per-client Wi-Fi signal, reject cause, network time zone...).
+   `docs/data-catalog.md` and `testdata/raw/` are not committed yet.

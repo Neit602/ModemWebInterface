@@ -1,0 +1,54 @@
+&C	setter
+&D	setter
+&E	setter
+&F	restores factory defaults
+&S	setter
+&W	writes the profile to NV
+E	setter (echo)
+L	setter
+M	setter
+Q	setter
+V	setter
+X	setter
+Z	resets the modem settings
+T	setter
+P	setter
+\Q	setter
+\S	setter
+\V	setter
+%V	unknown vendor command
+D	dials
+A	answers a call
+H	hangs up
+O	returns to data mode
++CGDATA	enters data mode
++CSAS	saves SMS settings
++CRES	restores SMS settings
++CPBW	writes the phonebook
++CMGL	lists SMS and marks them read
++CMGR	reads an SMS and marks it read
++CMGS	sends SMS
++CMSS	sends a stored SMS
++CMGW	writes an SMS to storage
++CMGD	deletes SMS
++CMGC	sends an SMS command
++CNMA	acknowledges an SMS
++CMMS	SMS link control
++CHUP	hangs up
++CLCK	SIM/facility locks
++CPWD	changes SIM passwords
++CSIM	raw SIM access (can write)
++CRSM	raw SIM access (can write)
++CLAC	already run (this list)
++CTFR	call deflection
++VTS	sends DTMF
++CEAP	EAP authentication on the SIM
++CERP	EAP response on the SIM
++CNMPSD	tells the network there is no more PS data (can release the connection)
+$QCCLR	clears the modem error log
+$QCPWRDN	powers the modem down
+$QCDGEN	generates data traffic
+$QCMRUC	clears the most-recently-used network list
+$QCRMCALL	starts/stops an rmnet data call
+$QCACQDBC	clears the network acquisition database
+$QCPRFCRT	creates a data profile

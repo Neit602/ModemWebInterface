@@ -1,0 +1,1390 @@
+### modem2_cli lte_band_get_enabled | 1\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### modem2_cli lte_band_get_enabled | 2\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### modem2_cli lte_band_get_enabled | 3\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 4\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 5\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 6\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 7\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 8\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 9\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 10\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 11\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 12\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 13\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 14\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 15\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 16\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 17\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 18\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 19\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### modem2_cli lte_band_get_enabled | 20\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 21\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 22\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 23\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 24\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 25\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 26\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 27\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 28\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 29\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### modem2_cli lte_band_get_enabled | 30\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 31\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 32\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.01
+sys 0.02
+### modem2_cli lte_band_get_enabled | 33\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 34\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 35\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 36\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 37\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 38\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 39\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 40\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 41\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli lte_band_get_enabled | 42\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli lte_band_get_enabled | 43\n
+Enter LTE band: cmd_lte_band_get_enabled returned 0 (MDM_MAIN: success.)
+LTE band enabled:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli band_class_get_enabled | 1\n
+BAND_CLASS_10 = 1
+BAND_CLASS_14 = 2
+Enter bandclass: cmd_band_class_get_enabled returned 0 (MDM_MAIN: success.)
+Band class 10 enabled:[0]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli band_class_get_enabled | 2\n
+BAND_CLASS_10 = 1
+BAND_CLASS_14 = 2
+Enter bandclass: cmd_band_class_get_enabled returned 0 (MDM_MAIN: success.)
+Band class 14 enabled:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli call_get_status | 1\n0\n
+Internet = 1
+Device Management = 2
+Data Usage = 3
+Enter APN: Enter ip_family (V4=0, V6=2): cmd_get_call_status returned 0 (MDM_MAIN: success.)
+WWAN State:[5] (Connected)
+APN:[1] (INTERNET)
+IP Family:[0] (IPV4)
+Interface:[rmnet_data0]
+IP Addr:[10.11.11.109]
+Gateway:[10.11.11.110]
+DNS 1:[11.111.11.11]
+DNS 2:[11.111.11.11]
+Mask:[255.255.255.252]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli call_get_status | 1\n2\n
+Internet = 1
+Device Management = 2
+Data Usage = 3
+Enter APN: Enter ip_family (V4=0, V6=2): cmd_get_call_status returned 0 (MDM_MAIN: success.)
+WWAN State:[3] (Idle)
+APN:[1] (INTERNET)
+IP Family:[2] (IPV6)
+Interface:[]
+IP Addr:[::]
+Gateway:[::]
+DNS 1:[::]
+DNS 2:[::]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli ca_bands_get_enabled | 3\n7\n
+Enter CA band 1: Enter CA band 2: cmd_ca_bands_get_enabled returned 1 (MDM_MAIN: general error.)
+LTE band enabled:[-1225625600]
+@rc 1
+real 0.05
+user 0.02
+sys 0.01
+### modem2_cli ca_bands_get_enabled | 3\n20\n
+Enter CA band 1: Enter CA band 2: cmd_ca_bands_get_enabled returned 1 (MDM_MAIN: general error.)
+LTE band enabled:[-1225285632]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli ca_bands_get_enabled | 7\n20\n
+Enter CA band 1: Enter CA band 2: cmd_ca_bands_get_enabled returned 1 (MDM_MAIN: general error.)
+LTE band enabled:[-1225252864]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli ca_bands_get_enabled | 3\n3\n
+Enter CA band 1: Enter CA band 2: cmd_ca_bands_get_enabled returned 1 (MDM_MAIN: general error.)
+LTE band enabled:[-1224974336]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli ca_tri_bands_get_enabled | 3\n7\n20\n
+Enter CA band 1: Enter CA band 2: Enter CA band 3: cmd_ca_tri_bands_get_enabled returned 1 (MDM_MAIN: general error.)
+LTE band enabled:[0]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli pdn_get_ext_params | 1\n0\n
+Enter profile number: Enter profile type (0-3GPP, 1-3GPP2): cmd_pdn_get_ext_params returned 0 (MDM_MAIN: success.)
+Extra PDN index:[1]
+Extra PDN type:[0]
+Extra PDN max connections:[20]
+Extra PDN wait timer:[0]
+Extra PDN connection timer:[300]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli prof_get_tech | 0\n1\n
+Enter profile type (3GPP=0, 3GPP2=1): Enter profile index: cmd_prof_get_tech returned 0 (MDM_MAIN: success.)
+
+Profile Type:[0](3GPP=0, 3GPP2=1)
+idx:[1]
+APN:[]
+User Name:[]
+Password:[]
+Name:[profile1]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[::]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli pdn_get_ext_params | 2\n0\n
+Enter profile number: Enter profile type (0-3GPP, 1-3GPP2): cmd_pdn_get_ext_params returned 0 (MDM_MAIN: success.)
+Extra PDN index:[2]
+Extra PDN type:[0]
+Extra PDN max connections:[20]
+Extra PDN wait timer:[0]
+Extra PDN connection timer:[300]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli prof_get_tech | 0\n2\n
+Enter profile type (3GPP=0, 3GPP2=1): Enter profile index: cmd_prof_get_tech returned 0 (MDM_MAIN: success.)
+
+Profile Type:[0](3GPP=0, 3GPP2=1)
+idx:[2]
+APN:[ims]
+User Name:[]
+Password:[]
+Name:[profile2]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[::]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli pdn_get_ext_params | 3\n0\n
+Enter profile number: Enter profile type (0-3GPP, 1-3GPP2): cmd_pdn_get_ext_params returned 0 (MDM_MAIN: success.)
+Extra PDN index:[3]
+Extra PDN type:[0]
+Extra PDN max connections:[20]
+Extra PDN wait timer:[0]
+Extra PDN connection timer:[300]
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli prof_get_tech | 0\n3\n
+Enter profile type (3GPP=0, 3GPP2=1): Enter profile index: cmd_prof_get_tech returned 0 (MDM_MAIN: success.)
+
+Profile Type:[0](3GPP=0, 3GPP2=1)
+idx:[3]
+APN:[sos]
+User Name:[]
+Password:[]
+Name:[]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli prof_get_pri_tech | 0\n
+Enter APN Technology (LTE=0, UMTS=1, eHRPD=2): cmd_prof_get_pri_tech returned 0 (MDM_MAIN: success.)
+
+APN:[sos]
+User Name:[]
+Password:[]
+Name:[]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli prof_get_cust_tech | 0\n
+Enter APN Technology (LTE=0, UMTS=1, eHRPD=2): cmd_prof_get_cust_tech returned 0 (MDM_MAIN: success.)
+
+APN:[]
+User Name:[]
+Password:[]
+Name:[profile1]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[::]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli prof_get_pri_tech | 1\n
+Enter APN Technology (LTE=0, UMTS=1, eHRPD=2): cmd_prof_get_pri_tech returned 0 (MDM_MAIN: success.)
+
+APN:[sos]
+User Name:[]
+Password:[]
+Name:[]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli prof_get_cust_tech | 1\n
+Enter APN Technology (LTE=0, UMTS=1, eHRPD=2): cmd_prof_get_cust_tech returned 0 (MDM_MAIN: success.)
+
+APN:[]
+User Name:[]
+Password:[]
+Name:[profile1]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[1] (none=0, enabled=1)
+DNS1:[0.0.0.0]
+DNS2:[0.0.0.0]
+PDP Type:[3] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[0.0.0.0]
+IPV6 address:[::]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli prof_get_pri_tech | 2\n
+Enter APN Technology (LTE=0, UMTS=1, eHRPD=2): cmd_prof_get_pri_tech returned 1003 (MDM_MAIN: APN invalid.)
+
+APN:[]
+User Name:[]
+Password:[]
+Name:[]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[0] (none=0, enabled=1)
+DNS1:[]
+DNS2:[]
+PDP Type:[0] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[]
+IPV6 address:[]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 235
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli prof_get_cust_tech | 2\n
+Enter APN Technology (LTE=0, UMTS=1, eHRPD=2): cmd_prof_get_cust_tech returned 1003 (MDM_MAIN: APN invalid.)
+
+APN:[]
+User Name:[]
+Password:[]
+Name:[]
+Locked:[0] (none=0, enabled=1, auto=2)
+Authenticate:[0] (none=0, PAP=1, CHAP=2)
+Manual DNS:[0] (none=0, enabled=1)
+DNS1:[]
+DNS2:[]
+PDP Type:[0] (ipv4=0, ppp=1, ipv6=2, ipv4v6=3)
+APN Disabled:[0] (enabled=0, disabled=1)
+PDN Inactivity Timeout:[0]
+IPV4 address:[]
+IPV6 address:[]
+Data Mode:[0] (CDMA or HDR=0, CDMA=1, HDR=2)
+PDP Type 3GPP2:[0] (ipv4=0, ipv6=1, ipv4v6=2, no pref=3)
+@rc 235
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli prof_get_act_tech | 0\n
+Enter profile type (3GPP=0, 3GPP2=1): cmd_prof_get_act_tech returned 0 (MDM_MAIN: success.)
+
+Profile Type:[0](3GPP=0, 3GPP2=1)
+idx:[1]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli sd_config_get_setting | 0\n
+Enter sd_config type: cmd_sd_config_get_setting returned 1 (MDM_MAIN: general error.)
+SD config for type [0] data:[-1093194612]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli sd_config_get_setting | 1\n
+Enter sd_config type: cmd_sd_config_get_setting returned 0 (MDM_MAIN: success.)
+SD config for type [1] data:[180]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli sd_config_get_setting | 2\n
+Enter sd_config type: cmd_sd_config_get_setting returned 1 (MDM_MAIN: general error.)
+SD config for type [2] data:[-1093235572]
+@rc 1
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli sd_config_get_setting | 3\n
+Enter sd_config type: cmd_sd_config_get_setting returned 1 (MDM_MAIN: general error.)
+SD config for type [3] data:[-1092727668]
+@rc 1
+real 0.04
+user 0.02
+sys 0.01
+### modem2_cli get_apn_from_database | 25501\n\n\n
+
+Enter the mccmnc: 
+Enter the Gid1 (comma separated list of byte values): 
+Enter the Gid2 (comma separated list of byte values): cmd_get_apn_from_database returned 1011 (MDM_MAIN: APN not found in Auto APN Database.)
+@rc 243
+real 0.04
+user 0.03
+sys 0.00
+### modem2_cli get_custom_apn_from_database | 8938000000000000000\n
+
+Enter the iccid: cmd_get_custom_apn_from_database returned 1011 (MDM_MAIN: APN not found in Auto APN Database.)
+@rc 243
+real 0.05
+user 0.03
+sys 0.00
+### wifi_cli get_ap_profile | 1\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_ap_profile]
+
+Enter the Wifi profile index (1-4):wifi_get_ap_profile returned 0 (WIFI: success.)
+Profile status         : [0]
+Profile name           : [Profile1]
+SSID                   : [Verizon-MiFi8800L-0000]
+Ignore broadcast SSID  : [0]
+Wifi privacy           : [0]
+Interface Feature Flags: [BLACKLIST, ]
+WPS status             : [1]
+Channel                : [0]
+Channel width          : [20 MHz.]
+Mode                   : [BGN]
+Security type          : [WPA2]
+Encryption type        : [AES]
+WPA Pre-Shared Key     : [xxxxxxxx]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_ap_profile | 2\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_ap_profile]
+
+Enter the Wifi profile index (1-4):wifi_get_ap_profile returned 0 (WIFI: success.)
+Profile status         : [1]
+Profile name           : [Profile2]
+SSID                   : [Verizon-MiFi8800L-0000]
+Ignore broadcast SSID  : [0]
+Wifi privacy           : [0]
+Interface Feature Flags: [BLACKLIST, ]
+WPS status             : [1]
+Channel                : [161]
+Channel width          : [80 MHz.]
+Mode                   : [ACN5.]
+Security type          : [WPA2]
+Encryption type        : [AES]
+WPA Pre-Shared Key     : [xxxxxxxx]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_ap_profile | 3\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_ap_profile]
+
+Enter the Wifi profile index (1-4):wifi_get_ap_profile returned 0 (WIFI: success.)
+Profile status         : [1]
+Profile name           : [Profile3]
+SSID                   : [Verizon-MiFi8800L-Guest-0000]
+Ignore broadcast SSID  : [0]
+Wifi privacy           : [0]
+Interface Feature Flags: [BLACKLIST, INTERFACE_ISOLATION, NO_GUEST_FILE_SHARING, NO_GUEST_WEB_ACCESS]
+WPS status             : [1]
+Channel                : [0]
+Channel width          : [20 MHz.]
+Mode                   : [BGN]
+Security type          : [WPA2]
+Encryption type        : [AES]
+WPA Pre-Shared Key     : [xxxxxxxx]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_ap_profile | 4\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_ap_profile]
+
+Enter the Wifi profile index (1-4):wifi_get_ap_profile returned 0 (WIFI: success.)
+Profile status         : [0]
+Profile name           : [Profile4]
+SSID                   : [Verizon-MiFi8800L-Guest-0000]
+Ignore broadcast SSID  : [0]
+Wifi privacy           : [0]
+Interface Feature Flags: [BLACKLIST, INTERFACE_ISOLATION, NO_GUEST_FILE_SHARING, NO_GUEST_WEB_ACCESS]
+WPS status             : [1]
+Channel                : [161]
+Channel width          : [80 MHz.]
+Mode                   : [ACN5.]
+Security type          : [WPA2]
+Encryption type        : [AES]
+WPA Pre-Shared Key     : [xxxxxxxx]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### wifi_cli get_mac | 0\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_mac]
+
+Enter the Wifi interface index 0/1:wifi_get_mac_addr returned 0 (WIFI: success.)
+The mac address for Wifi interface is :[02:00:00:00:00:1a]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### wifi_cli get_pindex | 0\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_pindex]
+
+Enter the Wifi interface index 0/1:wifi_get_pindex_from_intf returned 0 (WIFI: success.)
+Profile index on the interface 0 is :2 
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_band_status | 0\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_band_status]
+
+Enter the Wifi band (0=2.4GHZ, 1=5GHZ) to wait for 0/1:Enter the Wifi band status(0=DISABLE, 1=ENABLE) to wait for 0/1:Invalid band status.
+WIFI_CLI_MBH: Disable Message bus interface@rc 2
+real 0.04
+user 0.02
+sys 0.01
+### wifi_cli get_mac | 1\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_mac]
+
+Enter the Wifi interface index 0/1:wifi_get_mac_addr returned 0 (WIFI: success.)
+The mac address for Wifi interface is :[02:00:00:00:00:1b]
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### wifi_cli get_pindex | 1\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_pindex]
+
+Enter the Wifi interface index 0/1:wifi_get_pindex_from_intf returned 0 (WIFI: success.)
+Profile index on the interface 1 is :3 
+WIFI_CLI_MBH: Disable Message bus interface@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### wifi_cli get_band_status | 1\n
+WIFI_CLI_MBH: Init MsgBus donecommand [get_band_status]
+
+Enter the Wifi band (0=2.4GHZ, 1=5GHZ) to wait for 0/1:Enter the Wifi band status(0=DISABLE, 1=ENABLE) to wait for 0/1:Invalid band status.
+WIFI_CLI_MBH: Disable Message bus interface@rc 2
+real 0.04
+user 0.02
+sys 0.01
+### sms_cli get_list | 1\n
+command [get_list]
+
+Enter 0,1, 2 or 3: PreInbox(0), Inbox(1), Outbox(2), Sentbox(3): cmd_get_list returned 0 (SMS: success.)
+count:[120]
+list[0].id:[0]
+list[0].state:[Read]
+list[0].storage:[0]
+list[1].id:[1]
+list[1].state:[Read]
+list[1].storage:[0]
+list[2].id:[2]
+list[2].state:[Read]
+list[2].storage:[0]
+list[3].id:[3]
+list[3].state:[Unread]
+list[3].storage:[0]
+list[4].id:[4]
+list[4].state:[Unread]
+list[4].storage:[0]
+list[5].id:[5]
+list[5].state:[Unread]
+list[5].storage:[0]
+list[6].id:[6]
+list[6].state:[Read]
+list[6].storage:[0]
+list[7].id:[7]
+list[7].state:[Read]
+list[7].storage:[0]
+list[8].id:[8]
+list[8].state:[Read]
+list[8].storage:[0]
+list[9].id:[9]
+list[9].state:[Read]
+list[9].storage:[0]
+list[10].id:[10]
+list[10].state:[Read]
+list[10].storage:[0]
+list[11].id:[11]
+list[11].state:[Read]
+list[11].storage:[0]
+list[12].id:[12]
+list[12].state:[Read]
+list[12].storage:[0]
+list[13].id:[13]
+list[13].state:[Read]
+list[13].storage:[0]
+list[14].id:[14]
+list[14].state:[Read]
+list[14].storage:[0]
+list[15].id:[15]
+list[15].state:[Read]
+list[15].storage:[0]
+list[16].id:[16]
+list[16].state:[Read]
+list[16].storage:[0]
+list[17].id:[17]
+list[17].state:[Read]
+list[17].storage:[0]
+list[18].id:[18]
+list[18].state:[Read]
+list[18].storage:[0]
+list[19].id:[19]
+list[19].state:[Read]
+list[19].storage:[0]
+list[20].id:[20]
+list[20].state:[Read]
+list[20].storage:[0]
+list[21].id:[21]
+list[21].state:[Read]
+list[21].storage:[0]
+list[22].id:[22]
+list[22].state:[Read]
+list[22].storage:[0]
+list[23].id:[23]
+list[23].state:[Read]
+list[23].storage:[0]
+list[24].id:[24]
+list[24].state:[Read]
+list[24].storage:[0]
+list[25].id:[25]
+list[25].state:[Read]
+list[25].storage:[0]
+list[26].id:[26]
+list[26].state:[Read]
+list[26].storage:[0]
+list[27].id:[27]
+list[27].state:[Read]
+list[27].storage:[0]
+list[28].id:[28]
+list[28].state:[Read]
+list[28].storage:[0]
+list[29].id:[29]
+list[29].state:[Read]
+list[29].storage:[0]
+list[30].id:[30]
+list[30].state:[Read]
+list[30].storage:[0]
+list[31].id:[31]
+list[31].state:[Read]
+list[31].storage:[0]
+list[32].id:[32]
+list[32].state:[Read]
+list[32].storage:[0]
+list[33].id:[33]
+list[33].state:[Read]
+list[33].storage:[0]
+list[34].id:[34]
+list[34].state:[Read]
+list[34].storage:[0]
+list[35].id:[35]
+list[35].state:[Read]
+list[35].storage:[0]
+list[36].id:[36]
+list[36].state:[Read]
+list[36].storage:[0]
+list[37].id:[37]
+list[37].state:[Read]
+list[37].storage:[0]
+list[38].id:[38]
+list[38].state:[Read]
+list[38].storage:[0]
+list[39].id:[39]
+list[39].state:[Read]
+list[39].storage:[0]
+list[40].id:[40]
+list[40].state:[Read]
+list[40].storage:[0]
+list[41].id:[41]
+list[41].state:[Read]
+list[41].storage:[0]
+list[42].id:[42]
+list[42].state:[Read]
+list[42].storage:[0]
+list[43].id:[43]
+list[43].state:[Read]
+list[43].storage:[0]
+list[44].id:[44]
+list[44].state:[Read]
+list[44].storage:[0]
+list[45].id:[45]
+list[45].state:[Read]
+list[45].storage:[0]
+list[46].id:[46]
+list[46].state:[Unread]
+list[46].storage:[0]
+list[47].id:[47]
+list[47].state:[Read]
+list[47].storage:[0]
+list[48].id:[48]
+list[48].state:[Read]
+list[48].storage:[0]
+list[49].id:[49]
+list[49].state:[Read]
+list[49].storage:[0]
+list[50].id:[50]
+list[50].state:[Read]
+list[50].storage:[0]
+list[51].id:[51]
+list[51].state:[Read]
+list[51].storage:[0]
+list[52].id:[52]
+list[52].state:[Read]
+list[52].storage:[0]
+list[53].id:[53]
+list[53].state:[Read]
+list[53].storage:[0]
+list[54].id:[54]
+list[54].state:[Read]
+list[54].storage:[0]
+list[55].id:[55]
+list[55].state:[Read]
+list[55].storage:[0]
+list[56].id:[56]
+list[56].state:[Unread]
+list[56].storage:[0]
+list[57].id:[57]
+list[57].state:[Unread]
+list[57].storage:[0]
+list[58].id:[58]
+list[58].state:[Read]
+list[58].storage:[0]
+list[59].id:[59]
+list[59].state:[Read]
+list[59].storage:[0]
+list[60].id:[60]
+list[60].state:[Read]
+list[60].storage:[0]
+list[61].id:[61]
+list[61].state:[Unread]
+list[61].storage:[0]
+list[62].id:[62]
+list[62].state:[Unread]
+list[62].storage:[0]
+list[63].id:[63]
+list[63].state:[Unread]
+list[63].storage:[0]
+list[64].id:[64]
+list[64].state:[Unread]
+list[64].storage:[0]
+list[65].id:[65]
+list[65].state:[Read]
+list[65].storage:[0]
+list[66].id:[66]
+list[66].state:[Read]
+list[66].storage:[0]
+list[67].id:[67]
+list[67].state:[Read]
+list[67].storage:[0]
+list[68].id:[68]
+list[68].state:[Read]
+list[68].storage:[0]
+list[69].id:[69]
+list[69].state:[Read]
+list[69].storage:[0]
+list[70].id:[70]
+list[70].state:[Read]
+list[70].storage:[0]
+list[71].id:[71]
+list[71].state:[Read]
+list[71].storage:[0]
+list[72].id:[72]
+list[72].state:[Read]
+list[72].storage:[0]
+list[73].id:[73]
+list[73].state:[Read]
+list[73].storage:[0]
+list[74].id:[74]
+list[74].state:[Read]
+list[74].storage:[0]
+list[75].id:[75]
+list[75].state:[Read]
+list[75].storage:[0]
+list[76].id:[76]
+list[76].state:[Read]
+list[76].storage:[0]
+list[77].id:[77]
+list[77].state:[Read]
+list[77].storage:[0]
+list[78].id:[78]
+list[78].state:[Read]
+list[78].storage:[0]
+list[79].id:[79]
+list[79].state:[Read]
+list[79].storage:[0]
+list[80].id:[80]
+list[80].state:[Read]
+list[80].storage:[0]
+list[81].id:[81]
+list[81].state:[Unread]
+list[81].storage:[0]
+list[82].id:[82]
+list[82].state:[Read]
+list[82].storage:[0]
+list[83].id:[83]
+list[83].state:[Unread]
+list[83].storage:[0]
+list[84].id:[84]
+list[84].state:[Read]
+list[84].storage:[0]
+list[85].id:[85]
+list[85].state:[Read]
+list[85].storage:[0]
+list[86].id:[86]
+list[86].state:[Unread]
+list[86].storage:[0]
+list[87].id:[87]
+list[87].state:[Unread]
+list[87].storage:[0]
+list[88].id:[88]
+list[88].state:[Unread]
+list[88].storage:[0]
+list[89].id:[89]
+list[89].state:[Unread]
+list[89].storage:[0]
+list[90].id:[90]
+list[90].state:[Unread]
+list[90].storage:[0]
+list[91].id:[91]
+list[91].state:[Read]
+list[91].storage:[0]
+list[92].id:[92]
+list[92].state:[Read]
+list[92].storage:[0]
+list[93].id:[93]
+list[93].state:[Read]
+list[93].storage:[0]
+list[94].id:[94]
+list[94].state:[Read]
+list[94].storage:[0]
+list[95].id:[95]
+list[95].state:[Read]
+list[95].storage:[0]
+list[96].id:[96]
+list[96].state:[Read]
+list[96].storage:[0]
+list[97].id:[97]
+list[97].state:[Read]
+list[97].storage:[0]
+list[98].id:[98]
+list[98].state:[Read]
+list[98].storage:[0]
+list[99].id:[99]
+list[99].state:[Read]
+list[99].storage:[0]
+list[100].id:[100]
+list[100].state:[Read]
+list[100].storage:[0]
+list[101].id:[101]
+list[101].state:[Read]
+list[101].storage:[0]
+list[102].id:[102]
+list[102].state:[Read]
+list[102].storage:[0]
+list[103].id:[103]
+list[103].state:[Read]
+list[103].storage:[0]
+list[104].id:[104]
+list[104].state:[Read]
+list[104].storage:[0]
+list[105].id:[105]
+list[105].state:[Read]
+list[105].storage:[0]
+list[106].id:[106]
+list[106].state:[Read]
+list[106].storage:[0]
+list[107].id:[107]
+list[107].state:[Read]
+list[107].storage:[0]
+list[108].id:[108]
+list[108].state:[Read]
+list[108].storage:[0]
+list[109].id:[109]
+list[109].state:[Read]
+list[109].storage:[0]
+list[110].id:[110]
+list[110].state:[Read]
+list[110].storage:[0]
+list[111].id:[111]
+list[111].state:[Read]
+list[111].storage:[0]
+list[112].id:[112]
+list[112].state:[Read]
+list[112].storage:[0]
+list[113].id:[113]
+list[113].state:[Read]
+list[113].storage:[0]
+list[114].id:[114]
+list[114].state:[Read]
+list[114].storage:[0]
+list[115].id:[115]
+list[115].state:[Unread]
+list[115].storage:[0]
+list[116].id:[116]
+list[116].state:[Unread]
+list[116].storage:[0]
+list[117].id:[117]
+list[117].state:[Unread]
+list[117].storage:[0]
+list[118].id:[118]
+list[118].state:[Read]
+list[118].storage:[0]
+list[119].id:[119]
+list[119].state:[Read]
+list[119].storage:[0]
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### sms_cli get_list | 2\n
+command [get_list]
+
+Enter 0,1, 2 or 3: PreInbox(0), Inbox(1), Outbox(2), Sentbox(3): cmd_get_list returned 4 (SMS: the feature is unsupported.)
+@rc 0
+real 0.04
+user 0.02
+sys 0.01
+### sms_cli get_list | 3\n
+command [get_list]
+
+Enter 0,1, 2 or 3: PreInbox(0), Inbox(1), Outbox(2), Sentbox(3): cmd_get_list returned 4 (SMS: the feature is unsupported.)
+@rc 0
+real 0.04
+user 0.03
+sys 0.00
+### dsm_cli get_wifi_mac_address | 2\n
+command [get_wifi_mac_address]
+
+What is the no of WiFi Macs:cmd_get_wifi_mac_address returned 1 (DSM: general error.)
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### webui_cli get_country_code | 255\n
+command [get_country_code]
+
+What is the external mcc_id:  webui_get_country_code returned 0 (WEBUI: success.)
+mobile country code:[255]
+calling code:[0]
+mobile length:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.00
+### webui_cli get_uri_data | field_test_info\n
+command [get_uri_data]
+
+What is the uri_id:  webui_get_uri_data returned 0 (WEBUI: success.)
+url:[/fieldtest/]
+url_text:[field_test_info_menu_text]
+@rc 0
+real 0.04
+user 0.02
+sys 0.00
+### webui_cli get_app_properties | field_test_info\n
+command [get_app_properties]
+
+What is the app_id:  webui_get_app_properties returned 0 (WEBUI: success.)
+app_enabled:[1]
+login_enabled:[1]
+@rc 0
+real 0.05
+user 0.02
+sys 0.00
+### webui_cli get_uri_data | status_current\n
+command [get_uri_data]
+
+What is the uri_id:  webui_get_uri_data returned 0 (WEBUI: success.)
+url:[/internet/]
+url_text:[status_current_menu_text]
+@rc 0
+real 0.04
+user 0.02
+sys 0.00
+### webui_cli get_app_properties | status_current\n
+command [get_app_properties]
+
+What is the app_id:  webui_get_app_properties returned 0 (WEBUI: success.)
+app_enabled:[1]
+login_enabled:[1]
+@rc 0
+real 0.05
+user 0.01
+sys 0.01
+### webui_cli get_uri_data | device_info\n
+command [get_uri_data]
+
+What is the uri_id:  webui_get_uri_data returned 0 (WEBUI: success.)
+url:[/jetpackinfo/]
+url_text:[device_info_menu_text]
+@rc 0
+real 0.04
+user 0.00
+sys 0.02
+### webui_cli get_app_properties | device_info\n
+command [get_app_properties]
+
+What is the app_id:  webui_get_app_properties returned 0 (WEBUI: success.)
+app_enabled:[1]
+login_enabled:[1]
+@rc 0
+real 0.05
+user 0.02
+sys 0.00
+### modem2_cli get_state
+cmd_get_state returned 0 (MDM_MAIN: success.)
+state:[Connected]
+reg state:[1]
+
+Current Signal
+
+tech:[10] (LTE)
+roam:[0]
+rssi:[-39]
+dbm:[0]
+bars:[4]
+ecio:[0]
+sinr:[0]
+rsrq:[-13]
+snr:[13]
+rsrp:[-72]
+tx power:[0]
+radio temp[-1301287780]
+oper name:[Vodafone UA]
+oper id:[25501]
+cell id:[143415071]
+lac:[3221]
+femto:[0]
+p_rev:[0]
+sid:[0]
+nid:[0]
+@rc 0
+real 0.03
+user 0.02
+sys 0.01
+### modem2_cli get_diag_info
+cmd_get_diag_info returned 0 (MDM_MAIN: success.)
+
+[===============
+Diagnostic Data
+===============
+
+NAM: N/A
+Mobile Directory Number (MDN): N/A
+IMSI_S: 255010000000000
+Mobile Network Code (MNC): 01
+Mobile Country Code (MCC): 255
+Primary CDMA Channel A: 0
+Secondary CDMA Channel A: 0
+Primary CDMA Channel B: 0
+Secondary CDMA Channel B: 0
+Access Overload Class (ACCOLC): 0
+Register On Home SID: N/A
+Register On Foreign SID: N/A
+Register On Foreign NID: N/A
+CDMA Band Class: [WCDMA_EU_J_CH_IMT_2100] [WCDMA_US_PCS_1900] [WCDMA_US_850] [WCDMA_EU_J_900] 
+LTE Band Class: [E_UTRA_BAND_1] [E_UTRA_BAND_2] [E_UTRA_BAND_3] [E_UTRA_BAND_4] [E_UTRA_BAND_5] [E_UTRA_BAND_6] [E_UTRA_BAND_7] [E_UTRA_BAND_8] [E_UTRA_BAND_9] [E_UTRA_BAND_10] [E_UTRA_BAND_11] [E_UTRA_BAND_12] [E_UTRA_BAND_13] [E_UTRA_BAND_14] [E_UTRA_BAND_17] [E_UTRA_BAND_18] [E_UTRA_BAND_19] [E_UTRA_BAND_20] [E_UTRA_BAND_21] [E_UTRA_BAND_24] [E_UTRA_BAND_25] [E_UTRA_BAND_28] [E_UTRA_BAND_33] [E_UTRA_BAND_34] [E_UTRA_BAND_35] [E_UTRA_BAND_36] [E_UTRA_BAND_37] [E_UTRA_BAND_38] [E_UTRA_BAND_39] [E_UTRA_BAND_40] [E_UTRA_BAND_41] [E_UTRA_BAND_42] [E_UTRA_BAND_43] 
+Active Band: N/A
+Slot Cycle Index: N/A
+MIP Mode: MIP off
+MIP Registration Retries: 0
+MIP Registration Retries Timeout: 0
+Reverse Tunneling: 0
+DNS Primary: N/A
+DNS Secondary: N/A
+Supplemental Channel Request Message (SCRM): 0
+Network ID (NID): 0
+Error Rate: 
+RSSI: [0]:-125 
+Ec/Io: 
+Latitude: 0
+Longitude: 0
+Tx Power (EVDO): 0
+Rx Power 0 (EVDO): 0
+Rx Power 1 (EVDO): 0
+Packet Zone ID: 0
+Call State: Unknown
+Dormant State: Dormant
+MAC Index: N/A
+Subnet Mask: 255.255.255.252
+Color Code: 0
+UATI024: 00000000 00000000 00000000 00000000
+PN Offset: N/A
+]
+@rc 0
+real 0.06
+user 0.02
+sys 0.01
+### dmdb_cli get_data_usage_statistics | \n\n\n-1\n
+command [get_data_usage_statistics]
+
+Enter a start date or leave emtpy to skip: Enter a end date or leave emtpy to skip: Enter a mdn or leave emtpy to skip: Enter a bearer type (1 = 3G, 2 = LTE, 4 = WIMAX, 8 = WIFI, 16 = USB, 32 = ETH, -1 = ALL or leave emtpy to skip: cmd_get_data_usage_statistics returned 0 (DMDB: success.)
+tx_non_roaming:[24699257709]
+rx_non_roaming:[399690510667]
+tx_roaming_ERI:[0]
+rx_roaming_ERI:[0]
+tx_roaming_domestic:[0]
+rx_roaming_domestic:[0]
+tx_roaming_flash:[0]
+rx_roaming_flash:[0]
+tx_roaming_international:[0]
+rx_roaming_international:[0]
+@rc 0
+real 0.07
+user 0.02
+sys 0.01

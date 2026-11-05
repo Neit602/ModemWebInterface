@@ -1,0 +1,286 @@
+15950 root       0:00 sh -c /usr/bin/curl -k --max-filesize 524288 https://xtrapath3.izatcloud.net/xtra3grcej.bin -o /opt/nvtl/data/gps/xtra.bin
+15951 root       0:00 /usr/bin/curl -k --max-filesize 524288 https://xtrapath3.izatcloud.net/xtra3grcej.bin -o /opt/nvtl/data/gps/xtra.bin
+### /sys/kernel/debug/diag/status
+CPU Tools ID: 0
+Check Polling Response: 0
+Polling Registered: 1
+Uses Device Tree: 1
+Apps Supports Separate CMDRSP: 1
+Apps Supports HDLC Encoding: 1
+Apps Supports Sockets: 1
+Logging Mode: 0
+RSP Buffer is Busy: 0
+HDLC Disabled: 0
+Time Sync Enabled: 0
+MD session mode: 0
+MD session mask: 0
+Uses Time API: 0
+p: MODEM Feature: f7 ee |FCHBMQST|
+p: LPASS Feature: 00 00 |fchbmqst|
+p: WCNSS Feature: 00 00 |fchbmqst|
+p: SENSORS Feature: 00 00 |fchbmqst|
+USB Connected: 1
+Real Time Mode: 0: 1
+### /sys/kernel/debug/diag/dci_stats
+number of clients: 0
+dci proc active: 0
+dci real time vote: 1
+usb_connected: 1
+dci power: active, relax: 36, 36
+### /sys/kernel/debug/diag/usbinfo
+id: 0
+name: diag
+hdl: de27d640
+connected: 1
+diag state: 1
+enabled: 1
+mempool: POOL_MUX_APPS
+read pending: 1
+read count: 0
+write count: 0
+read work pending: 0
+read done work pending: 0
+connect work pending: 0
+disconnect work pending: 0
+max size supported: 1048576
+
+id: 0
+name: diag
+hdl: de27d640
+connected: 1
+diag state: 1
+enabled: 1
+mempool: POOL_MUX_APPS
+read pending: 1
+read count: 0
+write count: 0
+read work pending: 0
+read done work pending: 0
+connect work pending: 0
+disconnect work pending: 0
+max size supported: 1048576
+
+id: 0
+name: diag
+hdl: de27d640
+connected: 1
+diag state: 1
+enabled: 1
+mempool: POOL_MUX_APPS
+read pending: 1
+read count: 0
+write count: 0
+read work pending: 0
+read done work pending: 0
+connect work pending: 0
+disconnect work pending: 0
+max size supported: 1048576
+
+id: 0
+name: diag
+hdl: de27d640
+connected: 1
+diag state: 1
+enabled: 1
+mempool: POOL_MUX_APPS
+read pending: 1
+read count: 0
+write count: 0
+read work pending: 0
+read done work pending: 0
+### /sys/kernel/debug/diag/socketinfo
+name		:	MODEM_DATA
+hdl		:	deead900
+inited		:	1
+opened		:	0
+diag_state	:	1
+buf_1 busy	:	0
+buf_2 busy	:	0
+flow ctrl count	:	0
+data_ready	:	0
+init pending	:	0
+read pending	:	1
+bytes read	:	0
+bytes written	:	0
+fwd inited	:	1
+fwd opened	:	1
+fwd ch_open	:	0
+
+name		:	LPASS_DATA
+hdl		:	deeadd80
+inited		:	1
+opened		:	0
+diag_state	:	0
+buf_1 busy	:	-1
+buf_2 busy	:	-1
+flow ctrl count	:	0
+data_ready	:	0
+init pending	:	0
+read pending	:	0
+bytes read	:	0
+bytes written	:	0
+fwd inited	:	-1
+fwd opened	:	-1
+fwd ch_open	:	-1
+
+name		:	WCNSS_DATA
+hdl		:	deeae300
+inited		:	1
+opened		:	0
+diag_state	:	0
+buf_1 busy	:	-1
+buf_2 busy	:	-1
+flow ctrl count	:	0
+data_ready	:	0
+init pending	:	0
+read pending	:	0
+bytes read	:	0
+bytes written	:	0
+fwd inited	:	-1
+fwd opened	:	-1
+fwd ch_open	:	-1
+
+name		:	SENSORS_DATA
+hdl		:	deeae780
+inited		:	1
+opened		:	0
+diag_state	:	0
+buf_1 busy	:	-1
+buf_2 busy	:	-1
+flow ctrl count	:	0
+data_ready	:	0
+### /sys/kernel/debug/diag/smdinfo
+name		:	MODEM_DATA
+hdl		:	00000000
+inited		:	0
+opened		:	0
+diag_state	:	0
+fifo size	:	0
+open pending	:	0
+close pending	:	0
+read pending	:	0
+buf_1 busy	:	-1
+buf_2 busy	:	-1
+bytes read	:	0
+bytes written	:	0
+fwd inited	:	-1
+fwd opened	:	-1
+fwd ch_open	:	-1
+
+name		:	LPASS_DATA
+hdl		:	00000000
+inited		:	0
+opened		:	0
+diag_state	:	0
+fifo size	:	0
+open pending	:	0
+close pending	:	0
+read pending	:	0
+buf_1 busy	:	-1
+buf_2 busy	:	-1
+bytes read	:	0
+bytes written	:	0
+fwd inited	:	-1
+fwd opened	:	-1
+fwd ch_open	:	-1
+
+name		:	WCNSS_DATA
+hdl		:	00000000
+inited		:	0
+opened		:	0
+diag_state	:	0
+fifo size	:	0
+open pending	:	0
+close pending	:	0
+read pending	:	0
+buf_1 busy	:	-1
+buf_2 busy	:	-1
+bytes read	:	0
+bytes written	:	0
+fwd inited	:	-1
+fwd opened	:	-1
+fwd ch_open	:	-1
+
+name		:	SENSORS_DATA
+hdl		:	00000000
+inited		:	0
+opened		:	0
+diag_state	:	0
+fifo size	:	0
+open pending	:	0
+close pending	:	0
+read pending	:	0
+### /sys/kernel/debug/diag/power
+DCI reference count: 0
+DCI copy count: 0
+DCI Client Count: 0
+
+Memory Device reference count: 0
+Memory Device copy count: 0
+Logging mode: 0
+
+Wakeup source active count: 36
+Wakeup source relax count: 36
+
+### /sys/kernel/debug/diag/mempool
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+POOL                    	HANDLE    	COUNT	SIZE 	ITEMSIZE
+POOL_COPY               	dcee3ec0  	0    	12   	16394
+POOL_HDLC               	dcee3f40  	0    	10   	32771
+POOL_USER               	dcee3fc0  	0    	8    	16400
+POOL_MUX_APPS           	de21cd00  	0    	35   	20   
+POOL_DCI                	dce43980  	0    	10   	16384
+rndis_gsi,serial,diag,ffs,blank5,blank6,blank7,blank8,blank9,blank10,blank11,acm,hid

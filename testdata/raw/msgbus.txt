@@ -1,0 +1,840 @@
+### msgbus_cli MsgBusGet | print_channels\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:25:41 2026]
+data type:[Unknown]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | ccm2.wan_connection\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:19 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | ccm2.wan_stats\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:25:38 2026]
+data type:[binary]
+len:[240] (bytes)
+data:
+01 00 00 00 03 00 00 00 ff 0f 
+00 00 00 00 00 00 40 0b 00 00 
+00 00 00 00 33 02 00 00 72 6d 
+6e 65 74 5f 64 61 74 61 30 00 
+00 00 00 00 31 30 2e 31 31 2e 
+31 31 2e 31 30 39 00 00 00 00 
+00 32 35 35 2e 32 35 35 2e 32 
+35 35 2e 32 35 32 00 00 31 30 
+2e 31 31 2e 31 31 2e 31 31 30 
+00 00 00 00 00 00 01 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+3a 3a 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 3a 3a 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | devui.ready\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Sat Jan  3 23:23:09 1970]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | dmdb.blacklist.settings\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | dmdb.connected.device.list\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:19:56 2026]
+data type:[binary]
+len:[4] (bytes)
+data:
+02 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | dmdb.dus.report.statistics\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:19:56 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | dmdb.dus.traffic_status\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:25 2026]
+data type:[int32]
+data:[0]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | dmdb.internet_blocked.settings\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | dmdb.main.initialized\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | dmdb.reserved_ip.settings\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | dmdb.whitelist.settings\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | file_sharing.broadcast\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[binary]
+len:[8] (bytes)
+data:
+01 00 00 00 00 00 00 00 
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | gps.engine.status\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:17 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | hostapd.ap.enabled\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:34 2026]
+data type:[binary]
+len:[16] (bytes)
+data:
+77 6c 61 6e 31 00 00 00 00 00 
+00 00 00 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | hostapd.ap.sta_connected\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:19:46 2026]
+data type:[binary]
+len:[23] (bytes)
+data:
+77 6c 61 6e 30 00 00 00 00 00 
+00 00 00 00 00 00 00 02 00 00 
+00 00 01 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | led.ready\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:17 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.conn_dormancy\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:25:31 2026]
+data type:[binary]
+len:[12] (bytes)
+data:
+01 00 00 00 00 00 00 00 00 00 
+00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.conn_state\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[binary]
+len:[129] (bytes)
+data:
+01 00 00 00 00 00 00 00 05 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 72 6d 6e 65 74 5f 
+64 61 74 61 30 00 00 00 00 00 
+00 ff ff ff fc 02 00 00 00 0a 
+0b 0b 6d 00 00 00 00 00 00 00 
+00 00 00 00 00 02 00 00 00 0a 
+0b 0b 6e 00 00 00 00 00 00 00 
+00 00 00 00 00 02 00 00 00 0b 
+6f 0b 0b 00 00 00 00 00 00 00 
+00 00 00 00 00 02 00 00 00 0b 
+6f 0b 0b 00 00 00 00 00 00 00 
+00 00 00 00 00 dc 05 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.data_signal_change\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:25:38 2026]
+data type:[binary]
+len:[228] (bytes)
+data:
+0a 00 00 00 00 00 00 00 d6 ff 
+ff ff 00 00 00 00 04 00 00 00 
+00 00 00 00 00 00 00 00 f3 ff 
+ff ff 0d 00 00 00 b7 ff ff ff 
+00 00 00 00 56 6f 64 61 66 6f 
+6e 65 20 55 41 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 32 
+35 35 30 31 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 31 34 33 34 31 35 30 37 
+31 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 33 32 32 31 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 9c ec 6f b2 
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | modem2.device_state\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[int32]
+data:[5]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.non_pri_sim\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:14 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.operating.mode\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[int32]
+data:[0]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.operator_change\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:22:25 2026]
+data type:[binary]
+len:[228] (bytes)
+data:
+0a 00 00 00 00 00 00 00 da ff 
+ff ff 00 00 00 00 05 00 00 00 
+00 00 00 00 00 00 00 00 f1 ff 
+ff ff 0e 00 00 00 b8 ff ff ff 
+00 00 00 00 56 6f 64 61 66 6f 
+6e 65 20 55 41 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 32 
+35 35 30 31 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 38 36 36 39 30 38 33 33 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 33 32 32 31 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 9c ec 6f b2 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.pin1_state\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[binary]
+len:[16] (bytes)
+data:
+01 00 00 00 03 00 00 00 03 00 
+00 00 0a 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.plmn_mode\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[int32]
+data:[0]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | modem2.registration_status\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:22:25 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | modem2.roam_state\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:15 2026]
+data type:[binary]
+len:[8] (bytes)
+data:
+00 00 00 00 01 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.service\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:22:25 2026]
+data type:[int32]
+data:[10]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | modem2.time_change\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:22:25 2026]
+data type:[binary]
+len:[12] (bytes)
+data:
+d4 2a d9 12 08 00 00 00 00 00 
+00 00 
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | modem2.uim_state\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:14 2026]
+data type:[int32]
+data:[3]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | modem2.wifi_band_conflict\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:22:20 2026]
+data type:[int32]
+data:[0]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | nvtl.ans.notifications\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:20:09 2026]
+data type:[binary]
+len:[4] (bytes)
+data:
+00 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | nvtl.dua.usage.info\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Sat Jan  3 23:23:11 1970]
+data type:[binary]
+len:[216] (bytes)
+data:
+01 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 18 00 00 00 
+e7 c6 02 0c 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | settings.ready\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Sat Jan  3 23:23:07 1970]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | sms.list.unread\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:17:34 2026]
+data type:[int32]
+data:[20]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | su.broadcast\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:20:57 2026]
+data type:[binary]
+len:[1808] (bytes)
+data:
+0c 00 00 00 44 4d 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+02 63 00 00 56 44 4d 5f 45 52 
+52 5f 43 4f 4d 4d 53 5f 46 41 
+54 41 4c 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+23 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | usb.attached_to_bridge\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:51 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | webui.ready\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Sat Jan  3 23:23:09 1970]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | wifi.2ghz.enabled\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:31 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | wifi.5ghz.enabled\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:27 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | wifi.sta_connected\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:19:46 2026]
+data type:[binary]
+len:[28] (bytes)
+data:
+77 6c 61 6e 30 00 00 00 00 00 
+00 00 00 00 00 00 02 00 00 00 
+00 01 00 00 00 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | wifi.wlan0.if_up\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:34 2026]
+data type:[int32]
+data:[1]
+@rc 0
+real 0.02
+user 0.00
+sys 0.01
+### msgbus_cli MsgBusGet | wifi.wlan0.sta_list_updated\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:19:46 2026]
+data type:[binary]
+len:[116] (bytes)
+data:
+00 00 00 00 77 6c 61 6e 30 00 
+00 00 00 00 00 00 00 00 00 00 
+01 00 00 00 02 00 00 00 00 01 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 
+@rc 0
+real 0.02
+user 0.01
+sys 0.00
+### msgbus_cli MsgBusGet | wifi.wlan1.sta_list_updated\n
+command [MsgBusGet]
+
+What is channel: MsgBusGet returned 0 (MSGBUS: success.)
+last updated time:[Thu Nov  5 13:16:34 2026]
+data type:[binary]
+len:[116] (bytes)
+data:
+01 00 00 00 77 6c 61 6e 31 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 
+00 00 00 00 00 00 
+@rc 0
+real 0.04
+user 0.02
+sys 0.00
