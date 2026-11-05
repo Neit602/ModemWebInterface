@@ -1,0 +1,8 @@
+{
+  message c1 : rrcConnectionRelease : {
+    rrc-TransactionIdentifier 1,
+    criticalExtensions c1 : rrcConnectionRelease-r8 : {
+      releaseCause other
+    }
+  }
+}

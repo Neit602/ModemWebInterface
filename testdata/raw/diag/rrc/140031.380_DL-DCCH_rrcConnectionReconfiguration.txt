@@ -1,0 +1,130 @@
+{
+  message c1 : rrcConnectionReconfiguration : {
+    rrc-TransactionIdentifier 0,
+    criticalExtensions c1 : rrcConnectionReconfiguration-r8 : {
+      measConfig {
+        measObjectToAddModList {
+          {
+            measObjectId 1,
+            measObject measObjectEUTRA : {
+              carrierFreq 1700,
+              allowedMeasBandwidth mbw100,
+              presenceAntennaPort1 TRUE,
+              neighCellConfig '01'B,
+              offsetFreq dB0
+            }
+          }
+        },
+        reportConfigToAddModList {
+          {
+            reportConfigId 1,
+            reportConfig reportConfigEUTRA : {
+              triggerType event : {
+                eventId eventA3 : {
+                  a3-Offset 6,
+                  reportOnLeave FALSE
+                },
+                hysteresis 2,
+                timeToTrigger ms320
+              },
+              triggerQuantity rsrp,
+              reportQuantity both,
+              maxReportCells 3,
+              reportInterval ms1024,
+              reportAmount r1,
+              includeLocationInfo-r10 true
+            }
+          },
+          {
+            reportConfigId 2,
+            reportConfig reportConfigEUTRA : {
+              triggerType event : {
+                eventId eventA2 : {
+                  a2-Threshold threshold-RSRP : 32
+                },
+                hysteresis 0,
+                timeToTrigger ms320
+              },
+              triggerQuantity rsrp,
+              reportQuantity both,
+              maxReportCells 1,
+              reportInterval ms1024,
+              reportAmount r1,
+              includeLocationInfo-r10 true
+            }
+          },
+          {
+            reportConfigId 3,
+            reportConfig reportConfigEUTRA : {
+              triggerType event : {
+                eventId eventA3 : {
+                  a3-Offset -18,
+                  reportOnLeave TRUE
+                },
+                hysteresis 6,
+                timeToTrigger ms40
+              },
+              triggerQuantity rsrp,
+              reportQuantity sameAsTriggerQuantity,
+              maxReportCells 3,
+              reportInterval ms1024,
+              reportAmount r1,
+              includeLocationInfo-r10 true
+            }
+          },
+          {
+            reportConfigId 4,
+            reportConfig reportConfigEUTRA : {
+              triggerType periodical : {
+                purpose reportStrongestCells
+              },
+              triggerQuantity rsrp,
+              reportQuantity both,
+              maxReportCells 8,
+              reportInterval ms2048,
+              reportAmount r1,
+              includeLocationInfo-r10 true
+            }
+          }
+        },
+        measIdToAddModList {
+          {
+            measId 1,
+            measObjectId 1,
+            reportConfigId 1
+          },
+          {
+            measId 2,
+            measObjectId 1,
+            reportConfigId 2
+          },
+          {
+            measId 3,
+            measObjectId 1,
+            reportConfigId 3
+          },
+          {
+            measId 4,
+            measObjectId 1,
+            reportConfigId 4
+          }
+        },
+        quantityConfig {
+          quantityConfigEUTRA {
+            filterCoefficientRSRP fc4,
+            filterCoefficientRSRQ fc4
+          },
+          quantityConfigUTRA {
+            measQuantityUTRA-FDD cpich-RSCP,
+            measQuantityUTRA-TDD pccpch-RSCP,
+            filterCoefficient fc4
+          },
+          quantityConfigUTRA-v1020 {
+            filterCoefficient2-FDD-r10 fc4
+          }
+        },
+        s-Measure 90
+      }
+    }
+  }
+}

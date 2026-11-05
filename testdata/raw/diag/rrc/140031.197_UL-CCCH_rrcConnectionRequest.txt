@@ -1,0 +1,12 @@
+{
+  message c1 : rrcConnectionRequest : {
+    criticalExtensions rrcConnectionRequest-r8 : {
+      ue-Identity s-TMSI : {
+        mmec '00'H,
+        m-TMSI '00000000'H
+      },
+      establishmentCause mo-Data,
+      spare '0'B
+    }
+  }
+}

@@ -1,0 +1,17 @@
+# Log codes received in the 6 min capture (QMDL, wrapped in DIAG_MULTI_RADIO 0x98)
+0x1098	52	(unknown, equip 1)
+0xB061	1	LTE MAC RACH Trigger
+0xB062	1	LTE MAC RACH Attempt
+0xB063	284	LTE MAC DL Transport Block
+0xB064	23	LTE MAC UL Transport Block
+0xB0C0	283	LTE RRC OTA
+0xB0C2	1	LTE RRC Serving Cell Info
+0xB0CD	4	LTE RRC Supported CA Combos
+0xB0ED	1	LTE NAS EMM plain OTA outgoing
+0xB139	37	LTE PHY PUSCH Tx Report
+0xB167	1	LTE ML1 RAR Msg1
+0xB168	1	LTE ML1 RAR Msg2
+0xB169	1	LTE ML1 Msg3
+0xB16A	1	LTE ML1 Msg4
+0xB17F	271	LTE ML1 Serving Cell Meas and Eval
+0xB180	105	LTE ML1 Neighbor Measurements

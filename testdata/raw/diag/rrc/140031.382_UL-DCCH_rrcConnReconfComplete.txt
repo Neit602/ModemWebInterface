@@ -1,0 +1,6 @@
+{
+  message c1 : rrcConnectionReconfigurationComplete : {
+    rrc-TransactionIdentifier 0,
+    criticalExtensions rrcConnectionReconfigurationComplete-r8 : { }
+  }
+}

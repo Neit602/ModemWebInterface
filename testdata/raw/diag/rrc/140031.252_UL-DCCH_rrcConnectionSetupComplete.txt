@@ -1,0 +1,18 @@
+{
+  message c1 : rrcConnectionSetupComplete : {
+    rrc-TransactionIdentifier 1,
+    criticalExtensions c1 : rrcConnectionSetupComplete-r8 : {
+      selectedPLMN-Identity 1,
+      dedicatedInfoNAS '(masked: NAS message)'H,
+      nonCriticalExtension {
+        nonCriticalExtension {
+          nonCriticalExtension {
+            nonCriticalExtension {
+              mobilityState-r12 normal
+            }
+          }
+        }
+      }
+    }
+  }
+}

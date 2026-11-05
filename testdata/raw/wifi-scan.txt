@@ -1,0 +1,94 @@
+### wlan0 (5 GHz) scan
+SSID: "ssid-1"
+Mode: Managed	RSSI: -73 dBm	SNR: 16 dB	noise: -89 dBm	Flags: FromBcn RSSI on-channel 	Channel: 149/80
+BSSID: 02:00:00:00:00:01	Capability: ESS WEP RRM 
+Supported Rates: [ 6(b) 9 12(b) 18 24(b) 36 48 54 ]
+RSN:
+	multicast cipher: AES-CCMP
+	unicast ciphers(1): AES-CCMP 
+	AKM Suites(1): WPA2-PSK 
+	Capabilities(0x000c):
+ 		No Pre-Auth
+		Pairwise
+		MFP not Required
+		MFP not Capable
+		16 PTK Replay Ctrs
+		1 GTK Replay Ctr
+Extended Capabilities: 
+VHT Capable:
+	Chanspec: 5GHz channel 155 80MHz (0xe09b)
+	Primary channel: 149
+	HT Capabilities: 40Mhz SGI20 SGI40 
+	Supported HT MCS : 0-15
+	Supported VHT MCS:
+		NSS1 Tx: 0-9   Rx: 0-9 
+		NSS2 Tx: 0-9   Rx: 0-9 
+VS_IE:dd0a0017f2... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd190017f2... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd0500904c... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd0a001018... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd180050f2... (payload omitted: WPS/vendor data with MAC, UUID and model)
+
+### wlan1 (2.4 GHz) scan
+SSID: "ssid-2"
+Mode: Managed	RSSI: -75 dBm	SNR: 17 dB	noise: -92 dBm	Flags: RSSI on-channel 	Channel: 3
+BSSID: 02:00:00:00:00:02	Capability: ESS WEP ShortSlot RRM 
+Supported Rates: [ 1(b) 2(b) 5.5(b) 6 9 11(b) 12 18 24 36 48 54 ]
+RSN:
+	multicast cipher: AES-CCMP
+	unicast ciphers(1): AES-CCMP 
+	AKM Suites(1): WPA2-PSK 
+	Capabilities(0x0000):
+ 		No Pre-Auth
+		Pairwise
+		MFP not Required
+		MFP not Capable
+		1 PTK Replay Ctr
+		1 GTK Replay Ctr
+Extended Capabilities: 20/40_Bss_Coexist BSS_Transition
+VHT Capable:
+	Chanspec: 2.4GHz channel 3 20MHz (0x1003)
+	Primary channel: 3
+	HT Capabilities: SGI20 SGI40 
+	Supported HT MCS : 0-15
+	Supported VHT MCS:
+		NSS1 Tx: 0-9   Rx: 0-9 
+		NSS2 Tx: 0-9   Rx: 0-9 
+WPS: V2.0 Configured
+VS_IE:dd180050f2... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd7f0050f2... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd07000c43... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd21000ce7... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd1e001d0f... (payload omitted: WPS/vendor data with MAC, UUID and model)
+
+SSID: "ssid-3"
+Mode: Managed	RSSI: -33 dBm	SNR: 35 dB	noise: -92 dBm	Flags: RSSI on-channel 	Channel: 11u
+BSSID: 02:00:00:00:00:03	Capability: ESS WEP ShortSlot 
+Supported Rates: [ 1(b) 2(b) 5.5(b) 6 9 11(b) 12 18 24 36 48 54 ]
+RSN:
+	multicast cipher: AES-CCMP
+	unicast ciphers(1): AES-CCMP 
+	AKM Suites(1): WPA2-PSK 
+	Capabilities(0x000c):
+ 		No Pre-Auth
+		Pairwise
+		MFP not Required
+		MFP not Capable
+		16 PTK Replay Ctrs
+		1 GTK Replay Ctr
+Extended Capabilities: Not_Available
+VHT Capable:
+	Chanspec: 2.4GHz channel 9 40MHz (0x1909)
+	Primary channel: 11
+	HT Capabilities: 40Mhz SGI20 SGI40 
+	Supported HT MCS : 0-7 32 81-82 84 87 96
+	Supported VHT MCS:
+		NSS1 Tx: 0-9   Rx: 0-9 
+WPS: V2.0 Configured
+VS_IE:dd180050f2... (payload omitted: WPS/vendor data with MAC, UUID and model)
+VS_IE:dd710050f2... (payload omitted: WPS/vendor data with MAC, UUID and model)
+
+### after
+assoclist 02:00:00:00:00:04
+161/80 (0xe39b)
+6 (0x1006)

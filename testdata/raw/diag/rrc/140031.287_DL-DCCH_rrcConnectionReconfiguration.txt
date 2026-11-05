@@ -1,0 +1,107 @@
+{
+  message c1 : rrcConnectionReconfiguration : {
+    rrc-TransactionIdentifier 3,
+    criticalExtensions c1 : rrcConnectionReconfiguration-r8 : {
+      radioResourceConfigDedicated {
+        srb-ToAddModList {
+          {
+            srb-Identity 2,
+            rlc-Config explicitValue : am : {
+              ul-AM-RLC {
+                t-PollRetransmit ms55,
+                pollPDU p16,
+                pollByte kBinfinity,
+                maxRetxThreshold t32
+              },
+              dl-AM-RLC {
+                t-Reordering ms45,
+                t-StatusProhibit ms20
+              }
+            },
+            logicalChannelConfig explicitValue : {
+              ul-SpecificParameters {
+                priority 3,
+                prioritisedBitRate infinity,
+                bucketSizeDuration ms50,
+                logicalChannelGroup 0
+              }
+            }
+          }
+        },
+        drb-ToAddModList {
+          {
+            eps-BearerIdentity 5,
+            drb-Identity 3,
+            pdcp-Config {
+              discardTimer ms500,
+              rlc-AM {
+                statusReportRequired FALSE
+              },
+              headerCompression notUsed : NULL
+            },
+            rlc-Config am : {
+              ul-AM-RLC {
+                t-PollRetransmit ms55,
+                pollPDU p16,
+                pollByte kBinfinity,
+                maxRetxThreshold t32
+              },
+              dl-AM-RLC {
+                t-Reordering ms45,
+                t-StatusProhibit ms20
+              }
+            },
+            logicalChannelIdentity 3,
+            logicalChannelConfig {
+              ul-SpecificParameters {
+                priority 12,
+                prioritisedBitRate kBps8,
+                bucketSizeDuration ms500,
+                logicalChannelGroup 3
+              }
+            }
+          }
+        },
+        mac-MainConfig explicitValue : {
+          drx-Config setup : {
+            onDurationTimer psf10,
+            drx-InactivityTimer psf100,
+            drx-RetransmissionTimer psf8,
+            longDRX-CycleStartOffset sf320 : 2,
+            shortDRX {
+              shortDRX-Cycle sf80,
+              drxShortCycleTimer 2
+            }
+          },
+          timeAlignmentTimerDedicated infinity,
+          phr-Config setup : {
+            periodicPHR-Timer sf1000,
+            prohibitPHR-Timer sf10,
+            dl-PathlossChange dB3
+          }
+        },
+        physicalConfigDedicated {
+          antennaInfo-r10 explicitValue-r10 : {
+            transmissionMode-r10 tm4,
+            codebookSubsetRestriction-r10 '111111'B,
+            ue-TransmitAntennaSelection release : NULL
+          },
+          cif-Presence-r10 FALSE,
+          cqi-ReportConfig-r10 {
+            cqi-ReportAperiodic-r10 setup : {
+              cqi-ReportModeAperiodic-r10 rm31
+            },
+            nomPDSCH-RS-EPRE-Offset 0,
+            cqi-ReportPeriodic-r10 setup : {
+              cqi-PUCCH-ResourceIndex-r10 2,
+              cqi-pmi-ConfigIndex 88,
+              cqi-FormatIndicatorPeriodic-r10 widebandCQI-r10 : { },
+              ri-ConfigIndex 483,
+              simultaneousAckNackAndCQI TRUE
+            }
+          }
+        }
+      }
+    }
+  }
+}

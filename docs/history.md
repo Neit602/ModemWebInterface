@@ -574,18 +574,41 @@ start); LTE B3, Vodafone UA. Survey scratch files lived in `/tmp/cat` on the rou
 - adb lesson: `adb shell '(setsid cmd ... &)'` lost the process when the adb shell exited at once; adding
   `; sleep 1` inside the same adb command fixed it.
 
-## Resume here (state on 2026-11-02, end of the v0.6.0 session; data catalog added 2026-11-05)
+## Follow-up of the catalog (2026-11-05, with my OK for each step)
+
+- v0.6.1: battery temperature now read from `temp_ambient` (fallback `temp`), with a test. Committed with the
+  catalog (769308a, ac20d90). CLAUDE.md firewall line corrected.
+- `enabled_tech_get` 18 → 31: the logs show 18 until the shutdown on 2026-11-03 12:52 UTC and 31 from the first
+  LTE event of the next boot (2026-11-04 15:55 UTC); nothing logged sets it, our 2026-11-02 actions are ruled
+  out, the stock setting is still 18. Probably left over from the stock manual network selection in October
+  (`tech_modes = 18, mode_pref = 24`), dropped at a power-on. Left unchanged. Details in the catalog, section 5.
+- `efs_read`, exactly two paths: `lte_bandpref` = 8 bytes `ff`×8 (bands 1-64 all allowed, matches
+  `lte_band_get_enabled`); `band_priority_list` does not exist. `efs_read` prints `Content:[%s]`, so binary
+  items are only safe to read through `od` (they stop at the first zero byte otherwise).
+- Neighbour Wi-Fi scan (`wl -i wlanX scan -c <channels>` + `scanresults`, ~6 s, clients stayed): one 5 GHz AP on
+  the same 80 MHz block as ours, a strong 2.4 GHz AP at -33 dBm on ch 9/40 MHz overlapping our ch 6.
+- Diag with SCAT over USB (venv in the session scratchpad, so it has to be reinstalled next time; local patch
+  adds 0xB139 to the LTE mask): no udev rule or sudo needed (seat ACL). 6 min idle capture, the speedtest did
+  not happen in the window. Results: TA 3 → about 230-310 m to the antenna; Tx power -7..+4 dBm; PHR 19-22 dB;
+  UL 2-6 RB, up to 64QAM; cell B3 20 MHz/20 MHz; TM2 → TM4; connected-mode measurement only on EARFCN 1700;
+  no SIBs (no reselection). Router CPU unchanged in idle; masks cleared at exit (diag write counter frozen).
+  Frames come wrapped in DIAG_MULTI_RADIO 0x98; PUSCH Tx v124 Tx power is a signed 7-bit field.
+  Not captured: DL MCS/BLER (needs 0xB173/0xB14E, not in SCAT), CQI value (bit order unverified).
+- IPA: `/sys/kernel/debug/ipa/stats` counts packets only; WLAN IPA pipes are "Not up". `status_stats` hangs on
+  read: never read it. The undercount check (speedtest vs rmnet/wlan counters) is still open; it needs no diag.
+
+## Resume here (state on 2026-11-05: v0.6.1, data catalog, diag experiment)
 
 ### Where things are
 
-- Code: v0.6.0, committed to git; remote origin = git@github.com:Neit602/ModemWebInterface.git.
+- Code: v0.6.1, committed to git (not pushed); remote origin = git@github.com:Neit602/ModemWebInterface.git.
   Push only when I ask. Never commit probe*.txt or dist/ (router serial, MACs, client names; in .gitignore).
 - Router: Vodafone UA SIM on LTE B3 (B3 enabled in the band preference, persistent; stays enabled).
   AT+CEREG=2 is sent by the panel at startup. Nothing is installed persistently except
   /data/mifi-panel/screen-layout.json (my saved screen layout; /data/mifi-panel/ is approved for layouts).
 - The panel runs only from /tmp (RAM): after a reboot or power loss it is gone and has to be started again.
   No autostart yet.
-- This computer gets its internet over another Wi-Fi (OLAX), not through the MiFi.
+- This computer (Linux) gets its internet over another Wi-Fi (OLAX), not through the MiFi.
 
 ### How to run the panel on the router (the way it was done in this session)
 
@@ -615,8 +638,8 @@ adb forward tcp:8080 tcp:8080                 # then http://localhost:8080, or h
 4. IPA offload undercount check (speed test while comparing rmnet_data0, wlan0/1 and /sys/kernel/debug/ipa).
 5. Roadmap in CLAUDE.md: Telegram bot with power-outage alerts and SMS forwarding, GPS signal logger,
    VPN, DNS ad blocking.
-6. From the data catalog (2026-11-05): waiting for my OK on `modem2_cli efs_read` of the listed paths and on the
-   diag step (SCAT on the computer over USB). Next features: the top-20 list in `docs/data-catalog.md`
-   section 17 (session history page, battery voltage/current/temperature with the `temp_ambient` fix,
-   power-on cause, per-client Wi-Fi signal, reject cause, network time zone...).
-   `docs/data-catalog.md` and `testdata/raw/` are not committed yet.
+6. Next features: the top-20 list in `docs/data-catalog.md` section 17 (session history page, battery
+   voltage/current, power-on cause, per-client Wi-Fi signal, reject cause, network time zone...).
+   Diag-derived values (TA distance, Tx power, PHR) would need a DCI client or a computer-side reader: later.
+7. Still open: the IPA undercount check during a speedtest; SIB capture (needs a reselection or Reconnect
+   during a diag capture: ask first); DL MCS/BLER/CQI (own decoder for 0xB173/0xB14E).

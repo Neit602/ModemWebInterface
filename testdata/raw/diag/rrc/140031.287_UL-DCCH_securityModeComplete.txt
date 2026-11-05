@@ -1,0 +1,6 @@
+{
+  message c1 : securityModeComplete : {
+    rrc-TransactionIdentifier 2,
+    criticalExtensions securityModeComplete-r8 : { }
+  }
+}

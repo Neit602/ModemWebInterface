@@ -6,6 +6,9 @@ report-only commands, vendor CLI getters, message bus reads, GET requests to the
 `/proc`, `/sys` and tool output. Nothing was installed, nothing was left running, and `/tmp/cat` (the survey
 scratch folder) was removed from the router afterwards.
 
+Added later the same day, each with your explicit OK: `efs_read` of two band paths (section 5), one
+neighbour Wi-Fi scan per band (section 9) and a diag capture with SCAT over USB (section 16).
+
 Raw output (masked) is in `testdata/raw/` for future parser tests:
 
 | File | What |
@@ -51,7 +54,7 @@ Legend for the tables:
 | sysfs / `/proc` | cat | ~400 files | < 10 ms | battery, thermal, flash wear, CPU, network counters |
 | Wi-Fi (`wl`, `hostapd_cli`) | Broadcom `wl` getters | 17 per interface + per client | 10-20 ms | per-client RSSI and rates; `iw` gives nothing (Broadcom full-MAC) |
 | sqlite `dmdb.db` | read of a copy in `/tmp` | 8 tables | — | session history, per-client usage; SMS databases are encrypted |
-| Qualcomm diag | not started | — | — | see section 14, proposal waiting for your OK |
+| Qualcomm diag | SCAT on the computer over USB (2026-11-05, approved) | 6 min idle capture | no measurable router CPU in idle | section 16: TA, Tx power, PHR, UL MCS/RB, RRC config |
 
 ## 2. Signal
 
@@ -130,10 +133,12 @@ CDMA leftovers and stay 0.
 | LTE band preference | which LTE bands the modem may use | `lte_band_get_enabled` (stdin = band 1..43), 43 calls | all 1 now (B3 enabled since 2026-11-02) | bands ≥ 44 cannot be read (rc 2) | 43 × 40 ms | no |
 | Applied LTE bands | bands actually in effect | `get_diag_info` "LTE Band Class" | includes E_UTRA_BAND_3 | updates only after a modem restart | 50 ms | no |
 | WCDMA band preference | 3G bands | `AT$QCBANDPREF?`; `get_diag_info` "CDMA Band Class" | I, II, V, VIII | — | < 0.2 s | no |
-| Tech modes | enabled / active / supported | `enabled_tech_get`, `active_tech_get`, `get_sup_tech` | 31 / 31 / 79 | bit masks; **enabled was 18 ("UMTS LTE") on 2026-11-02, 31 now** | 30 ms | no |
+| Tech modes | enabled / active / supported | `enabled_tech_get`, `active_tech_get`, `get_sup_tech` | 31 / 31 / 79 | modem2 bits: 1 GSM, 2 UMTS, 4 CDMA, 8 EVDO, 16 LTE, so 18 = UMTS+LTE and 31 = all five; `get_sup_tech` uses another layout (79 = bits 0-3 + bit 6). **18 until 2026-11-03, 31 since the boot of 2026-11-04** (see the note below) | 30 ms | no |
 | Roaming allowed | domestic / international | `roam_get_enabled`, `roam_get_intl_enabled` | 0 / 0 | — | 30 ms | no |
 | World mode | — | `get_world_mode_enabled` | 1 | — | 30 ms | no |
 | DRX | idle paging cycle | `AT$QCDRX?` | 0 | 0 = network default | < 0.2 s | no |
+| Stored LTE band preference | the EFS item behind `lte_band_get_enabled` | `modem2_cli efs_read` stdin `/nv/item_files/modem/mmode/lte_bandpref` (read 2026-11-05 with your OK) | 8 bytes `ff ff ff ff ff ff ff ff` | little-endian bit mask, bit n-1 = band n: **all bands 1-64 allowed**. Matches `lte_band_get_enabled` (all 1 for 1..43); before the B3 change bit 2 was 0. B66 (> 64) lives in another item, not read | 40 ms | no |
+| LTE band priority list | stored band priorities | `efs_read` `/nv/item_files/modem/lte/rrc/csp/band_priority_list` | rc 1, 0 bytes | the item does not exist: no band priorities set (same as `lte_band_get_prior` → rc 1) | 40 ms | no |
 | SD config type 1 | system determination timer | `sd_config_get_setting` stdin `1` | 180 | seconds (other types: error) | 40 ms | no |
 | PDN extras | per-profile limits | `pdn_get_ext_params` stdin `N\n0\n` | max conn 20, conn timer 300 | — | 40 ms | no |
 | Profiles | APN, auth, DNS of each profile | `prof_get_tech`, `prof_get_pri_tech`, `prof_get_cust_tech`; `AT$QCPRFMOD?`, `$QCAPNE?`, `$QCPDPCFGE?`, `$QCPDPP?` | profile1 empty APN, profile2 ims, profile3 sos; no auth | username/password fields empty (would be secret) | 40 ms | no |
@@ -141,6 +146,18 @@ CDMA leftovers and stay 0.
 | CDMA / IMS / VoLTE / MIP | Verizon leftovers | `band_class_get_enabled`, `ehrpd_*`, `ims_*`, `volte_get_*`, `mip_*`, `1xrtt_*`, `cai_get`, `lbs_get`, `ddtm_get`, `emergency_get_mode` | zeros, errors or garbage | nothing useful in Ukraine | 40 ms | no |
 | Carrier unlock | lock state | `get_carrier_unlock` | error, state 0 | — | 30 ms | no |
 | Refurb / activation date | factory data | `get_refurb_info`, `get_act_date` | error, 1970 | — | 30 ms | no |
+
+Tech mode note (read-only investigation of `/opt/nvtl/log/system_log` and its rotated archives, log times
+in UTC): ansd logs "global tech mode value is G and tech mode value is M" at every WAN tech change. G is the
+stock setting (`AutomaticTechMode` 18) and never changed; M was 18 in every log up to the shutdown at
+2026-11-03 12:52:39 and is 31 from the first LTE event of the next boot (2026-11-04 15:55:23, clock set during
+that boot). Nothing in between sets it: no web UI or device-menu network change, no `Forcing automatic
+network selection`, no MNS. Our 2026-11-02 actions (B3 enable, Reconnect, Find all networks, reboot) are ruled
+out because the following boot still reported 18. The stock manual network selections of 2026-10-21..27
+(web UI, "technology UTRAN" / "E-UTRAN") were sent as `tech_modes = 18, mode_pref = 24` (QMI 0x18 = UMTS+LTE),
+so 18 most likely came from those, and the modem dropped back to its default "all" preference at that power-on
+for a reason the Linux side does not log. Harmless here (GSM/CDMA/EVDO have nothing to find in Ukraine);
+left unchanged.
 
 ## 6. SIM and device identity
 
@@ -218,8 +235,16 @@ CDMA leftovers and stay 0.
 | AP limits | max clients | `wifi_cli get_ap_settings` (5), `get_caps` (15 supported, channels, modes) | — | — | always | 40 ms | public | no |
 | Wi-Fi keys | passwords of both networks | `wifi_cli get_ap_profile` stdin 1..4 | masked | — | always | 40 ms | **secret** | no (never show) |
 
-`iw dev wlan0 station dump` prints nothing (Broadcom full-MAC driver); `wl` is the tool. A neighbour AP scan
-(`wl scan` / `wl scanresults`) briefly takes the radio off-channel: **not run, needs your OK**.
+`iw dev wlan0 station dump` prints nothing (Broadcom full-MAC driver); `wl` is the tool.
+
+Neighbour AP scan (2026-11-05, with your OK, one per band): `wl -i wlan0 scan -c 36,...,165` then
+`wl -i wlan0 scanresults`, and `wl -i wlan1 scan -c 1,...,13` on 2.4 GHz; ~6 s each, the client stayed
+associated and both channels were unchanged afterwards. Output per AP: SSID, BSSID, RSSI, SNR, noise,
+channel and width, capabilities, rates, HT/VHT, vendor IEs (WPS data with model and UUID: dropped from the
+saved copy, `testdata/raw/wifi-scan.txt`). Result here: one AP on 5 GHz at -73 dBm on 149/80, **the same 80 MHz
+block as ours (161/80, centre 155)**; on 2.4 GHz one AP on ch 3 at -75 dBm and one on ch 9 at 40 MHz at -33 dBm
+(very close, probably the OLAX next to the computer), overlapping our ch 6. Privacy: SSIDs and BSSIDs of the
+neighbours are personal data of others; mask before saving.
 
 ## 10. Router, firewall and traffic counters
 
@@ -310,9 +335,7 @@ Wi-Fi key (both are the label default). Treat both as secret.
 
 | Item | Why | What it would give |
 |---|---|---|
-| `modem2_cli efs_read` | **waiting for your OK on the path list below** | raw NV/EFS items (band preference as stored, IMS config) |
-| Qualcomm diag logging | proposal in section 16, waiting for your OK | Tx power, timing advance, CQI, MCS, BLER, RRC messages |
-| `wl scan` (neighbour Wi-Fi) | takes the radio off-channel briefly | nearby APs, for channel choice |
+| `modem2_cli efs_read` of other paths | only the two band paths were approved and read (section 5) | IMS and timer items |
 | `MsgBus_Subscribe` | listen-only, but outside what this step allowed | push updates instead of polling |
 | `ccm2_cli apps_call_state`, `dm_call_state` | rule 4 lists `apps_call_*` / `dm_call_*` as needing OK | state of the stock management APN calls |
 | `modem2_cli mns_validate`, `validate_home`, `validate_apn` | "validate" may act | home network check |
@@ -324,7 +347,7 @@ Wi-Fi key (both are the label default). Treat both as secret.
 | `cdra_cli server_upload_status` | **was run once: it is a setter** (asks "Enter the server upload status"); empty input was rejected with "Invalid upload status", nothing changed | — |
 | `bckrst`, `nwnvitem`, `fota`, `omadm`, `nua`, `factory_reset` tools | never run (rule 4) | — |
 
-EFS paths that the stock software itself uses (found in `libmal_qct.so`; none read yet):
+EFS paths that the stock software itself uses (found in `libmal_qct.so`; only the first two were read):
 
 ```
 /nv/item_files/modem/mmode/lte_bandpref
@@ -347,7 +370,7 @@ EFS paths that the stock software itself uses (found in `libmal_qct.so`; none re
 Only the first two matter to us (they back up what `lte_band_get_enabled` shows and the B3 change). Reading
 them is a read, but it goes through the same modem EFS interface as `efs_write`, hence the explicit OK.
 
-## 16. Qualcomm diag (deepest level): findings and a proposal
+## 16. Qualcomm diag (deepest level)
 
 Findings (read-only: `ps`, `lsof`, `/proc`, `/sys/kernel/debug/diag/*`, strings of the binaries):
 
@@ -389,10 +412,81 @@ PUSCH Tx report `0xB139` (Tx power, resource blocks, MCS), PUCCH Tx report `0xB1
 access response). SCAT covers RRC/NAS and the ML1 measurements well; the PHY statistics (PDSCH/PUSCH/CSF)
 are MobileInsight's strength.
 
-Proposal, as a separate step with your OK: install SCAT on the computer after reading its source, capture
-2 minutes over USB with RRC + NAS + ML1 serving/neighbour + PUSCH Tx masks only, watch router CPU over adb,
-then look at the pcap and the measurement lines together. Diag log masks live in modem RAM only (no NV write); `diag_mdlog -c` clears them on exit, for SCAT this
-has to be checked in its source, and a router reboot clears them in any case.
+### Experiment 2026-11-05: SCAT over USB (with your OK)
+
+Setup. SCAT 2.1.2 (fgsect/scat, commit 17b3d49) installed from its source into a virtualenv on the computer,
+after reading the Qualcomm parser. USB access needed nothing extra: the logind seat ACL already gives the
+desktop user `rw` on `/dev/bus/usb/001/008`. SCAT claims only interface 3 and calls `set_configuration` only
+with `-c`, so adb (interface 4) and RNDIS stayed up. Command:
+`scat -t qc -u -a 001:008 -i 3 -L nas,rrc,mac -F cap.pcap --qmdl cap.qmdl` (the `ip` layer was left out: it
+would carry user traffic). `pycrate` was added to the same virtualenv to decode RRC ASN.1 offline.
+
+What SCAT sends to the modem (all runtime diag commands, nothing to NV/EFS, no mode change, no reset):
+- start: `stop_diag` (below), `DIAG_VERNO_F` 0x00 and `EXT_BUILD_ID` 0x7C (versions), `EVENT_REPORT` 0x60 off,
+  `LOG_CONFIG` 0x73 "retrieve ID ranges", an empty log mask for each subsystem (1x, WCDMA, GSM, UMTS, DTV,
+  LTE, TD-SCDMA), `EXT_MSG_CONFIG` 0x7D ranges and F3 message masks set to level 0; then `EVENT_REPORT` on and
+  the log masks for the chosen layers;
+- exit (end or Ctrl+C): `EVENT_REPORT` off, `LOG_CONFIG` `DISABLE_OP` (every log mask off), `EXT_MSG_CONFIG`
+  op 5 (every message mask off). So it clears what it set.
+- Local change: SCAT's LTE mask has no PUSCH Tx report, so code 0xB139 was added to the mask in the venv
+  copy only (same `LOG_CONFIG` command). PDSCH stats (0xB173) and CSF (0xB14E) are not supported by SCAT and
+  were not enabled.
+
+Run. 30 s baseline, capture 15:57:11-16:03:15 local (6 min, the cap: the speedtest did not happen in that
+window), 30 s after. The modem was idle almost the whole time; one short RRC connection at 16:00:31 local
+(455 bytes of traffic, ~12 s connected). Received: 106 KB of QMDL, 1380 diag frames, all wrapped in
+`DIAG_MULTI_RADIO` 0x98 (8-byte header, subscription 1) even on this single-SIM modem.
+
+| Log code | Count | What |
+|---|---|---|
+| 0xB17F ML1 serving cell meas | 271 | every ~1.3 s in idle (the 1.28 s paging cycle) |
+| 0xB180 ML1 neighbour meas | 105 | PCI 73 only, same EARFCN |
+| 0xB0C0 RRC OTA | 283 | 273 paging, 10 messages of the connection |
+| 0xB063 / 0xB064 MAC DL / UL TB | 284 / 23 | MAC headers and control elements |
+| 0xB061 / 0xB062 RACH trigger / attempt, 0xB167-0xB16A RAR Msg1-4 | 1 each | the connection's random access |
+| 0xB139 PUSCH Tx report v124 | 37 (65 records) | only while connected |
+| 0xB0C2, 0xB0CD, 0xB0ED, 0x1098 | 1, 4, 1, 52 | RRC serving cell info, CA combos, NAS EMM out, unknown (1x side) |
+
+Values obtained:
+
+| Value | Result | Source and decoding |
+|---|---|---|
+| Timing advance, distance | **TA 3 at access, one +1 command later: about 230-310 m to the antenna** | RACH Msg2 TA (0xB062 subpacket v3), × 78.12 m per step (16 Ts); TA command MAC CE (LCID 29) value 32 = +1 |
+| Tx power | **−7 to +4 dBm, mostly 0 dBm** (max 23) | 0xB139 v124 record +24, low 7 bits **signed** (121 = −7); MobileInsight's "x − 128" comment is wrong for this version, the PHR confirms |
+| Power headroom | **19-22 dB** (PHR level 42-45 − 23) | MAC UL CE LCID 26 every ~1.3 s while connected (periodicPHR 1000 ms) |
+| Uplink resource blocks | 2-6 of 100 | 0xB139 `Num of RB` |
+| Uplink modulation, code rate | QPSK, 16QAM and **64QAM**, code rate 0.15-0.74, TB 9-157 bytes | `PUSCH Mod Order` 1/2/3 = QPSK/16QAM/64QAM (checked against TB size ÷ RB capacity) |
+| Uplink retransmissions | 1 of 65 (≈1.5%) | `Re-tx Index` |
+| CQI | sent on PUSCH (aperiodic mode 3-1, 30-61 bits) but **not decoded**: the bit order in the payload is not verified | 0xB139 CQI payload |
+| Downlink MCS, BLER, RBs | **not captured**: needs PDSCH stats 0xB173 / CSF 0xB14E, not supported by SCAT | — |
+| Serving cell | B3, EARFCN 1700/19700, **20 MHz down and 20 MHz up**, PCI 80, TAC 3221, MCC 255 MNC 01 | 0xB0C2 |
+| Idle measurements | serving RSRP −73.7..−68.2 (median −70.4), RSRQ −14.2..−5.2 (median −12.8), RSSI ≈ −37; neighbour PCI 73 RSRP median −79.4, RSRQ −20.7 | 0xB17F / 0xB180 (SCAT stdout) |
+| Transmission mode | TM2 (transmit diversity) at setup, **TM4** (closed-loop 2×2 MIMO) from the first reconfiguration | RRC |
+| DRX, timers | long DRX 320 ms, short 80 ms ×2, inactivity 100 subframes, on-duration 10; time alignment infinity; maxHARQ-Tx 5 | RRC |
+| Connected-mode measurements | **one measurement object: EARFCN 1700 only**; A3 +3 dB (hyst 1 dB, 320 ms), A2 RSRP < −108 dBm, A3 leave −9 dB (40 ms), periodic strongest cells every 2 s, s-Measure −51 dBm, `includeLocationInfo` requested | RRC `measConfig` |
+| Release | cause "other", no idle-mode frequency priorities | RRC |
+| SIBs (neighbour frequencies, priorities) | **not captured**: in idle on an unchanged cell the modem does not re-read system information | would need a cell reselection or a Reconnect during the capture (an action: ask) |
+
+Cost and cleanup:
+- Router CPU busy 8.2% in the baseline, 8.3% during the capture, 8.0% after (all including the 2 s watcher and
+  adb polls). The diag kernel threads used 0 ticks: nothing measurable in idle. Under heavy traffic MAC and
+  PUSCH logs grow with the data rate; not measured.
+- After exit the diag USB write counter stayed at 383 for 40 s, logging mode 0, no MD session: masks cleared,
+  no reboot needed.
+
+IPA / undercount question: not answered, because the speedtest did not happen during the capture. Found
+meanwhile: `/sys/kernel/debug/ipa/stats` counts packets only (sw_tx, hw_tx, wan_rx...), not bytes; the WLAN IPA
+pipes in `wstats` are "Not up", so Wi-Fi traffic does not go through IPA WLAN offload and `rmnet_data0` should
+see it. Reading `/sys/kernel/debug/ipa/status_stats` hangs (killed by the timeout): do not read it. The check
+needs no diag: watch `rmnet_data0`, `wlan0/1` and `br0` counters during a speedtest.
+
+Saved (masked) in `testdata/raw/diag/`: `log-codes.txt`, `scat-stdout.txt` (measurements), `rach-mac-ce.txt`
+(RACH, TA command, PHR, BSR), `pusch-tx-v124.tsv` (decoded records), `rrc/*.txt` (decoded RRC messages, with
+S-TMSI and the NAS container masked). The raw QMDL and pcap were not saved: paging carries temporary IDs of
+other people's phones and NAS carries ours.
+
+For the panel: TA (distance), Tx power and PHR are the diag values worth showing. Live use would mean a DCI
+client on the router or a computer-side reader; both are later steps.
 
 ## 17. The most useful values the panel does not show yet
 

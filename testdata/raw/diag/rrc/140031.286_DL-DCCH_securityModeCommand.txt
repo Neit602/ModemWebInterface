@@ -1,0 +1,13 @@
+{
+  message c1 : securityModeCommand : {
+    rrc-TransactionIdentifier 2,
+    criticalExtensions c1 : securityModeCommand-r8 : {
+      securityConfigSMC {
+        securityAlgorithmConfig {
+          cipheringAlgorithm eea2,
+          integrityProtAlgorithm eia2
+        }
+      }
+    }
+  }
+}
