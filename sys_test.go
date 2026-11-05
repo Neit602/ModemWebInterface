@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+	"path/filepath"
 	"testing"
 	"time"
 )
@@ -62,5 +64,54 @@ func TestHistoryClockJump(t *testing.T) {
 	h.add(&Status{TS: 5_000}, iv)
 	if h.T[3]-h.T[2] != 2000 {
 		t.Fatalf("backwards jump: %v", h.T)
+	}
+}
+
+func writeSysfs(t *testing.T, dir string, files map[string]string) {
+	t.Helper()
+	if err := os.MkdirAll(dir, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	for name, v := range files {
+		if err := os.WriteFile(filepath.Join(dir, name), []byte(v+"\n"), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestReadBatteryTemp(t *testing.T) {
+	// Layout of the 8800L (2026-11-05): the fuel gauge has temp_ambient, no temp; the charger
+	// also says type=Battery but has no capacity.
+	base := t.TempDir()
+	writeSysfs(t, filepath.Join(base, "bq27520-battery"), map[string]string{
+		"type": "Battery", "present": "1", "capacity": "100", "status": "Full",
+		"temp_ambient": "284", "voltage_now": "4277000", "current_now": "84000"})
+	writeSysfs(t, filepath.Join(base, "smb1351-charger"), map[string]string{
+		"type": "Battery", "present": "1", "status": "Charging"})
+	writeSysfs(t, filepath.Join(base, "usb"), map[string]string{"type": "USB", "online": "1"})
+	b := readBatteryFrom(base)
+	if b.Percent == nil || *b.Percent != 100 || b.Status != "full" {
+		t.Fatalf("level/status: %+v", b)
+	}
+	if b.TempC == nil || *b.TempC != 28.4 {
+		t.Fatalf("temp_ambient not used: %v", b.TempC)
+	}
+	if b.ExtPower == nil || !*b.ExtPower {
+		t.Fatalf("ext power: %v", b.ExtPower)
+	}
+
+	// Other drivers: plain temp.
+	base2 := t.TempDir()
+	writeSysfs(t, filepath.Join(base2, "battery"), map[string]string{
+		"type": "Battery", "capacity": "55", "status": "Discharging", "temp": "312"})
+	if b := readBatteryFrom(base2); b.TempC == nil || *b.TempC != 31.2 {
+		t.Fatalf("temp fallback: %v", b.TempC)
+	}
+
+	// Neither file: no temperature, no crash.
+	base3 := t.TempDir()
+	writeSysfs(t, filepath.Join(base3, "battery"), map[string]string{"type": "Battery", "capacity": "55"})
+	if b := readBatteryFrom(base3); b.TempC != nil {
+		t.Fatalf("expected no temperature, got %v", *b.TempC)
 	}
 }

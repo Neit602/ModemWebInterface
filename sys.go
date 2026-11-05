@@ -87,9 +87,21 @@ func ifaceState(name string) (up bool, ipv4 string) {
 	return up, ""
 }
 
-func readBattery() Battery {
+func readBattery() Battery { return readBatteryFrom("/sys/class/power_supply") }
+
+// batteryTemp reads the battery temperature in tenths of a degree. The 8800L fuel gauge
+// (bq27520-battery) exposes it as temp_ambient; other drivers use temp.
+func batteryTemp(dir string) *float64 {
+	for _, name := range []string{"temp_ambient", "temp"} {
+		if v, err := strconv.Atoi(readTrim(filepath.Join(dir, name))); err == nil {
+			return fp(float64(v) / 10)
+		}
+	}
+	return nil
+}
+
+func readBatteryFrom(base string) Battery {
 	var b Battery
-	base := "/sys/class/power_supply"
 	entries, err := os.ReadDir(base)
 	if err != nil {
 		b.Status = "unknown"
@@ -122,9 +134,7 @@ func readBattery() Battery {
 			default:
 				b.Status = "unknown"
 			}
-			if v, err := strconv.Atoi(readTrim(filepath.Join(p, "temp"))); err == nil {
-				b.TempC = fp(float64(v) / 10)
-			}
+			b.TempC = batteryTemp(p)
 		case strings.HasPrefix(typ, "USB") || typ == "Mains" || typ == "Wireless":
 			online := readTrim(filepath.Join(p, "online")) == "1"
 			if ext == nil {
