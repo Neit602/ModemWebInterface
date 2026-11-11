@@ -32,23 +32,33 @@ type Signal struct {
 }
 
 type WAN struct {
-	Iface    string  `json:"iface"`
-	IP       string  `json:"ip"`
-	Up       bool    `json:"up"`
-	State    string  `json:"state"`     // connected, connecting, disconnected; empty when unknown
-	SessionS int64   `json:"session_s"` // how long the data session has been up
-	RxBytes  uint64  `json:"rx_bytes"`
-	TxBytes  uint64  `json:"tx_bytes"`
-	RxRate   float64 `json:"rx_rate"` // bytes per second
-	TxRate   float64 `json:"tx_rate"`
+	Details  *WANDetails `json:"details"` // APN, gateway, mask, DNS; nil = not read yet
+	TZMin    *int        `json:"tz_min"`  // network time zone, minutes east of UTC
+	Iface    string      `json:"iface"`
+	IP       string      `json:"ip"`
+	Up       bool        `json:"up"`
+	State    string      `json:"state"`     // connected, connecting, disconnected; empty when unknown
+	SessionS int64       `json:"session_s"` // how long the data session has been up
+	RxBytes  uint64      `json:"rx_bytes"`
+	TxBytes  uint64      `json:"tx_bytes"`
+	RxRate   float64     `json:"rx_rate"` // bytes per second
+	TxRate   float64     `json:"tx_rate"`
 }
 
 type Battery struct {
-	Present  bool     `json:"present"`
-	Percent  *int     `json:"percent"`
-	Status   string   `json:"status"` // charging, discharging, full, unknown
-	ExtPower *bool    `json:"ext_power"`
-	TempC    *float64 `json:"temp_c"`
+	Present     bool     `json:"present"`
+	Percent     *int     `json:"percent"`
+	Status      string   `json:"status"` // charging, discharging, full, unknown
+	ExtPower    *bool    `json:"ext_power"`
+	TempC       *float64 `json:"temp_c"`
+	VoltageV    *float64 `json:"voltage_v"`
+	CurrentMA   *float64 `json:"current_ma"` // positive = charging, negative = draining
+	PowerW      *float64 `json:"power_w"`    // same sign as the current
+	Phase       string   `json:"phase"`      // fast charging, topping up, full, on battery...
+	Health      string   `json:"health,omitempty"`
+	TimeLeftS   *int64   `json:"time_left_s"` // on battery only
+	TimeLeftEst bool     `json:"time_left_est,omitempty"`
+	PowerOn     string   `json:"power_on"` // why the router last started
 }
 
 type System struct {
@@ -62,6 +72,15 @@ type Client struct {
 	MAC    string `json:"mac"`
 	Name   string `json:"name"`
 	Online bool   `json:"online"`
+	// Filled on the 8800L: how the device is connected and, on Wi-Fi, its signal and link.
+	Via        string       `json:"via,omitempty"`     // "wifi" or "usb"
+	Network    string       `json:"network,omitempty"` // Primary or Guest
+	Band       string       `json:"band,omitempty"`    // 2.4 GHz or 5 GHz
+	Signal     *int         `json:"signal,omitempty"`  // dBm, as the router hears the device
+	TxRate     *float64     `json:"tx_rate,omitempty"` // Mbps, router to device
+	RxRate     *float64     `json:"rx_rate,omitempty"` // Mbps, device to router
+	ConnectedS int64        `json:"connected_s,omitempty"`
+	Usage      *deviceUsage `json:"usage,omitempty"`
 }
 
 type Action struct {
@@ -83,6 +102,10 @@ type Status struct {
 	Clients  []Client `json:"clients"`
 	Action   *Action  `json:"action"`
 	Warnings []string `json:"warnings"`
+
+	SMSUnread *int      `json:"sms_unread"` // nil = not known
+	Lifetime  *Lifetime `json:"lifetime"`   // traffic since the router was first used
+	SoCTempC  *float64  `json:"soc_temp_c"` // hottest chip sensor
 }
 
 const historyCap = 450 // 15 minutes at a 2 s interval
@@ -162,15 +185,18 @@ type Collector struct {
 
 	actMu  sync.Mutex
 	action *Action
+
+	x *extras // slower values (0.7.0)
 }
 
 var errBusy = errors.New("wait, the previous action is still running")
 
 func NewCollector(cfg Config) *Collector {
-	c := &Collector{cfg: cfg, cells: NewCellTracker(), events: &EventLog{}}
+	c := &Collector{cfg: cfg, cells: NewCellTracker(), events: &EventLog{}, x: newExtras()}
 	if cfg.Demo {
 		c.demo = NewDemo()
 		c.conn, c.connOK = c.demo.SeedEvents(c.events, time.Now())
+		demoExtras(c.x)
 	} else {
 		c.vendor = NewVendor(cfg.VendorDir)
 		if cfg.ATPath != "" {
@@ -184,6 +210,7 @@ func (c *Collector) Run() {
 	if c.demo == nil {
 		c.pollRadio(0)
 		go c.radioLoop()
+		go c.extrasLoop()
 	}
 	c.sample()
 	t := time.NewTicker(c.cfg.Interval)
@@ -264,7 +291,9 @@ func (c *Collector) pollRadio(round int) {
 		c.mu.RLock()
 		r.clients = c.radio.clients
 		c.mu.RUnlock()
-		if round%3 == 0 || r.clients == nil {
+		// dmdb_cli is one of the dearer tools (it hands over a 570 KB buffer); names change rarely and the
+		// Wi-Fi list (wl) says who is connected, so once a minute is enough.
+		if round%15 == 0 || r.clients == nil {
 			if cl, err := c.vendor.Clients(); err == nil {
 				r.clients = cl
 			}
@@ -308,6 +337,9 @@ func (c *Collector) trackEvents(n Network, netOK bool, w *wanInfo, now time.Time
 		return
 	}
 	diffEvents(c.conn, next, func(kind, level, text string) { c.events.Add(kind, level, text, now) })
+	if c.demo == nil && lostService(c.conn, next) {
+		go c.explainLoss(now)
+	}
 	c.conn = next
 }
 
@@ -323,7 +355,7 @@ func (c *Collector) CellsView() CellsView {
 		scan = &s
 	}
 	c.mu.RUnlock()
-	v := CellsView{Serving: servingCell(n), Cells: c.cells.Snapshot(now), Scan: scan}
+	v := CellsView{Serving: servingCell(n), Cells: c.cells.Snapshot(now), Scan: scan, Modem: c.modemView(n.Tech)}
 	switch {
 	case c.demo != nil:
 		v.Source = "demo"
@@ -335,6 +367,7 @@ func (c *Collector) CellsView() CellsView {
 
 // ScreenData is the snapshot the screen renderer draws from.
 func (c *Collector) ScreenData() ScreenData {
+	c.want("ui") // the screen may show the weakest Wi-Fi client
 	return ScreenData{St: c.Status(), Hist: c.HistorySnapshot(), AimBest: map[string]float64{}}
 }
 
@@ -358,6 +391,7 @@ func (c *Collector) sample() {
 		st.Warnings = append(st.Warnings, r.warn...)
 		st.WAN = c.readWAN(now, r.wan)
 		st.Battery = readBattery()
+		fillPower(&st.Battery, readPowerDetails("/sys/class/power_supply"), &c.x.drain, now)
 		st.Clients = readClients(c.cfg.Leases, st.WAN.Iface)
 		if r.clients != nil {
 			st.Clients = mergeClients(st.Clients, r.clients)
@@ -365,6 +399,7 @@ func (c *Collector) sample() {
 	}
 	st.System = readSystem()
 	st.Action = c.currentAction()
+	c.fillExtras(&st, now)
 
 	c.mu.Lock()
 	c.cur = st

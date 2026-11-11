@@ -36,6 +36,20 @@ var vendorAllowed = map[string]bool{
 	"ccm2_cli wwan_connect":              true,
 	// Only from the screen failsafe while devuiappd is paused for "Show on router".
 	"watchdog_cli application_send_keep_alive": true,
+	// Slower reads (0.7.0): battery/power state, versions, SIM, data session details, network time,
+	// reject cause, LTE search timer, band preference (band number on stdin), unread SMS count
+	// (channel name on stdin), lifetime traffic.
+	"dsm_cli get_state":                  true,
+	"modem2_cli get_info":                true,
+	"modem2_cli sim_get_status":          true,
+	"modem2_cli call_get_status":         true,
+	"modem2_cli get_network_time":        true,
+	"modem2_cli get_reject_cause_code":   true,
+	"modem2_cli bsr_get_timers":          true,
+	"modem2_cli lte_band_get_enabled":    true,
+	"modem2_cli get_diag_info":           true,
+	"msgbus_cli MsgBusGet":               true,
+	"dmdb_cli get_data_usage_statistics": true,
 }
 
 // run starts one tool. Some subcommands ask questions on stdin, so stdin is always given explicitly.
@@ -301,9 +315,27 @@ func parseDmdbClients(out string) ([]Client, error) {
 		if name == "" {
 			name = f["entry.hostname"]
 		}
-		out2 = append(out2, Client{IP: f["data.ipv4"], MAC: strings.ToLower(f["mac"]), Name: name, Online: f["data.connected"] == "1"})
+		cl := Client{IP: f["data.ipv4"], MAC: strings.ToLower(f["mac"]), Name: name, Online: f["data.connected"] == "1"}
+		cl.Via, cl.Network = dmdbInterface(f["entry.interface"])
+		out2 = append(out2, cl)
 	}
 	return out2, nil
+}
+
+// dmdbInterface reads dmdb's entry.interface: "USB", "WIFI Primary", "WIFI Guest" (or "WIFI Secondary").
+func dmdbInterface(s string) (via, network string) {
+	u := strings.ToUpper(s)
+	switch {
+	case strings.HasPrefix(u, "USB"):
+		return "usb", ""
+	case strings.Contains(u, "PRIMARY"):
+		return "wifi", "Primary"
+	case strings.Contains(u, "GUEST"), strings.Contains(u, "SECONDARY"):
+		return "wifi", "Guest"
+	case strings.HasPrefix(u, "WIFI"):
+		return "wifi", ""
+	}
+	return "", ""
 }
 
 // mergeClients puts what dmdb knows (connected now, names) over the lease/ARP list, which also
@@ -326,6 +358,9 @@ func mergeClients(base, live []Client) []Client {
 		}
 		if c.IP != "" {
 			b.IP = c.IP
+		}
+		if c.Via != "" {
+			b.Via, b.Network = c.Via, c.Network
 		}
 	}
 	sort.SliceStable(base, func(i, j int) bool {

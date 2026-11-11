@@ -107,7 +107,7 @@ button { font: inherit; color: inherit; }
 /* Layout grid */
 .grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 900px) {
-  .grid { grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr); align-items: start; }
+  .grid { grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr); grid-template-rows: auto 1fr; align-items: start; }
   .signal { grid-column: 1; grid-row: 1; }
   .side { grid-column: 2; grid-row: 1 / span 2; }
   .details { grid-column: 1; grid-row: 2; }
@@ -232,7 +232,7 @@ footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
 .cgrid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 900px) {
   .cgrid { grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr); align-items: start; }
-  .cgrid > .ev-card { grid-column: 2; grid-row: 1 / span 3; }
+  .cgrid > .ev-card { grid-column: 2; grid-row: 1 / span 4; }
 }
 body.stale .cgrid { opacity: .55; }
 .card { background: var(--surface); border-radius: 12px; padding: 16px; }
@@ -259,6 +259,49 @@ body.stale .cgrid { opacity: .55; }
 .events li { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 0 8px; align-items: baseline; padding: 6px 0; font-size: 14px; }
 .events li + li { border-top: 1px solid var(--line); }
 .events time { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Battery, Internet details, devices */
+.kv.mini { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 10px; }
+.kv.mini div { padding: 4px 0; font-size: 14px; }
+.kv.mini div:last-child { border-bottom: 0; }
+.bat-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-top: 8px; }
+.bat-top b { font-size: 28px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.bat-top .q { font-size: 15px; }
+.clients .wf { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 10px; font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; margin-top: 2px; }
+.clients .wf span { display: inline-flex; align-items: center; gap: 4px; }
+.clients .wf .icon { width: 13px; height: 13px; vertical-align: -2px; }
+
+/* Wi-Fi and System pages */
+.wgrid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) {
+  .wgrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .wgrid > .wide { grid-column: 1 / -1; }
+}
+body.stale .wgrid, body.stale .ygrid { opacity: .55; }
+.radios { display: grid; gap: 12px 24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 6px; }
+.radio h3 { font-size: 15px; font-weight: 600; margin: 8px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.radio .ssid { color: var(--ink-2); font-size: 13px; overflow-wrap: anywhere; }
+.radio .kv { grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 6px; }
+.radio .kv div { padding: 5px 0; font-size: 14px; }
+.tbl.wide-tbl { min-width: 560px; }
+.tscroll { overflow-x: auto; }
+.tbl td small { color: var(--muted); font-size: 12px; }
+.tbl tr.mine td { color: var(--muted); }
+.chip.st-warning, .chip.st-critical, .chip.st-good { color: var(--ink); font-weight: 500; }
+.chip.st-warning { border-color: var(--warning); }
+.chip.st-critical { border-color: var(--critical); }
+.chip.st-good { border-color: var(--good); }
+.chip .icon { margin-right: 5px; }
+.advice { margin: 10px 0 0; padding-left: 18px; font-size: 14px; }
+.advice li + li { margin-top: 4px; }
+.ygrid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
+.bands { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 6px; margin-top: 10px; }
+.band { border: 1px solid var(--line); border-radius: 8px; padding: 4px 9px; font-size: 13px; line-height: 1.3; }
+.band b { display: block; font-weight: 600; font-size: 14px; }
+.band small { color: var(--muted); font-size: 12px; }
+.band.ua { border-color: var(--accent); }
+.band.off { border-style: dashed; }
+.reveal { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
 
 /* Screen page */
 .sgrid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
@@ -361,6 +404,7 @@ dialog.aim::backdrop { background: var(--page); }
     <span class="state" id="reg"></span>
     <span class="state" id="conn"></span>
     <span class="state push" id="batt"></span>
+    <span class="state" id="sms" hidden></span>
     <span class="chip demo" id="demo" hidden>Demo data</span>
   </header>
 
@@ -368,6 +412,8 @@ dialog.aim::backdrop { background: var(--page); }
     <div class="seg" role="tablist">
       <a href="#" role="tab" data-view="overview" aria-selected="true">Overview</a>
       <a href="#cells" role="tab" data-view="cells" aria-selected="false">Cells</a>
+      <a href="#wifi" role="tab" data-view="wifi" aria-selected="false">Wi-Fi</a>
+      <a href="#system" role="tab" data-view="system" aria-selected="false">System</a>
       <a href="#screen" role="tab" data-view="screen" aria-selected="false">Screen</a>
     </div>
   </nav>
@@ -406,6 +452,13 @@ dialog.aim::backdrop { background: var(--page); }
           <div class="tip" hidden></div>
         </div>
         <p class="sub" id="net-sub"></p>
+        <dl class="kv mini" id="net-kv"></dl>
+      </section>
+
+      <section aria-labelledby="h-bat" id="bat-sec">
+        <h2 id="h-bat">Battery</h2>
+        <div class="bat-top"><b id="bat-pct">—</b><span class="q" id="bat-q"></span></div>
+        <dl class="kv mini" id="bat-kv"></dl>
       </section>
 
       <section aria-labelledby="h-act">
@@ -464,10 +517,75 @@ dialog.aim::backdrop { background: var(--page); }
       <div id="scan-out"></div>
     </section>
 
+    <section class="card" aria-labelledby="h-modem">
+      <h2 id="h-modem">Modem settings</h2>
+      <p class="sub" id="modem-sub">Which LTE bands the modem is allowed to use. Read-only: the panel never changes them.</p>
+      <div id="modem-out"></div>
+    </section>
+
     <section class="card ev-card" aria-labelledby="h-ev">
       <h2 id="h-ev">Connection events</h2>
-      <p class="sub">What changed since the panel started: network type, band, cell, registration, data session and IP address. The last 300 are kept.</p>
+      <p class="sub">What changed since the panel started: network type, band, cell, registration, data session and IP address. When the network or the internet is lost, the reason the network gave (if any) is added. The last 300 are kept.</p>
       <ol class="events" id="ev-list"></ol>
+    </section>
+  </main>
+
+  <main class="wgrid" id="view-wifi" hidden>
+    <section class="card" aria-labelledby="h-wnets">
+      <h2 id="h-wnets">Wi-Fi networks</h2>
+      <p class="sub">The router's two networks. "Air busy" is how much of the time the channel was taken, by this router or by others.</p>
+      <div class="radios" id="radios"></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-wdev">
+      <h2 id="h-wdev">Devices on Wi-Fi</h2>
+      <p class="sub" id="wdev-sub"></p>
+      <div id="wdev-out"></div>
+    </section>
+
+    <section class="card wide" aria-labelledby="h-nearby">
+      <div class="sec-head">
+        <h2 id="h-nearby">Networks nearby</h2>
+        <button type="button" class="btn" id="wscan-btn">Scan for networks</button>
+      </div>
+      <p class="sub">Other networks on the same or overlapping channels share the air with yours and slow it down. Use this to pick a quieter channel, then change it in the stock settings.</p>
+      <div class="action-msg" id="wscan-msg" role="status" hidden></div>
+      <div id="wscan-out"></div>
+    </section>
+  </main>
+
+  <main class="ygrid" id="view-system" hidden>
+    <section class="card" aria-labelledby="h-temp">
+      <h2 id="h-temp">Temperatures</h2>
+      <p class="sub" id="temp-sub"></p>
+      <dl class="kv mini" id="temp-kv"></dl>
+    </section>
+    <section class="card" aria-labelledby="h-sim">
+      <h2 id="h-sim">SIM card</h2>
+      <dl class="kv mini" id="sim-kv"></dl>
+      <div class="reveal">
+        <button type="button" class="btn" id="id-btn" aria-expanded="false">Show IMEI, IMSI and ICCID</button>
+      </div>
+      <dl class="kv mini" id="id-kv" hidden></dl>
+      <p class="sub" id="id-note" style="margin-top:8px">These numbers identify this router and your SIM. They are hidden so they do not end up in screenshots.</p>
+    </section>
+    <section class="card" aria-labelledby="h-fw">
+      <h2 id="h-fw">Protection from the internet</h2>
+      <p class="sub" id="fw-sub"></p>
+      <dl class="kv mini" id="fw-kv"></dl>
+    </section>
+    <section class="card" aria-labelledby="h-flash">
+      <h2 id="h-flash">Storage</h2>
+      <p class="sub" id="flash-sub"></p>
+      <dl class="kv mini" id="flash-kv"></dl>
+    </section>
+    <section class="card" aria-labelledby="h-sys">
+      <h2 id="h-sys">System</h2>
+      <dl class="kv mini" id="sys-kv"></dl>
+    </section>
+    <section class="card" aria-labelledby="h-ver">
+      <h2 id="h-ver">Versions</h2>
+      <dl class="kv mini" id="ver-kv"></dl>
     </section>
   </main>
 
@@ -562,6 +680,17 @@ dialog.aim::backdrop { background: var(--page); }
   </form>
 </dialog>
 
+<dialog class="confirm" id="wscan-dlg" aria-labelledby="wscan-dlg-h">
+  <form method="dialog">
+    <h2 id="wscan-dlg-h">Scan for Wi-Fi networks nearby?</h2>
+    <p>The router listens on every channel, about 6 seconds per band. While it does, Wi-Fi on this router blips: devices may pause for a moment. Nothing is changed.</p>
+    <div class="action-btns">
+      <button type="submit" class="btn" value="cancel">Cancel</button>
+      <button type="submit" class="btn primary" value="ok">Scan</button>
+    </div>
+  </form>
+</dialog>
+
 <dialog class="confirm" id="show-dlg" aria-labelledby="show-dlg-h">
   <form method="dialog">
     <h2 id="show-dlg-h">Show this on the router's screen?</h2>
@@ -649,6 +778,7 @@ const ICONS = {
   critical: '<path d="M5 .8h6L15.2 5v6L11 15.2H5L.8 11V5z" fill="currentColor"/><path d="M5.6 5.6l4.8 4.8M10.4 5.6l-4.8 4.8" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>',
   neutral: '<circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="2"/>',
   bolt: '<path d="M9.2 1L3.5 9h4l-1 6L12.5 7h-4z" fill="currentColor"/>',
+  mail: '<rect x="1.2" y="3.2" width="13.6" height="9.6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M2 4.2l6 4.6 6-4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
 };
 function icon(name, st = name) {
   return `<svg class="icon st-${st}" viewBox="0 0 16 16" aria-hidden="true">${ICONS[name]}</svg>`;
@@ -658,6 +788,37 @@ function setQ(el, q) {
   el.innerHTML = icon(q.st) + `<span>${q.t}</span>`;
 }
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// Time zone in minutes east of UTC -> "UTC+2".
+function tzText(m) {
+  if (m == null) return "—";
+  const sign = m < 0 ? "−" : "+", a = Math.abs(m);
+  return `UTC${sign}${Math.floor(a / 60)}${a % 60 ? ":" + String(a % 60).padStart(2, "0") : ""}`;
+}
+// Wi-Fi signal as the router hears a device (dBm).
+const WIFI_STEPS = [-55, -67, -75, -82];
+function wifiQ(v) {
+  if (v == null) return null;
+  let i = WIFI_STEPS.findIndex((x) => v >= x);
+  if (i < 0) i = WIFI_STEPS.length;
+  return LEVELS[Math.min(i, LEVELS.length - 1)];
+}
+const mbps = (v) => (v == null ? "—" : (v >= 100 ? NF0 : NF1).format(v) + " Mbps");
+function hm(s) {
+  if (s == null) return "—";
+  const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60);
+  return h ? `${h} h ${m} min` : `${m} min`;
+}
+function addKV(kv, rows) { // rows: [label, text] or [label, html, true]
+  kv.replaceChildren();
+  for (const [k, v, html] of rows) {
+    const d = document.createElement("div");
+    const dt = document.createElement("dt"); dt.textContent = k;
+    const dd = document.createElement("dd");
+    if (html) dd.innerHTML = v; else dd.textContent = v == null || v === "" ? "—" : String(v);
+    d.append(dt, dd); kv.append(d);
+  }
+}
 
 /* ---------- Charts ---------- */
 function setupChart(el) {
@@ -881,6 +1042,9 @@ function render(st) {
 
   renderAction(st.action);
   renderClients(st.clients || []);
+  renderSMS(st.sms_unread);
+  renderBattery(b);
+  renderNetKV(st);
   renderDetails(st);
   aimUpdate(st);
 }
@@ -957,6 +1121,57 @@ function renderAction(a) {
   box.append(tx);
 }
 
+function renderSMS(n) {
+  const el = $("#sms");
+  el.hidden = n == null || n === 0;
+  if (!el.hidden) el.innerHTML = icon("mail", "neutral") + `<span>${n} unread SMS</span>`;
+}
+
+const PHASE = { "fast charging": "Charging fast", "topping up": "Topping up (almost full)", "trickle charging": "Trickle charging",
+  charging: "Charging", full: "Full", "on battery": "On battery", "not charging": "Not charging" };
+function renderBattery(b) {
+  $("#bat-sec").hidden = !b.present;
+  if (!b.present) return;
+  $("#bat-pct").textContent = b.percent != null ? b.percent + "%" : "—";
+  const onBat = b.ext_power === false;
+  const low = b.percent != null && b.percent <= 15 ? "critical" : b.percent != null && b.percent <= 30 ? "warning" : null;
+  const st = onBat ? (low || "warning") : "good";
+  $("#bat-q").innerHTML = (onBat ? icon(st) : icon("bolt", "neutral")) + `<span>${esc(PHASE[b.phase] || (onBat ? "On battery" : "External power"))}</span>`;
+  const sign = (v) => (v > 0 ? "+" : v < 0 ? "−" : "");
+  const rows = [];
+  if (onBat) rows.push(["Time left", b.time_left_s != null ? (b.time_left_est ? "about " : "") + hm(b.time_left_s) : "estimating…"]);
+  rows.push(
+    ["Power", b.power_w != null ? `${sign(b.power_w)}${NF2.format(Math.abs(b.power_w))} W ${b.power_w < 0 ? "from the battery" : b.power_w > 0 ? "into the battery" : ""}`.trim() : "—"],
+    ["Current", b.current_ma != null ? `${sign(b.current_ma)}${NF0.format(Math.abs(b.current_ma))} mA` : "—"],
+    ["Voltage", b.voltage_v != null ? NF2.format(b.voltage_v) + " V" : "—"],
+    ["Temperature", b.temp_c != null ? num(b.temp_c, 1) + " °C" : "—"],
+    ["Power source", b.ext_power == null ? "—" : onBat ? "Battery (no external power)" : "External power (USB or charger)"],
+    ["Last start", b.power_on || "—"],
+  );
+  if (b.health) rows.push(["Battery health", b.health]);
+  addKV($("#bat-kv"), rows);
+}
+
+function renderNetKV(st) {
+  const w = st.wan, d = w.details;
+  const rows = [];
+  if (w.up && w.ip) {
+    rows.push(["APN", d && d.apn], ["Gateway", d && d.gateway],
+      ["Subnet mask", d && d.mask ? d.mask + (d.mask === "255.255.255.252" ? " (/30)" : "") : ""],
+      ["Operator DNS", d && d.dns && d.dns.length ? d.dns.join(", ") : ""]);
+  }
+  rows.push(["Network time zone", tzText(w.tz_min)]);
+  if (st.lifetime) rows.push(["Since first use", `${bytes(st.lifetime.down)} received, ${bytes(st.lifetime.up)} sent`]);
+  addKV($("#net-kv"), rows);
+}
+
+function usedText(u, short) {
+  if (!u) return "";
+  const s = u.sess_down + u.sess_up, t = u.total_down + u.total_up;
+  if (short) return s ? `${bytes(s)} this session` : `${bytes(t)} in total`;
+  return `${s ? bytes(s) + " this session, " : ""}${bytes(t)} in total`;
+}
+
 function renderClients(list) {
   const on = list.filter((c) => c.online).length;
   $("#cl-sub").textContent = list.length ? `${on} online now, ${list.length} total` : "";
@@ -973,7 +1188,19 @@ function renderClients(list) {
     const ad = document.createElement("span"); ad.className = "ad"; ad.textContent = `${c.ip}  ${c.mac}`;
     const st = document.createElement("span"); st.className = "on";
     st.innerHTML = c.online ? icon("good") + "online" : icon("neutral") + "offline";
-    li.append(nm, st, ad); ul.append(li);
+    li.append(nm, st, ad);
+    const wf = document.createElement("span"); wf.className = "wf";
+    const parts = [];
+    if (c.online && c.via === "wifi") {
+      const q = wifiQ(c.signal);
+      parts.push([c.band, c.network].filter(Boolean).join(" · ") || "Wi-Fi");
+      if (c.signal != null) parts.push(icon(q.st) + esc(`${num(c.signal)} dBm, ${q.t.toLowerCase()}`));
+      if (c.tx_rate != null) parts.push(esc(`link ${mbps(c.tx_rate)}`));
+      if (c.connected_s) parts.push(esc(`connected ${duration(c.connected_s)}`));
+    } else if (c.online && c.via === "usb") parts.push("USB cable");
+    if (c.usage) parts.push(esc(usedText(c.usage, true)));
+    if (parts.length) { wf.innerHTML = parts.map((x) => `<span>${x}</span>`).join(""); li.append(wf); }
+    ul.append(li);
   }
 }
 
@@ -990,7 +1217,6 @@ function renderDetails(st) {
     ["Registration", REG[n.reg] || "—"], ["Data session", SESSION[w.state] || "—"], ["Interface", w.iface || "—"],
     ["Uptime", duration(sy.uptime_s)], ["Load", num(sy.load1, 1)],
     ["Memory used", sy.mem_used_pct ? num(sy.mem_used_pct) + "%" : "—"],
-    ["Battery temperature", b.temp_c != null ? num(b.temp_c, 1) + " °C" : "—"],
   ];
   const kv = $("#kv");
   kv.replaceChildren();
@@ -1009,11 +1235,15 @@ function setView(v) {
   $("#view-overview").hidden = v !== "overview";
   $("#view-cells").hidden = v !== "cells";
   $("#view-screen").hidden = v !== "screen";
+  $("#view-wifi").hidden = v !== "wifi";
+  $("#view-system").hidden = v !== "system";
   document.querySelectorAll(".tabs a").forEach((a) => a.setAttribute("aria-selected", String(a.dataset.view === v)));
   if (v === "cells") loadCells();
+  if (v === "wifi") loadWifi();
+  if (v === "system") loadSystem();
   if (v === "screen") openScreen();
 }
-const viewFromHash = () => ({ "#cells": "cells", "#screen": "screen" })[location.hash] || "overview";
+const viewFromHash = () => ({ "#cells": "cells", "#screen": "screen", "#wifi": "wifi", "#system": "system" })[location.hash] || "overview";
 
 async function loadCells() {
   try {
@@ -1022,6 +1252,7 @@ async function loadCells() {
     renderCells(cv.cells || [], cv.source, cv.serving.tech);
     renderScan(cv.scan);
     renderEvents(ev.events || []);
+    renderModem(cv.modem, cv.serving.tech);
   } catch (e) { /* the status poll reports a dead panel */ }
 }
 
@@ -1161,15 +1392,216 @@ function renderEvents(list) {
   }
 }
 
+const LTE_MHZ = { 1: "2100", 2: "1900", 3: "1800", 4: "1700/2100", 5: "850", 7: "2600", 8: "900", 13: "700", 14: "700", 20: "800",
+  28: "700", 46: "5200", 48: "3500", 66: "1700/2100" };
+function renderModem(m, tech) {
+  const out = $("#modem-out"); out.replaceChildren();
+  if (!m) {
+    const p = document.createElement("p"); p.className = "empty";
+    p.textContent = "Reading the band settings from the modem… (they are read when this page opens, then every 10 minutes)";
+    out.append(p); return;
+  }
+  const p = document.createElement("p"); p.className = "sub"; p.style.marginTop = "10px";
+  const off = m.pref_off || [];
+  const ua = m.bands.filter((b) => b.used_here && b.hardware).map((b) => "B" + b.band).join(", ");
+  p.textContent = off.length
+    ? `Switched off in the band preference: ${off.map((b) => "B" + b).join(", ")}. A band works only if it is both allowed here and built into the router.`
+    : `Every band the modem can report (B1–B43) is allowed. Of the bands used in Ukraine, this router has ${ua}.`;
+  const bands = document.createElement("div"); bands.className = "bands";
+  for (const b of m.bands) {
+    const d = document.createElement("div");
+    d.className = "band" + (b.used_here ? " ua" : "") + (b.pref === false ? " off" : "");
+    const pref = b.pref == null ? "unreadable" : b.pref ? "allowed" : "switched off";
+    const hw = b.pref == null ? "" : b.applied ? "in use" : b.pref ? "after restart" : "not in use";
+    d.innerHTML = `<b>B${b.band}</b><small>${esc(LTE_MHZ[b.band] || "")} MHz</small><br><small>${esc(b.hardware ? pref : "no radio")}${b.hardware && hw ? " · " + esc(hw) : ""}</small>`;
+    d.title = `B${b.band}: ${b.hardware ? "the router has this band" : "the router's radio does not have this band"}; preference: ${pref}; ${b.applied ? "in effect since the modem started" : "not in effect"}${b.used_here ? "; used by operators in Ukraine" : ""}`;
+    bands.append(d);
+  }
+  const legend = document.createElement("p"); legend.className = "sub"; legend.style.marginTop = "8px";
+  legend.textContent = "Blue frame: used by operators in Ukraine. Dashed: switched off. \"In use\" means the modem applied it when it last started; a changed preference takes effect after a restart. Bands above 43 cannot be read with the stock tool." +
+    (m.read_ago_s != null ? ` Read ${m.read_ago_s < 60 ? "just now" : Math.round(m.read_ago_s / 60) + " min ago"}.` : "");
+  out.append(p, bands, legend);
+  if (tech === "3G") {
+    const h = document.createElement("p"); h.className = "notice"; h.style.marginTop = "12px";
+    h.innerHTML = icon("warning") + `<span>The modem is on 3G. It looks for LTE again every ${m.next_lte_scan_s ? Math.round(m.next_lte_scan_s / 60) + " minutes" : "few minutes"} by itself; Reconnect makes it look right away.</span>`;
+    out.append(h);
+  }
+}
+
+/* ---------- Wi-Fi page ---------- */
+let wifiLast = null;
+async function loadWifi() {
+  try {
+    const v = await api.wifi();
+    wifiLast = v;
+    renderRadios(v.radios || [], v.source);
+    renderWifiDevices(v.clients || []);
+    renderWScan(v.scan, v.radios || []);
+  } catch (e) { /* the status poll reports a dead panel */ }
+}
+function chanText(r) {
+  if (!r.channel) return "—";
+  if (r.width <= 20) return `${r.channel} (20 MHz)`;
+  const half = r.width / 10 - 2;
+  return `${r.channel} (${r.width} MHz, channels ${r.center - half}–${r.center + half})`;
+}
+function renderRadios(list, source) {
+  const box = $("#radios"); box.replaceChildren();
+  if (!list.length) {
+    const p = document.createElement("p"); p.className = "empty";
+    p.textContent = source === "no-wl" ? "The Wi-Fi tool of the router (wl) was not found, so there are no Wi-Fi details." : "Reading the Wi-Fi networks…";
+    box.append(p); return;
+  }
+  for (const r of list) {
+    const d = document.createElement("div"); d.className = "radio";
+    const h = document.createElement("h3");
+    h.innerHTML = `${esc(r.network)} network <span class="chip">${esc(r.band || "off")}</span>`;
+    const ss = document.createElement("div"); ss.className = "ssid"; ss.textContent = r.up ? r.ssid || "" : "Turned off";
+    const kv = document.createElement("dl"); kv.className = "kv";
+    if (r.up) {
+      const busy = r.busy_pct == null ? "—" : `${r.busy_pct}%` + (r.others_pct ? ` (other networks and noise ${r.others_pct}%)` : "");
+      const bq = r.busy_pct == null ? null : r.busy_pct >= 50 ? "serious" : r.busy_pct >= 25 ? "warning" : "good";
+      addKV(kv, [["Channel", chanText(r)], ["Frequency", r.freq_mhz ? NF0.format(r.freq_mhz) + " MHz" : "—"],
+        ["Background noise", r.noise != null ? num(r.noise) + " dBm" : "—"],
+        ["Air busy", (bq ? icon(bq) + " " : "") + esc(busy), true], ["Devices", String(r.clients)]]);
+    }
+    d.append(h, ss, kv); box.append(d);
+  }
+}
+function renderWifiDevices(list) {
+  const out = $("#wdev-out"); out.replaceChildren();
+  const wifi = list.filter((c) => c.via === "wifi");
+  $("#wdev-sub").textContent = wifi.length ? "Signal is how well the router hears each device; link is the speed of the last frame sent to it." : "";
+  if (!wifi.length) {
+    const p = document.createElement("p"); p.className = "empty"; p.textContent = "No device is on the router's Wi-Fi right now."; out.append(p); return;
+  }
+  const sc = document.createElement("div"); sc.className = "tscroll";
+  const tbl = document.createElement("table"); tbl.className = "tbl";
+  tbl.innerHTML = "<thead><tr><th>Device</th><th>Signal</th><th>Link</th><th>Connected</th><th>Data used</th></tr></thead>";
+  const tb = document.createElement("tbody");
+  for (const c of wifi.sort((a, b) => (a.signal ?? -999) - (b.signal ?? -999))) {
+    const q = wifiQ(c.signal);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${esc(c.name || "Unnamed")}<br><small>${esc([c.network, c.band].filter(Boolean).join(" · "))}</small></td>` +
+      `<td>${q ? icon(q.st) : icon("neutral")}${c.signal != null ? esc(num(c.signal) + " dBm") : "—"}<br><small>${q ? esc(q.t) : ""}</small></td>` +
+      `<td>${esc(mbps(c.tx_rate))}<br><small>${c.rx_rate != null ? "from it " + esc(mbps(c.rx_rate)) : ""}</small></td>` +
+      `<td>${c.connected_s ? esc(duration(c.connected_s)) : "—"}</td>` +
+      `<td>${c.usage ? `${esc(bytes(c.usage.sess_down + c.usage.sess_up))}<br><small>${esc(bytes(c.usage.total_down + c.usage.total_up))} in total</small>` : "—"}</td>`;
+    tb.append(tr);
+  }
+  tbl.append(tb); sc.append(tbl); out.append(sc);
+}
+function renderWScan(scan, radios) {
+  const msg = $("#wscan-msg"), out = $("#wscan-out"), btn = $("#wscan-btn");
+  btn.disabled = !!(scan && scan.running);
+  msg.hidden = !(scan && (scan.running || scan.error));
+  if (!msg.hidden) {
+    msg.replaceChildren();
+    if (scan.running) { const sp = document.createElement("span"); sp.className = "spin"; msg.append(sp); }
+    else msg.insertAdjacentHTML("afterbegin", icon("critical"));
+    const t = document.createElement("span"); t.textContent = scan.running ? "Listening for other networks, about 15 seconds…" : "Scan failed: " + scan.error; msg.append(t);
+  }
+  out.replaceChildren();
+  if (!scan || (!scan.neighbours.length && !scan.ts)) {
+    const p = document.createElement("p"); p.className = "empty"; p.textContent = "No scan has been run since the panel started."; out.append(p); return;
+  }
+  const list = scan.neighbours || [];
+  if (scan.advice && scan.advice.length) {
+    const ul = document.createElement("ul"); ul.className = "advice";
+    for (const a of scan.advice) { const li = document.createElement("li"); li.textContent = a; ul.append(li); }
+    out.append(ul);
+  }
+  const sc = document.createElement("div"); sc.className = "tscroll";
+  const tbl = document.createElement("table"); tbl.className = "tbl wide-tbl";
+  tbl.innerHTML = "<thead><tr><th>Network</th><th>Band</th><th>Channel</th><th>Signal</th><th>Shares the air with yours</th></tr></thead>";
+  const tb = document.createElement("tbody");
+  const ourName = (band) => { const r = radios.find((x) => x.band === band); return r ? r.network.toLowerCase() : "your"; };
+  for (const n of list) {
+    const tr = document.createElement("tr"); if (n.ours) tr.className = "mine";
+    const ov = n.ours ? '<span class="chip">This router</span>'
+      : n.overlap === "same" ? `<span class="chip st-critical">${icon("critical")}Same channel as the ${esc(ourName(n.band))} network</span>`
+      : n.overlap === "partly" ? `<span class="chip st-warning">${icon("warning")}Overlaps the ${esc(ourName(n.band))} network</span>`
+      : `<span class="chip st-good">${icon("good")}No</span>`;
+    tr.innerHTML = `<td>${n.ssid ? esc(n.ssid) : "<small>(hidden network)</small>"}${n.secure ? "" : "<br><small>open, no password</small>"}</td>` +
+      `<td>${esc(n.band)}</td><td>${esc(chanText(n))}</td><td>${esc(num(n.rssi) + " dBm")}</td><td>${ov}</td>`;
+    tb.append(tr);
+  }
+  tbl.append(tb); sc.append(tbl);
+  const p = document.createElement("p"); p.className = "sub"; p.style.marginTop = "8px";
+  p.textContent = list.length ? `Scanned at ${clock(scan.ts)}: ${list.length} network(s) heard.` : `Scanned at ${clock(scan.ts)}: no other networks heard.`;
+  out.append(sc, p);
+}
+
+/* ---------- System page ---------- */
+let sysTick = 0;
+async function loadSystem() {
+  try { renderSystem(await api.system()); } catch (e) { /* the status poll reports a dead panel */ }
+}
+function renderSystem(v) {
+  const ts = v.temps || [];
+  const hot = v.soc_temp_c;
+  const tq = hot == null ? null : hot >= 75 ? "critical" : hot >= 60 ? "warning" : "good";
+  $("#temp-sub").innerHTML = hot == null ? "No temperature sensors found." :
+    icon(tq) + ` <span>The chip is at ${esc(num(hot))} °C: ${tq === "good" ? "normal" : tq === "warning" ? "warm, keep it out of the sun" : "hot, let it cool down"}.</span>`;
+  addKV($("#temp-kv"), [...ts.map((t) => [t.name, num(t.c, 1) + " °C"]), ["Battery", v.battery_temp_c != null ? num(v.battery_temp_c, 1) + " °C" : "—"]]);
+
+  const s = v.sim;
+  const SIMST = { ready: ["good", "Ready"], pin: ["warning", "Waiting for the PIN"], puk: ["critical", "Blocked: needs the PUK code"],
+                  absent: ["critical", "No SIM card"], error: ["critical", "SIM error"], unknown: ["neutral", "Unknown"] };
+  if (s) {
+    const st = SIMST[s.state] || SIMST.unknown;
+    const pinQ = s.pin_retries == null ? null : s.pin_retries <= 1 ? "critical" : s.pin_retries < 3 ? "warning" : null;
+    addKV($("#sim-kv"), [["State", icon(st[0]) + " " + esc(st[1]), true],
+      ["PIN tries left", s.pin_retries == null ? "—" : (pinQ ? icon(pinQ) + " " : "") + esc(String(s.pin_retries)), true],
+      ["PUK tries left", s.puk_retries ?? "—"]]);
+  } else addKV($("#sim-kv"), [["State", "Reading…"]]);
+  $("#id-btn").disabled = !v.has_identity;
+
+  const f = v.firewall;
+  if (f) {
+    $("#fw-sub").innerHTML = f.wan_closed
+      ? icon("good") + " <span>The internet side is closed: nobody on the internet can open a connection to the router.</span>"
+      : icon("warning") + " <span>The firewall is open right now. The stock software closes it once the LTE connection is up; the panel itself listens only on Wi-Fi either way.</span>";
+    addKV($("#fw-kv"), [["Default for incoming", f.policy === "DROP" ? "Block" : f.policy === "ACCEPT" ? "Allow" : f.policy || "—"],
+      ["Refused from the internet", NF0.format(f.wan_rejected) + " connection attempts"],
+      ["Blocked by default", NF0.format(f.policy_dropped) + " packets (any side but Wi-Fi)"]]);
+  } else {
+    $("#fw-sub").textContent = v.firewall_error || "Reading the firewall…";
+    addKV($("#fw-kv"), []);
+  }
+  $("#fw-sub").insertAdjacentHTML("beforeend", "");
+
+  const fl = v.flash;
+  if (fl) {
+    const spare = fl.reserved_bad;
+    const fq = spare <= 2 ? "critical" : spare <= 8 ? "warning" : "good";
+    $("#flash-sub").innerHTML = icon(fq) + ` <span>${fq === "good" ? "Healthy." : fq === "warning" ? "Few spare blocks left for worn-out flash." : "Almost no spare blocks left: avoid writing to flash."}</span>`;
+    addKV($("#flash-kv"), [["Most-worn block", `erased ${NF0.format(fl.max_erase_count)} times`],
+      ["Worn-out blocks", `${fl.bad_blocks} of ${NF0.format(fl.total_blocks)}, ${spare} spare left`],
+      ["Free space", fl.size_mb ? `${NF0.format(fl.free_mb)} MB of ${NF0.format(fl.size_mb)} MB` : "—"]]);
+  } else { $("#flash-sub").textContent = "Reading…"; addKV($("#flash-kv"), []); }
+
+  addKV($("#sys-kv"), [["Running for", duration(v.uptime_s)],
+    ["Load", v.load ? v.load.map((x) => NF2.format(x)).join(" · ") + " (1, 5, 15 min)" : "—"],
+    ["Memory used", v.mem_used_pct ? num(v.mem_used_pct) + "%" : "—"]]);
+  const vv = v.versions || {};
+  addKV($("#ver-kv"), [["Model", [vv.maker, vv.model].filter(Boolean).join(" ") || "—"], ["Router software (MiFiOS)", vv.mifios],
+    ["Modem firmware", vv.modem_fw], ["Carrier configuration (PRI)", vv.pri], ["Hardware revision", vv.hardware],
+    ["Linux kernel", vv.kernel], ["Wi-Fi chip", [vv.wifi_chip, vv.wifi_driver && "driver " + vv.wifi_driver].filter(Boolean).join(", ")],
+    ["MiFi Panel", v.panel]]);
+}
+
 /* ---------- Screen page ---------- */
 const WNAMES = { metric: "Big signal value", band: "Band and cell", bars: "Signal bars", speed: "Download / upload speed",
   traffic: "Traffic total", battery: "Battery", clock: "Clock", operator: "Operator", devices: "Connected devices",
-  chart: "Signal chart", aim: "Antenna aiming", data: "Data session and IP", text: "Free text" };
+  chart: "Signal chart", aim: "Antenna aiming", data: "Data session and IP", text: "Free text",
+  temp: "Temperature", power: "Battery power", sms: "Unread SMS", lifetime: "Traffic since first use", weakest: "Weakest Wi-Fi device" };
 const OPTS = {
   metric: ["Metric", [["auto", "Main for the network (RSRP or RSCP)"], ["rsrp", "RSRP"], ["sinr", "SINR"], ["rsrq", "RSRQ"], ["rscp", "RSCP (3G)"], ["ecio", "Ec/Io (3G)"]]],
   size: ["Text size", [["s", "Small, 12 px"], ["m", "Medium, 16 px"], ["mb", "Medium bold, 16 px"], ["l", "Large, 24 px"], ["xl", "Extra large, 32 px"], ["xxl", "Huge, 48 px"], ["huge", "Giant, 64 px"]]],
   align: ["Align", [["left", "Left"], ["center", "Centre"], ["right", "Right"]]],
   label: ["Label", [["on", "Show name and quality"], ["off", "Hide"]]],
+  sensor: ["Sensor", [["soc", "Hottest chip sensor"], ["battery", "Battery"]]],
   color: ["Colour"], text: ["Text"], offset: ["Time zone"],
 };
 const SC = { layout: null, page: 0, sel: -1, widgets: {}, metas: [], meta: {}, pick: {}, persistent: false, dirty: false, loaded: false, previewT: 0, lastPreview: 0, lastMirror: 0 };
@@ -1346,7 +1778,7 @@ function drawForm() {
     } else {
       inp = document.createElement("input");
       inp.type = o === "color" ? "color" : "text";
-      if (o === "offset") inp.placeholder = "+2";
+      if (o === "offset") { inp.placeholder = "+2"; inp.title = "Hours from UTC, such as +2 or +5:30, or auto for the time zone the network reports"; }
       inp.value = w.opts[o] || (o === "color" ? "#000000" : "");
     }
     inp.addEventListener(o === "text" || o === "offset" ? "input" : "change", () => { w.opts[o] = inp.value; changed(); });
@@ -1609,6 +2041,10 @@ function realApi() {
     showStop: () => fetch("api/screen/stop", { method: "POST" }).then(j),
     events: () => fetch("api/events", { cache: "no-store" }).then(j),
     action: (name) => fetch("api/action", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) }).then(j),
+    wifi: () => fetch("api/wifi", { cache: "no-store" }).then(j),
+    wifiScan: () => fetch("api/wifi/scan", { method: "POST" }).then(j),
+    system: () => fetch("api/system", { cache: "no-store" }).then(j),
+    identity: () => fetch("api/system/identity", { cache: "no-store" }).then(j),
     at: (cmd) => fetch("api/at", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ cmd }) }).then(j),
   };
 }
@@ -1616,6 +2052,7 @@ function realApi() {
 // Demo data for viewing the file without the device (opened from disk or with ?demo=1; ?demo=3g shows a 3G network).
 function mockApi() {
   const G3 = new URLSearchParams(location.search).get("demo") === "3g";
+  const BAT = new URLSearchParams(location.search).get("demo") === "battery";
   const S = { rsrp: -97, rsrq: -11, sinr: 7, rscp: -78, ecio: -7, batt: 78, rx: 3.4e9, tx: 4.1e8, burst: 0, br: 0, until: 0, action: null };
   const nrm = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
   const walk = (v, mean, pull, noise, lo, hi) => Math.max(lo, Math.min(hi, v + (mean - v) * pull + nrm() * noise));
@@ -1647,13 +2084,23 @@ function mockApi() {
         : { operator: "Kyivstar", tech: "LTE", tech_name: "LTE", band: "B3", earfcn: 1300, pci: 212, freq_mhz: 1815, cell_id: "174092810", tac: "8010", mcc: "255", mnc: "03", reg: "home" },
       signal: sig,
       wan: { iface: "rmnet_data0", ip: searching ? "" : "10.87.142.19", up: !searching, state: searching ? "connecting" : "connected",
-             session_s: searching ? 0 : 2820 + ts / 1000 % 1000, rx_bytes: S.rx, tx_bytes: S.tx, rx_rate: rx, tx_rate: tx },
-      battery: { present: true, percent: Math.round(S.batt), status: "charging", ext_power: true, temp_c: 31.5 },
+             session_s: searching ? 0 : 2820 + ts / 1000 % 1000, rx_bytes: S.rx, tx_bytes: S.tx, rx_rate: rx, tx_rate: tx,
+             details: searching ? null : { apn: "internet", gateway: "10.87.142.20", mask: "255.255.255.252", dns: ["193.41.60.1", "193.41.60.2"] }, tz_min: 120 },
+      battery: BAT
+        ? { present: true, percent: Math.round(S.batt), status: "discharging", ext_power: false, temp_c: 30.2, voltage_v: 3.87, current_ma: -612, power_w: -2.37,
+            phase: "on battery", time_left_s: Math.round(S.batt / 100 * 4400 / 612 * 3600), time_left_est: true, power_on: "Power button" }
+        : { present: true, percent: Math.round(S.batt), status: "charging", ext_power: true, temp_c: 31.5, voltage_v: 4.11, current_ma: 812, power_w: 3.34,
+            phase: "fast charging", time_left_s: null, power_on: "Power button" },
+      sms_unread: 3, lifetime: { down: 399690510667, up: 24699257709 }, soc_temp_c: 37.7,
       system: { uptime_s: 11520 + ts / 1000 % 1000, load1: .31, mem_used_pct: 46 },
       clients: [
-        { ip: "192.168.1.2", mac: "a4:83:e7:1c:22:9f", name: "laptop", online: true },
-        { ip: "192.168.1.5", mac: "3c:06:30:8d:41:aa", name: "Pixel-7", online: true },
-        { ip: "192.168.1.9", mac: "f0:2f:74:55:10:03", name: "kitchen-tv", online: false },
+        { ip: "192.168.1.2", mac: "a4:83:e7:1c:22:9f", name: "laptop", online: true, via: "wifi", network: "Primary", band: "5 GHz",
+          signal: -52 + Math.round(nrm()), tx_rate: 390, rx_rate: 351, connected_s: 7260 + ts / 1000 % 1000,
+          usage: { sess_down: 812400000, sess_up: 41200000, total_down: 96300000000, total_up: 5100000000 } },
+        { ip: "192.168.1.5", mac: "3c:06:30:8d:41:aa", name: "Pixel-7", online: true, via: "wifi", network: "Guest", band: "2.4 GHz",
+          signal: -74 + Math.round(nrm()), tx_rate: 26, rx_rate: 13, connected_s: 1835 + ts / 1000 % 1000,
+          usage: { sess_down: 64100000, sess_up: 7900000, total_down: 12800000000, total_up: 1400000000 } },
+        { ip: "192.168.1.9", mac: "f0:2f:74:55:10:03", name: "kitchen-tv", online: false, usage: { sess_down: 0, sess_up: 0, total_down: 210000000000, total_up: 3200000000 } },
       ],
       action: S.action ? { ...S.action } : null, warnings: [],
     };
@@ -1714,6 +2161,28 @@ function mockApi() {
       : { tech: "LTE", tech_name: "LTE", operator: "Kyivstar", mcc: "255", mnc: "03", band: "B3", band_name: "1800 MHz", freq_mhz: 1815, earfcn: 1300, pci: 212,
           cell_id: "174092810", enb: 680050, sector: 10, area_code: "8010", area_label: "TAC" };
   };
+  const demoModem = () => {
+    const hw = [2, 3, 4, 5, 7, 13, 14, 20, 28, 46, 48, 66], ua = [1, 3, 7, 8, 20];
+    const bands = [...new Set([...hw, ...ua])].sort((a, b) => a - b).map((b) => ({ band: b, hardware: hw.includes(b), pref: b > 43 ? null : true,
+      applied: b <= 43 && hw.includes(b), used_here: ua.includes(b) }));
+    return { bands, pref_all_on: true, pref_off: [], read_ago_s: 140, next_lte_scan_s: G3 ? 300 : null };
+  };
+  const demoRadios = () => [
+    { iface: "wlan0", network: "Primary", ssid: "Verizon-MiFi8800L-1A2B", up: true, band: "5 GHz", channel: 161, center: 155, width: 80, freq_mhz: 5805,
+      noise: -89, busy_pct: 4, others_pct: 1, clients: 1 },
+    { iface: "wlan1", network: "Guest", ssid: "Verizon-MiFi8800L-Guest-1A2B", up: true, band: "2.4 GHz", channel: 6, center: 6, width: 20, freq_mhz: 2437,
+      noise: -92, busy_pct: 23, others_pct: 15, clients: 1 },
+  ];
+  const demoScan = () => ({ running: false, ts: Date.now(), neighbours: [
+    { ssid: "HomeNet-5G", rssi: -73, secure: true, overlap: "same", band: "5 GHz", channel: 149, center: 155, width: 80 },
+    { ssid: "Kyivstar-WiFi", rssi: -81, secure: true, overlap: "", band: "5 GHz", channel: 36, center: 42, width: 80 },
+    { ssid: "OLAX_MT80", rssi: -33, secure: true, overlap: "partly", band: "2.4 GHz", channel: 11, center: 9, width: 40 },
+    { ssid: "ASUS", rssi: -84, secure: true, overlap: "same", band: "2.4 GHz", channel: 6, center: 6, width: 20 },
+    { ssid: "TP-Link_7F21", rssi: -75, secure: true, overlap: "partly", band: "2.4 GHz", channel: 3, center: 3, width: 20 },
+    { ssid: "", rssi: -88, secure: false, overlap: "", band: "2.4 GHz", channel: 1, center: 1, width: 20 } ],
+    advice: ["Primary network (5 GHz): 1 other network(s) share the air with channel 161. Channel 36 (80 MHz) is free: you can switch to it in the stock settings (my.mifi → Wi-Fi).",
+             "Guest network (2.4 GHz): channel 1 (20 MHz) is quieter than channel 6. You can switch to it in the stock settings (my.mifi → Wi-Fi)."] });
+
   // Screen designer: the layout works here, but its picture is drawn by the panel, so there is none from a file.
   const W = (type, x, y, w, h, opts = {}) => ({ type, x, y, w, h, opts });
   const defLayout = () => ({ version: 1, pages: [
@@ -1725,14 +2194,16 @@ function mockApi() {
   const wopts = { metric: ["metric", "size", "align", "color", "label"], band: ["size", "align", "color"], bars: ["metric", "color"],
     speed: ["size", "align", "color"], traffic: ["size", "align", "color"], battery: ["size", "align", "color"], clock: ["size", "align", "color", "offset"],
     operator: ["size", "align", "color"], devices: ["size", "align", "color"], chart: ["metric", "color"], aim: ["metric", "color"],
-    data: ["size", "align", "color"], text: ["text", "size", "align", "color"] };
+    data: ["size", "align", "color"], text: ["text", "size", "align", "color"], temp: ["sensor", "size", "align", "color"],
+    power: ["size", "align", "color"], sms: ["size", "align", "color"], lifetime: ["size", "align", "color"], weakest: ["size", "align", "color"] };
   const noPicture = async () => { throw new Error("the picture is drawn by the panel itself; run mifi-panel -demo to see it"); };
   return {
     layoutGet: async () => ({ layout: defLayout(), from: "default", persistent: false, widgets: wopts }),
     // From a file there are no thumbnails (the panel draws them); one size per widget is enough here.
     widgets: async () => {
       const box = { metric: [200, 80], aim: [320, 240], chart: [240, 72], bars: [40, 28], band: [240, 36], operator: [200, 28], speed: [200, 64],
-        traffic: [200, 20], data: [304, 24], devices: [96, 16], battery: [64, 16], clock: [80, 28], text: [160, 28] };
+        traffic: [200, 20], data: [304, 24], devices: [96, 16], battery: [64, 16], clock: [80, 28], text: [160, 28],
+        temp: [160, 28], power: [240, 20], sms: [120, 16], lifetime: [304, 20], weakest: [304, 20] };
       return { widgets: Object.keys(box).map((t) => ({ type: t, name: WNAMES[t], desc: "", opts: wopts[t], min: [8, 8], default: "M",
         sizes: [{ key: "M", w: box[t][0], h: box[t][1] }] })) };
     },
@@ -1743,7 +2214,25 @@ function mockApi() {
     session: async () => (S.show && Date.now() < S.show.ends_ts ? { ...S.show } : { active: false }),
     show: async (l, page, seconds) => { S.show = { active: true, page, pages: l.pages.length, ends_ts: Date.now() + seconds * 1000 }; return S.show; },
     showStop: async () => { S.show = null; return { active: false }; },
-    cells: async () => ({ serving: serving(), cells: cells(), scan: S.scan || null, source: "demo" }),
+    cells: async () => ({ serving: serving(), cells: cells(), scan: S.scan || null, source: "demo", modem: demoModem() }),
+    wifi: async () => ({ radios: demoRadios(), clients: step(Date.now()).clients.filter((c) => c.online), scan: S.wscan ? { ...S.wscan } : null, source: "demo" }),
+    wifiScan: async () => {
+      if (S.wscan && S.wscan.running) throw new Error("a Wi-Fi scan is already running");
+      S.wscan = { running: true, neighbours: [], advice: [], ts: 0 };
+      setTimeout(() => { S.wscan = demoScan(); }, 4000);
+      return { ok: "scan" };
+    },
+    system: async () => ({
+      temps: [{ name: "Chip sensor 0", c: 37 }, { name: "Chip sensor 1", c: 37 }, { name: "Chip sensor 2", c: 36.3 }, { name: "Chip sensor 3", c: 35.2 },
+              { name: "Chip sensor 4", c: 37.7 }, { name: "Crystal (XO)", c: 33 }].sort((a, b) => a.name.localeCompare(b.name)),
+      soc_temp_c: 37.7, battery_temp_c: 31.5,
+      flash: { max_erase_count: 144, bad_blocks: 2, reserved_bad: 38, total_blocks: 1484, free_mb: 217.4, size_mb: 330.2 },
+      firewall: { policy: "DROP", policy_dropped: 3, wan_rejected: 41, wan_closed: true },
+      uptime_s: 11520 + Date.now() / 1000 % 1000, load: [0.31, 0.28, 0.25], mem_used_pct: 46,
+      versions: { model: "MIFI8800L", maker: "Inseego", mifios: "2.100.29", modem_fw: "SDx20ALP-1.22.11 (2020-04-13)", pri: "151", hardware: "4",
+                  kernel: "3.18.71", wifi_chip: "BCM43596", wifi_driver: "9.86.13" },
+      panel: "demo", sim: { state: "ready", pin_retries: 3, puk_retries: 10, detail: "SIM_READY" }, has_identity: true, source: "demo" }),
+    identity: async () => ({ imei: "990016870000000", imsi: "255030000000000", iccid: "8938030000000000000" }),
     events: async () => ({ events: [...E].reverse() }),
     info: async () => ({ version: "", demo: true, at_console: true, interval: 2000 }),
     status: async () => step(Date.now()),
@@ -1791,6 +2280,8 @@ async function poll() {
     render(st);
     if (view === "cells") loadCells();
     if (view === "screen") screenTick();
+    if (view === "wifi") loadWifi();
+    if (view === "system" && ++sysTick % 3 === 1) loadSystem();
   } catch (e) {
     if (++failures >= 2) {
       document.body.classList.add("stale");
@@ -1843,6 +2334,23 @@ document.querySelectorAll("[data-action]").forEach((b) => b.addEventListener("cl
 }));
 
 window.addEventListener("hashchange", () => setView(viewFromHash()));
+
+// The neighbour scan makes Wi-Fi blip for a moment: ask first.
+$("#wscan-btn").addEventListener("click", () => { const d = $("#wscan-dlg"); d.returnValue = ""; d.showModal(); });
+$("#wscan-dlg").addEventListener("close", async () => {
+  if ($("#wscan-dlg").returnValue !== "ok") return;
+  try { await api.wifiScan(); } catch (e) { /* shown by the next load */ }
+  setTimeout(loadWifi, 300);
+});
+$("#id-btn").addEventListener("click", async () => {
+  const b = $("#id-btn"), kv = $("#id-kv");
+  if (!kv.hidden) { kv.hidden = true; kv.replaceChildren(); b.textContent = "Show IMEI, IMSI and ICCID"; b.setAttribute("aria-expanded", "false"); return; }
+  try {
+    const id = await api.identity();
+    addKV(kv, [["IMEI (router)", id.imei], ["IMSI (SIM subscriber)", id.imsi], ["ICCID (SIM card number)", id.iccid]]);
+    kv.hidden = false; b.textContent = "Hide them"; b.setAttribute("aria-expanded", "true");
+  } catch (e) { $("#id-note").textContent = "Could not read them: " + e.message; }
+});
 
 // Find all networks takes the router off the network for a while: ask first.
 document.querySelectorAll("[data-scan]").forEach((b) => b.addEventListener("click", () => {

@@ -334,6 +334,13 @@ func techText(tech, band string) string {
 }
 
 // diffEvents describes what changed between two readings, in plain words.
+// lostService says whether the registration or the data session was just lost, so the cause is worth reading.
+func lostService(old, cur connState) bool {
+	ok := func(r string) bool { return r == "home" || r == "roaming" }
+	return (ok(old.reg) && !ok(cur.reg) && cur.reg != "unknown") ||
+		(old.data == "connected" && cur.data != "" && cur.data != "connected")
+}
+
 func diffEvents(old, cur connState, add func(kind, level, text string)) {
 	if old.tech != cur.tech {
 		add("network", "neutral", fmt.Sprintf("Network type changed: %s → %s", techText(old.tech, old.band), techText(cur.tech, cur.band)))
@@ -384,8 +391,9 @@ type ScanResult struct {
 
 // CellsView is the /api/cells answer.
 type CellsView struct {
-	Serving ServingCell `json:"serving"`
-	Cells   []Cell      `json:"cells"`
-	Scan    *ScanResult `json:"scan"`
-	Source  string      `json:"source"` // why the list may be empty: "", "no-at", "demo"
+	Serving ServingCell  `json:"serving"`
+	Cells   []Cell       `json:"cells"`
+	Scan    *ScanResult  `json:"scan"`
+	Source  string       `json:"source"` // why the list may be empty: "", "no-at", "demo"
+	Modem   *ModemConfig `json:"modem"`  // band preference and applied bands; nil until read
 }

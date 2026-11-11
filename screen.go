@@ -252,8 +252,13 @@ func drawWidget(c *Canvas, w Widget, r image.Rectangle, d ScreenData) {
 		}
 		line(s)
 	case "clock":
-		// The router keeps UTC; "offset" is the local time zone, e.g. "+2" or "+5:30".
-		t := time.UnixMilli(st.TS).UTC().Add(parseOffset(opt(w, "offset", "")))
+		// The router keeps UTC; "offset" is the local time zone, e.g. "+2" or "+5:30", or "auto" for the
+		// time zone the network reports.
+		off := parseOffset(opt(w, "offset", ""))
+		if opt(w, "offset", "") == "auto" && st.WAN.TZMin != nil {
+			off = time.Duration(*st.WAN.TZMin) * time.Minute
+		}
+		t := time.UnixMilli(st.TS).UTC().Add(off)
 		if t.Year() < 2020 { // the router clock starts at 1970 until the network sets it
 			line("--:--")
 		} else {
@@ -338,6 +343,54 @@ func drawWidget(c *Canvas, w Widget, r image.Rectangle, d ScreenData) {
 		} else {
 			line(a)
 		}
+	case "temp":
+		v, name := st.SoCTempC, "Chip"
+		if opt(w, "sensor", "soc") == "battery" {
+			v, name = st.Battery.TempC, "Battery"
+		}
+		s := "—"
+		if v != nil {
+			s = strconv.FormatFloat(*v, 'f', 0, 64) + " °C"
+			if ts.width(name+" "+s) <= r.Dx() {
+				s = name + " " + s
+			}
+		}
+		line(s)
+	case "power":
+		line(fitText(ts, r.Dx(), powerTexts(st.Battery)...))
+	case "sms":
+		switch {
+		case st.SMSUnread == nil:
+			line("SMS —")
+		case *st.SMSUnread == 0:
+			line("No new SMS")
+		default:
+			line(fitText(ts, r.Dx(), strconv.Itoa(*st.SMSUnread)+" unread SMS", strconv.Itoa(*st.SMSUnread)+" SMS"))
+		}
+	case "lifetime":
+		if l := st.Lifetime; l != nil {
+			t := "↓ " + bytesText(uint64(l.Down)) + "  ↑ " + bytesText(uint64(l.Up))
+			line(fitText(ts, r.Dx(), "Since first use "+t, "All time "+t, t))
+		} else {
+			line("—")
+		}
+	case "weakest":
+		var weak *Client
+		for i, cl := range st.Clients {
+			if cl.Online && cl.Signal != nil && (weak == nil || *cl.Signal < *weak.Signal) {
+				weak = &st.Clients[i]
+			}
+		}
+		if weak == nil {
+			line("No Wi-Fi devices")
+			break
+		}
+		name := weak.Name
+		if name == "" {
+			name = "Unnamed"
+		}
+		sig := strconv.Itoa(*weak.Signal) + " dBm"
+		line(fitText(ts, r.Dx(), "Weakest: "+name+" "+sig, name+" "+sig, sig))
 	case "metric":
 		drawMetric(c, w, r, d, fg, ts, align)
 	case "bars":
@@ -557,6 +610,49 @@ func rateText(bps float64) string {
 		return strconv.FormatFloat(b/1e3, 'f', 0, 64) + " kbps"
 	}
 	return strconv.FormatFloat(b, 'f', 0, 64) + " bps"
+}
+
+// fitText returns the first text that fits the width, or the last one.
+func fitText(ts textSize, width int, texts ...string) string {
+	for _, t := range texts {
+		if ts.width(t) <= width {
+			return t
+		}
+	}
+	return texts[len(texts)-1]
+}
+
+// powerTexts describes the battery power from the longest to the shortest wording.
+func powerTexts(b Battery) []string {
+	if b.PowerW == nil {
+		if b.Percent != nil {
+			return []string{"Battery " + strconv.Itoa(*b.Percent) + "%"}
+		}
+		return []string{"—"}
+	}
+	w := strconv.FormatFloat(math.Abs(*b.PowerW), 'f', 1, 64) + " W"
+	switch {
+	case *b.PowerW < -0.05:
+		if b.TimeLeftS != nil {
+			left := hoursText(*b.TimeLeftS)
+			return []string{"−" + w + " · " + left + " left", "−" + w + " " + left, left + " left"}
+		}
+		return []string{"−" + w + " on battery", "−" + w}
+	case *b.PowerW > 0.05:
+		return []string{"+" + w + " charging", "+" + w}
+	}
+	if b.Phase == "full" {
+		return []string{"Full, on external power", "Full"}
+	}
+	return []string{w}
+}
+
+func hoursText(s int64) string {
+	h, m := s/3600, s%3600/60
+	if h > 0 {
+		return strconv.FormatInt(h, 10) + " h " + strconv.FormatInt(m, 10) + " min"
+	}
+	return strconv.FormatInt(m, 10) + " min"
 }
 
 func bytesText(n uint64) string {

@@ -18,7 +18,7 @@ import (
 	"time"
 )
 
-const version = "0.6.1"
+const version = "0.7.0"
 
 //go:embed web
 var webFS embed.FS
@@ -120,7 +120,30 @@ func main() {
 	mux.Handle("GET /", http.FileServerFS(sub))
 
 	mux.HandleFunc("GET /api/status", func(w http.ResponseWriter, r *http.Request) {
+		col.want("ui")
 		writeJSON(w, http.StatusOK, col.Status())
+	})
+	mux.HandleFunc("GET /api/wifi", func(w http.ResponseWriter, r *http.Request) {
+		writeJSON(w, http.StatusOK, col.WiFiView())
+	})
+	mux.HandleFunc("POST /api/wifi/scan", func(w http.ResponseWriter, r *http.Request) {
+		if err := col.StartWiFiScan(); err != nil {
+			writeJSON(w, http.StatusConflict, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusAccepted, map[string]string{"ok": "scan"})
+	})
+	mux.HandleFunc("GET /api/system", func(w http.ResponseWriter, r *http.Request) {
+		writeJSON(w, http.StatusOK, col.SystemView())
+	})
+	// IMEI, IMSI and ICCID are sent only when asked for with the Show button on the System page.
+	mux.HandleFunc("GET /api/system/identity", func(w http.ResponseWriter, r *http.Request) {
+		id, ok := col.Identity()
+		if !ok {
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": "not read from the modem yet"})
+			return
+		}
+		writeJSON(w, http.StatusOK, id)
 	})
 	mux.HandleFunc("GET /api/history", func(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusOK, col.HistorySnapshot())
